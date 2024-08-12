@@ -9,3 +9,6 @@ use App\Controller\UserController;
 Flight::route("GET /" ,[new IndexController(),"index"]);
 Flight::route("GET /Main" ,[new IndexController(),"index"]);
 
+//users
+Flight::route("GET /users" ,[new UserController(),"GetAll"]);
+
