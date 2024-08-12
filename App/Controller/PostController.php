@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use flight;
 class PostController
 {
     public function Insert()

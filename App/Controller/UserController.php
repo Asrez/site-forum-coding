@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use flight;
 class UserController
 {
     public function Insert()
