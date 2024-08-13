@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Manage posts</title>
-    <link href="./dist/css/tabler.min.css?1668287865" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1668287865" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1668287865" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1668287865" rel="stylesheet"/>
+    <link href="/dist/css/tabler.min.css?1668287865" rel="stylesheet" />
+  <link href="/dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
+  <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
+  <link href="/dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
+  <link href="/dist/css/demo.min.css?1668287865" rel="stylesheet" />
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -52,7 +52,12 @@
                           <th>title</th>
                           <th>Created</th>
                           <th>Status</th>
-                          <th></th>
+                          <th><form action="/inp1">
+                                  <button type="submit" class="dropdown-item" >
+                                    new post
+                                  </button>
+                              </form>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -72,12 +77,16 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  update
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  delete
-                                </a>
+                                <form action="/upp1/<?= $post['id'] ?>">
+                                  <button type="submit" class="dropdown-item" >
+                                    update
+                                  </button>
+                                </form>
+                                <form action="/delp1/<?= $post['id'] ?>">
+                                  <button type="submit" class="dropdown-item" >
+                                    delete
+                                  </button>
+                                </form>                
                               </div>
                             </span>
                           </td>

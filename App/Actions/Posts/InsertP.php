@@ -7,6 +7,6 @@ class InsertP
 {
     public static function execute(array $data)
     {
-        Post::Insert($data);
+        return Post::Insert($data);
     }
 }

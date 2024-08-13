@@ -7,6 +7,6 @@ class GetAllU
 {
     public static function execute()
     {
-        User::GetAll();
+        return User::GetAll();
     }
 }

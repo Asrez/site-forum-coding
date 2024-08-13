@@ -2,11 +2,12 @@
 
 namespace App\Actions\Posts;
 
-use App\Modals\Post;
-class GetAllP
+use App\Modals\User;
+
+class CountU
 {
     public static function execute()
     {
-        return Post::GetAll();
+        return User::Count();
     }
 }

@@ -7,6 +7,6 @@ class GetByIdU
 {
     public static function execute(int $id)
     {
-        User::GetById($id);
+       return User::GetById($id);
     }
 }

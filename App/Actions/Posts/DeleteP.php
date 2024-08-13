@@ -7,6 +7,6 @@ class DeleteP
 {
     public static function execute(int $id)
     {
-        Post::Delete($id);
+        return Post::Delete($id);
     }
 }

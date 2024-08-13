@@ -7,6 +7,6 @@ class DeleteU{
     
     public static function execute(int $id)
     {
-        User::Delete($id);
+       return User::Delete($id);
     }
 }

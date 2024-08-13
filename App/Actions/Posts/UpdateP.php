@@ -7,6 +7,6 @@ class UpdateP
 {
     public static function execute(int $id, array $data)
     {
-        Post::Update($id, $data);
+        return Post::Update($id, $data);
     }
 }

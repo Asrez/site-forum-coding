@@ -7,6 +7,6 @@ class UpdateU
 {
     public static function execute(int $id, array $data)
     {
-        User::Update($id, $data);
+        return User::Update($id, $data);
     }
 }

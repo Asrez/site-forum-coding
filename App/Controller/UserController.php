@@ -19,7 +19,7 @@ class UserController
 
     public function Update(int $id, array $data)
     {
-        flight::json(UpdateU::execute($id, $array));
+        flight::json(UpdateU::execute($id, $data));
     }
 
     public function Delete(int $id)
@@ -33,12 +33,22 @@ class UserController
         
         require __DIR__."/../../views/Users.php";
 
-        // flight::json(GetAllU::execute());
-
     }
 
     public function GetById(int $id)
     {
         flight::json(GetByIdU::execute($id));
+    }
+    public function Manage()
+    {
+        $admin = GetByIdU::execute(1);
+        $users = GetAllU::execute();
+        require __DIR__."/../../Views/manageusers.php";
+    }
+    public function Setting(int $id)
+    {
+        $admin = GetByIdU::execute(1);
+        $user = GetByIdU::execute($id);
+        require __DIR__."/../../Views/settings.php";
     }
 }

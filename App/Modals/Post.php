@@ -23,7 +23,7 @@ class Post
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        return $stms->fetchAll(PDO::FETCH_ASSOC);
+        return $stms->fetch(PDO::FETCH_ASSOC);
 
     }
     public static function GetAll() : array
@@ -31,6 +31,26 @@ class Post
         $db = Database::getInstance()->getConnection();
 
         $stms="SELECT * FROM `posts` ;";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function Innerjoin() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms="SELECT `users`.`id` ,
+         `users`.`image` as userimage ,
+         `users`.`username` ,
+         `posts`.`title` ,
+         `posts`.`image` ,
+         `posts`.`id` ,
+         `posts`.`viewcount` ,
+         `posts`.`likes` 
+        FROM `posts`
+        INNER JOIN `users` ON `posts`.`admin_id` = `users`.`id` ;";
+
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -79,4 +99,15 @@ class Post
         if($stms->execute()) return "insert post succesed";
         else return "insert post failed";
     }
+    public static function Count() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms="SELECT COUNT(*) FROM `posts` ;";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }

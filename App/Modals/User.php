@@ -24,7 +24,7 @@ class User
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        return $stms->fetchAll(PDO::FETCH_ASSOC);
+        return $stms->fetch(PDO::FETCH_ASSOC);
     }
     public static function GetAll() : array
     {
@@ -77,5 +77,15 @@ class User
         
         if($stms->execute()) return "insert user succesed";
         else return "insert user failed";
+    }
+    public static function Count() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms="SELECT COUNT(*) FROM `users` ;";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetch(PDO::FETCH_ASSOC);
     }
 }

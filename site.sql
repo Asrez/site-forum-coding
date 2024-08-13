@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2024 at 09:18 AM
+-- Generation Time: Aug 13, 2024 at 04:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,16 +33,19 @@ CREATE TABLE `posts` (
   `date` date NOT NULL,
   `content` longtext NOT NULL,
   `image` mediumtext NOT NULL DEFAULT 'nullimage.jpg',
-  `admin_id` bigint(20) UNSIGNED NOT NULL
+  `admin_id` bigint(20) UNSIGNED NOT NULL,
+  `state` int(10) NOT NULL DEFAULT 0,
+  `likes` bigint(20) NOT NULL,
+  `viewcount` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`) VALUES
-(1, 'post 1', '2024-08-29', 'content 1', 'nullimage.jpg', 1),
-(2, 'post 2', '2024-08-30', 'content 2', 'nullimage.jpg', 1);
+INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
+(1, 'post 1', '2024-08-29', 'content 1', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 0, 17, 68),
+(2, 'post 2', '2024-08-30', 'content 2', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 0, 44, 66);
 
 -- --------------------------------------------------------
 
@@ -55,6 +58,7 @@ CREATE TABLE `users` (
   `name` varchar(5000) NOT NULL,
   `username` varchar(5000) NOT NULL,
   `password` mediumtext NOT NULL,
+  `image` mediumtext NOT NULL DEFAULT '\'000m.jpg\'',
   `email` mediumtext NOT NULL,
   `state` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
@@ -63,8 +67,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `password`, `email`, `state`) VALUES
-(1, 'admin 1', 'admin', '123', 'admin@gmail.com', 1);
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `image`, `email`, `state`) VALUES
+(1, 'admin 1', 'admin', '123', '000m.jpg', 'admin@gmail.com', 1);
 
 --
 -- Indexes for dumped tables

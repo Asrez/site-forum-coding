@@ -3,10 +3,10 @@
 namespace App\Actions\Posts;
 
 use App\Modals\Post;
-class GetAllP
+class Innerjoin
 {
     public static function execute()
     {
-        return Post::GetAll();
+        return Post::Innerjoin();
     }
 }

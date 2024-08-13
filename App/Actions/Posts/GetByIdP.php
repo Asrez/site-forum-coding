@@ -7,6 +7,6 @@ class GetByIdP
 {
     public static function execute(int $id)
     {
-        Post::GetById($id);
+        return Post::GetById($id);
     }
 }
