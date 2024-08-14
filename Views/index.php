@@ -23,7 +23,7 @@
 <body>
 
   <?php include "includes/header.php"; ?>
-
+  
   <div class="page-wrapper">
     <div class="page-header d-print-none">
       <div class="container-xl">
@@ -74,10 +74,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <span
-                          class="bg-primary text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
+                          class="bg-yellow text-white avatar">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
                             <path d="M12 3v3m0 12v3" />
@@ -86,10 +84,10 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          132 Sales
+                          users
                         </div>
                         <div class="text-muted">
-                          12 waiting payments
+                          <?= $countuser ?>
                         </div>
                       </div>
                     </div>
@@ -102,10 +100,9 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <span
-                          class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
+                          class="bg-pink text-white avatar">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="3" />
+                          <path d="M12 2a3 3 0 0 1 3 3c0 .562 -.259 1.442 -.776 2.64l-.724 1.36l1.76 -1.893c.499 -.6 .922 -1.002 1.27 -1.205a2.968 2.968 0 0 1 4.07 1.099a3.011 3.011 0 0 1 -1.09 4.098c-.374 .217 -.99 .396 -1.846 .535l-2.664 .366l2.4 .326c.995 .145 1.698 .337 2.11 .576a3.011 3.011 0 0 1 1.09 4.098a2.968 2.968 0 0 1 -4.07 1.098c-.348 -.202 -.771 -.604 -1.27 -1.205l-1.76 -1.893l.724 1.36c.516 1.199 .776 2.079 .776 2.64a3 3 0 0 1 -6 0c0 -.562 .259 -1.442 .776 -2.64l.724 -1.36l-1.76 1.893c-.499 .601 -.922 1.003 -1.27 1.205a2.968 2.968 0 0 1 -4.07 -1.098a3.011 3.011 0 0 1 1.09 -4.098c.374 -.218 .99 -.396 1.846 -.536l2.664 -.366l-2.4 -.325c-.995 -.145 -1.698 -.337 -2.11 -.576a3.011 3.011 0 0 1 -1.09 -4.099a2.968 2.968 0 0 1 4.07 -1.099c.348 .203 .771 .604 1.27 1.205l1.76 1.894c-1 -2.292 -1.5 -3.625 -1.5 -4a3 3 0 0 1 3 -3z" /></svg>
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <circle cx="6" cy="19" r="2" />
                             <circle cx="17" cy="19" r="2" />
@@ -116,10 +113,10 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          78 Orders
+                          posts
                         </div>
                         <div class="text-muted">
-                          32 shipped
+                          <?= $countpost ?>
                         </div>
                       </div>
                     </div>
@@ -132,10 +129,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <span
-                          class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
+                          class="bg-green text-white avatar">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path
                               d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
@@ -144,10 +139,10 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          623 Shares
+                          viewcounts
                         </div>
                         <div class="text-muted">
-                          16 today
+                          <?= $countview ?>
                         </div>
                       </div>
                     </div>
@@ -160,10 +155,10 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <span
-                          class="bg-facebook text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
+                          class="bg-red text-white avatar">
                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
+                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path 
+                          d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
                           </svg>
@@ -171,10 +166,10 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          132 Likes
+                          Likes
                         </div>
                         <div class="text-muted">
-                          21 today
+                        <?= $countlike ?>
                         </div>
                       </div>
                     </div>
@@ -335,7 +330,6 @@
             <div class="card card-md">
               <div class="card-stamp card-stamp-lg">
                 <div class="card-stamp-icon bg-primary">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -368,7 +362,7 @@
                     <td>
                       /
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -389,7 +383,7 @@
                     <td>
                       /form-elements.html
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -410,7 +404,7 @@
                     <td>
                       /index.html
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -431,7 +425,7 @@
                     <td>
                       /icons.html
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -452,7 +446,7 @@
                     <td>
                       /docs/
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -473,7 +467,7 @@
                     <td>
                       /accordion.html
                       <a href="#" class="ms-1"
-                        aria-label="Open website"><!-- Download SVG icon from http://tabler-icons.io/i/link -->
+                        aria-label="Open website">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -540,110 +534,65 @@
 
   <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
+      <form action="/inpost" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New report</h5>
+          <h5 class="modal-title">New post</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+        <h3>post information</h3>
           <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
-          </div>
-          <label class="form-label">Report type</label>
-          <div class="form-selectgroup-boxes row mb-3">
-            <div class="col-lg-6">
-              <label class="form-selectgroup-item">
-                <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked>
-                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1">Simple</span>
-                    <span class="d-block text-muted">Provide only basic data needed for the report</span>
-                  </span>
-                </span>
-              </label>
-            </div>
-            <div class="col-lg-6">
-              <label class="form-selectgroup-item">
-                <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
-                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                  <span class="me-3">
-                    <span class="form-selectgroup-check"></span>
-                  </span>
-                  <span class="form-selectgroup-label-content">
-                    <span class="form-selectgroup-title strong mb-1">Advanced</span>
-                    <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in
-                      the report</span>
-                  </span>
-                </span>
-              </label>
-            </div>
+            <label class="form-label">title</label>
+            <input type="text" class="form-control" name="title" placeholder="title">
           </div>
           <div class="row">
             <div class="col-lg-8">
               <div class="mb-3">
-                <label class="form-label">Report url</label>
+                <label class="form-label">content</label>
                 <div class="input-group input-group-flat">
-                  <span class="input-group-text">
-                    https://tabler.io/reports/
-                  </span>
-                  <input type="text" class="form-control ps-0" value="report-01" autocomplete="off">
+                  <textarea name="content" class="form-control" rows="3">
+
+                  </textarea>
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="mb-3">
-                <label class="form-label">Visibility</label>
-                <select class="form-select">
-                  <option value="1" selected>Private</option>
-                  <option value="2">Public</option>
-                  <option value="3">Hidden</option>
-                </select>
+                <label class="form-label">image</label>
+                <input name="image" type="file" class="form-control">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Client name</label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Reporting period</label>
-                <input type="date" class="form-control">
-              </div>
-            </div>
+            <h3>admin information</h3>
+                <input type="number"  name="admin_id" value="<?= $admin['id'] ?>" style="opacity : 0">
             <div class="col-lg-12">
               <div>
-                <label class="form-label">Additional information</label>
-                <textarea class="form-control" rows="3"></textarea>
+                <label class="form-label">admin username</label>
+                <input class="form-control" type="text" value="<?= $admin['username'] ?>" disabled>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          <a href="" class="btn btn-link link-secondary" data-bs-dismiss="modal">
             Cancel
           </a>
-          <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+          <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal" name="btninpost">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
               stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            Create new report
-          </a>
+            </svg> 
+            Create new post
+          </button>
         </div>
       </div>
+      </form>
     </div>
   </div>
   <!-- Libs JS -->

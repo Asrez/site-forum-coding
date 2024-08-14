@@ -82,7 +82,7 @@ class User
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT COUNT(*) FROM `users` ;";
+        $stms="SELECT COUNT(*) as count FROM `users` ;";
         $stms = $db->prepare($stms);
         $stms->execute();
 

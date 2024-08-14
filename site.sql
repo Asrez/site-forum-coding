@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2024 at 04:25 PM
+-- Generation Time: Aug 14, 2024 at 11:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `site`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `like`
+--
+
+CREATE TABLE `like` (
+  `id` bigint(20) NOT NULL,
+  `ip` mediumtext NOT NULL,
+  `post_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +56,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
-(1, 'post 1', '2024-08-29', 'content 1', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 0, 17, 68),
+(1, 'post 1', '2024-08-29', 'content 1', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 1, 17, 68),
 (2, 'post 2', '2024-08-30', 'content 2', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 0, 44, 66);
 
 -- --------------------------------------------------------
@@ -68,11 +80,30 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `image`, `email`, `state`) VALUES
-(1, 'admin 1', 'admin', '123', '000m.jpg', 'admin@gmail.com', 1);
+(1, 'admin 1', 'admin', '123', '000m.jpg', 'admin@gmail.com', 1),
+(2, 'user1', 'userr', '12345', '018f.jpg', 'user1@gmail.com', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `view`
+--
+
+CREATE TABLE `view` (
+  `id` bigint(20) NOT NULL,
+  `ip` mediumtext NOT NULL,
+  `post_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `like`
+--
+ALTER TABLE `like`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `posts`
@@ -91,8 +122,20 @@ ALTER TABLE `users`
   ADD KEY `id_2` (`id`);
 
 --
+-- Indexes for table `view`
+--
+ALTER TABLE `view`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `like`
+--
+ALTER TABLE `like`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -104,7 +147,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `view`
+--
+ALTER TABLE `view`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

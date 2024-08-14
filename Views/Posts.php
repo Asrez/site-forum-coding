@@ -45,13 +45,6 @@
                   </div>
                   <div class="card-body">
                     <div id="carousel-indicators" class="carousel slide" data-bs-ride="carousel">
-                      <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carousel-indicators" data-bs-slide-to="0" class=" active"></button>
-                        <button type="button" data-bs-target="#carousel-indicators" data-bs-slide-to="1" class=""></button>
-                        <button type="button" data-bs-target="#carousel-indicators" data-bs-slide-to="2" class=""></button>
-                        <button type="button" data-bs-target="#carousel-indicators" data-bs-slide-to="3" class=""></button>
-                        <button type="button" data-bs-target="#carousel-indicators" data-bs-slide-to="4" class=""></button>
-                      </div>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <img class="d-block w-100" alt="" src="./static/photos/<?= $post['image'] ?>">

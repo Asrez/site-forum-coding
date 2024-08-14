@@ -48,17 +48,13 @@
                       <div>
                         <div class="row">
                           <div class="col-auto">
-                            <span class="avatar" 
-                            <?php if(!empty ($user['image'])){ echo 'style="background-image: url('.$user['image'].');"' ;} ?> ></span>
+                            <span class="avatar" style="background-image: url(./static/avatars/<?= $user['image'] ?>)" ></span>
                           </div>
                           <div class="col">
                             <div class="text-truncate">
                               <strong><?= $user['username'] ?></strong>
                             </div>
                             <div class="text-muted"><?= $user['name'] ?></div>
-                          </div>
-                          <div class="col-auto align-self-center">
-                            <div class="badge bg-primary"></div>
                           </div>
                         </div>
                       </div>

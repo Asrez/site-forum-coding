@@ -30,11 +30,10 @@
                   Users
                 </h2>
               </div>
-              <!-- Page title actions -->
               <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex">
                   <input type="search" class="form-control d-inline-block w-9 me-3" placeholder="Search user…"/>
-                  <a href="#" class="btn btn-primary">
+                  <a href="/inuser" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                     New user
                   </a>
@@ -46,30 +45,59 @@
         <div class="page-body">
           <div class="container-xl">
             <div class="row row-cards">
-              <?php foreach ($users as $user) { ?>
-              <div class="col-md-6 col-lg-3">
+              <div class="col-12">
                 <div class="card">
-                  <div class="card-body p-4 text-center">
-                    <span class="avatar avatar-xl mb-3 avatar-rounded" style="background-image: url(./static/avatars/<?= $user['image'] ?>)"></span>
-                    <h3 class="m-0 mb-1"><a href="#"><?= $user['username'] ?></a></h3>
-                    <div class="text-muted"><?= $user['name'] ?></div>
-                    <div class="mt-3">
-                      <span class="badge bg-purple-lt">Owner</span>
-                    </div>
+                  <div class="card-header">
+                    <h3 class="card-title">Posts</h3>
                   </div>
-                  <div class="d-flex">
-                    <?php if ($user['id'] === $admin['id']) { ?>
-                    <form action="/updateuser1/<?= $user['id'] ?>" >
-                      <button class="card-btn" name="upu1">update</button>
-                    </form>
-                    <?php } ?>
-                    <form action="/deleteuser1/<?= $user['id'] ?>" >
-                      <button class="card-btn" name="delu1">update</button>
-                    </form>
+                  <div class="table-responsive">
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                      <thead>
+                        <tr>
+                          <th>image</th>
+                          <th class="w-1">code</th>
+                          <th>name</th>
+                          <th>username</th>
+                          <th>email</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                        <?php foreach ($users as $user) { ?>
+                          <td> <span class="avatar me-3 rounded" style="background-image: url(/static/avatars/<?= $user['image'] ?>)"></span></td>
+                          <td><span class="text-muted"><?= $user['id'] ?></span></td>
+                          <td><?= $user['name'] ?></td>
+                          <td><?= $user['username'] ?></td>
+                          <td><?= $user['email'] ?></td>
+                          <td>
+                            <span class="badge 
+                            <?php if ($user['state'] == "1") echo " bg-success "; ?>
+                             me-1"></span>
+                            <?php if ($user['state'] == "1") echo "admin";
+                                  else echo "user"; ?>
+                          </td>
+                          <td >
+                            <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="/upuser/<?= $user['id'] ?>" >
+                                    update
+                                  </a>
+                                  <a class="dropdown-item" href="/deluser/<?= $user['id'] ?>">
+                                    delete
+                                  </a>               
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+                        <?php } ?>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-              <?php } ?>
             </div>
           </div>
         </div>

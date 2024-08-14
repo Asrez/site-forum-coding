@@ -15,9 +15,29 @@ use App\Actions\Posts\Innerjoin;
 
 class PostController
 {
-    public function Insert()
+    public function Insert(string $image = "1.jpg")
     {
+        echo $_POST['admin_id'];
+        if(isset($_POST["btninpost"])){
+            if(isset($_POST['title']) && !empty($_POST['title'])
+            && isset($_POST['content']) && !empty($_POST['content'])
+            && isset($_POST['admin_id']) && !empty($_POST['admin_id'])){
+                $title = $_POST['title'];
+                $content = $_POST['content'];
+                // $image = basename($_FILES['image'],"name");
+                $admin_id = $_POST['admin_id'];
+                $data = [
+                    'title'=> $title,
+                    'content'=> $content,
+                    'image'=> $image,
+                    'admin_id'=> $admin_id
+                ];
 
+                InsertP::execute($data);
+                
+            }
+        }
+        
     }
 
     public function Update(int $id, array $data)
@@ -32,7 +52,10 @@ class PostController
 
     public function GetAll()
     {
-        $all_posts = GetAllP::execute();
+        $posts = GetAllP::execute();
+        $admin = GetByIdU::execute(1);
+
+        require __DIR__."/../../views/Posts.php";
     }
 
     public function Manage()

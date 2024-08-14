@@ -81,13 +81,13 @@ class Post
         if($stms->execute()) return "insert post succesed";
         else return "insert post failed";
     }
-    public static function Insert(array $data) : string
+    public static function Insert(array $data)
     {
         $date = date("Y-m-d");
 
         $db = Database::getInstance()->getConnection();
 
-        $stms="INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`) VALUES (NULL , :title , :date , :content ', :image , :admin_id ) ;";
+        $stms="INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, : title , : date , :content , : image , : admin_id ,0 ,0 , 0) ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
@@ -96,18 +96,26 @@ class Post
         $stms->bindParam("admin_id", $data['admin_id']);
 
 
-        if($stms->execute()) return "insert post succesed";
-        else return "insert post failed";
+        if($stms->execute()) echo  "insert post succesed";
+        else echo "insert post failed";
     }
     public static function Count() : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT COUNT(*) FROM `posts` ;";
+        $stms="SELECT COUNT(*) as count FROM `posts` ;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
+    }
+    public static function update_viewcount(int $id)
+    {
+        $db = Database::getInstance()->getConnection();
+        $stms = "UPDATE `posts` SET `viewcount`=`viewcount` + 1 WHERE `id` = : id ;";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("id" , $id);
+        $stms->execute();
     }
     
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Posts;
+namespace App\Actions\Users;
 
 use App\Modals\User;
 

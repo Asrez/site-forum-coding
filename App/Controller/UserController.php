@@ -29,6 +29,7 @@ class UserController
 
     public function GetAll()
     {
+        $admin = GetByIdU::execute(1);
         $users = GetAllU::execute();
         
         require __DIR__."/../../views/Users.php";
