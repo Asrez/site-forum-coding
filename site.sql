@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2024 at 11:47 AM
+-- Generation Time: Aug 17, 2024 at 11:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,7 +57,36 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
 (1, 'post 1', '2024-08-29', 'content 1', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 1, 17, 68),
-(2, 'post 2', '2024-08-30', 'content 2', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 0, 44, 66);
+(2, 'post 2', '2024-08-30', '                    content 2                  ', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 1, 44, 66),
+(3, 'v', '2024-08-17', '\r\n                  v', '1.jpg', 1, 0, 0, 0),
+(4, 'c', '2024-08-17', '\r\n                  c', 'finances-us-dollars-and-bitcoins-currency-money-2.jpg', 1, 0, 0, 0),
+(5, 'ccc', '2024-08-17', '\r\n                  cccc', 'stylish-workplace-with-computer-at-home.jpg', 1, 1, 0, 0),
+(6, 'ccc', '2024-08-17', '\r\n                  ccc', 'young-entrepreneur-working-from-a-modern-cafe.jpg', 1, 0, 0, 0),
+(7, 'hhh', '2024-08-17', '\r\n                  hh', 'workplace-with-laptop-on-table-at-home-3.jpg', 1, 0, 0, 0),
+(8, 'gg', '2024-08-17', '\r\n                  gg', 'stylish-workspace-with-macbook-pro.jpg', 1, 0, 0, 0),
+(9, 'll', '2024-08-17', '\r\n                  ll', 'stylish-workplace-with-computer-at-home.jpg', 1, 0, 0, 0),
+(10, 'v', '2024-08-17', '\r\n                  v', 'tropical-palm-leaves-floral-pattern-background.jpg', 1, 0, 0, 0),
+(11, 'hgd', '2024-08-17', '\r\n                  hh', 'young-entrepreneur-working-from-a-modern-cafe.jpg', 1, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `setting`
+--
+
+CREATE TABLE `setting` (
+  `id` bigint(20) NOT NULL,
+  `key_setting` mediumtext NOT NULL,
+  `value_setting` mediumtext NOT NULL,
+  `link` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+
+--
+-- Dumping data for table `setting`
+--
+
+INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
+(1, 'logo', 'logo.svg', '/');
 
 -- --------------------------------------------------------
 
@@ -70,7 +99,7 @@ CREATE TABLE `users` (
   `name` varchar(5000) NOT NULL,
   `username` varchar(5000) NOT NULL,
   `password` mediumtext NOT NULL,
-  `image` mediumtext NOT NULL DEFAULT '\'000m.jpg\'',
+  `image` mediumtext NOT NULL,
   `email` mediumtext NOT NULL,
   `state` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
@@ -81,7 +110,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `image`, `email`, `state`) VALUES
 (1, 'admin 1', 'admin', '123', '000m.jpg', 'admin@gmail.com', 1),
-(2, 'user1', 'userr', '12345', '018f.jpg', 'user1@gmail.com', 0);
+(2, 'user1', 'user1', '12345', '018f.jpg', 'user1@gmail.com', 0),
+(3, 'user2', 'user2', '444', '006m.jpg', 'fff@gmail.com', 0),
+(4, 'user3', 'user3', '123245', '019f.jpg', 'user2@gmail.com', 0),
+(6, 'user4', 'user4', '123', '018m.jpg', 'c@gmail.com', 0),
+(7, 'user5', 'user5', '123', '035f.jpg', 'rr@gmai.com', 0),
+(8, 'user6', 'user6', '111', '018f.jpg', 'ijdij@gmail.com', 0),
+(9, 'admin2', 'adminn', '1888', '053f.jpg', 'arr@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -114,10 +149,18 @@ ALTER TABLE `posts`
   ADD KEY `admin_id_2` (`admin_id`);
 
 --
+-- Indexes for table `setting`
+--
+ALTER TABLE `setting`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `key_setting` (`key_setting`) USING HASH;
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`) USING HASH,
   ADD KEY `id` (`id`),
   ADD KEY `id_2` (`id`);
 
@@ -141,13 +184,19 @@ ALTER TABLE `like`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `setting`
+--
+ALTER TABLE `setting`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `view`

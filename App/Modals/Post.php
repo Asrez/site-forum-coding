@@ -56,7 +56,7 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Delete(int $id) : string
+    public static function Delete(int $id) 
     {
         $db = Database::getInstance()->getConnection();
 
@@ -64,40 +64,58 @@ class Post
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
 
-        if($stms->execute()) return "delete post succesed";
-        else return "delete post failed";
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("delete post success");
+            location.replace("/manageposts");
+        </script>
+        <?php
     }
-    public static function Update(int $id, array $data) : string
+    public static function Update(array $data) 
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="UPDATE `posts` SET `title`= :title ,`content`= :content ,`image`= :image  WHERE `id` = :id ;";
+        $stms="UPDATE `posts` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
+        
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
+        $stms->bindParam("id", $data['id']);
 
-
-        if($stms->execute()) return "insert post succesed";
-        else return "insert post failed";
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("update post success");
+            location.replace("/manageposts");
+        </script>
+        <?php
     }
     public static function Insert(array $data)
     {
+
         $date = date("Y-m-d");
 
         $db = Database::getInstance()->getConnection();
 
-        $stms="INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, : title , : date , :content , : image , : admin_id ,0 ,0 , 0) ;";
+        $stms="INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0, 0);";
+        
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
-        $stms->bindParam("admin_id", $data['admin_id']);
+        $stms->bindParam("admin_id", $data['admin_id'] );
 
-
-        if($stms->execute()) echo  "insert post succesed";
-        else echo "insert post failed";
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("insert post success");
+            location.replace("/manageposts");
+        </script>
+        <?php
+    
     }
     public static function Count() : array
     {
@@ -112,10 +130,27 @@ class Post
     public static function update_viewcount(int $id)
     {
         $db = Database::getInstance()->getConnection();
-        $stms = "UPDATE `posts` SET `viewcount`=`viewcount` + 1 WHERE `id` = : id ;";
+        $stms = "UPDATE `posts` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id" , $id);
         $stms->execute();
     }
     
+    public static function Confirm(int $id) 
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms="UPDATE `posts` SET `state` = 1 WHERE `id` = :id ;";
+        
+        $stms = $db->prepare($stms);
+        $stms->bindParam("id", $id);
+
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("post confirmed");
+            location.replace("/manageposts");
+        </script>
+        <?php
+    }
 }

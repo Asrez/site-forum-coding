@@ -7,6 +7,6 @@ class InsertU
 {
     public static function execute(array $data)
     {
-       return User::Insert($data);
+        return User::Insert($data);
     }
 }

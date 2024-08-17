@@ -4,6 +4,7 @@ namespace App\Modals;
 
 use App\Database\Database;
 use PDO;
+use PDOException;
 class User
 {
     public function __construct(int $id, string $name, string $username, string $email, string $password, int $state)
@@ -36,7 +37,7 @@ class User
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Delete(int $id) : string
+    public static function Delete(int $id)
     {
         $db = Database::getInstance()->getConnection();
 
@@ -44,39 +45,74 @@ class User
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
         
-        if($stms->execute()) return "delete user succesed";
-        else return "delete user failed";
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("delete user successed");
+            location.replace("/manageusers");
+        </script>
+        <?php
     }
-    public static function Update(int $id, array $data) : string
+    public static function Update(array $data)
     {
+        try {
+            $db = Database::getInstance()->getConnection();
+
+            $stms="UPDATE `users` SET `name` = :name, `username`= :username, `password` = :password, `image` = :image, `email`= :email  WHERE `id` = :id ;";
+            $stms = $db->prepare($stms);
+            $stms->bindParam("name", $data['name']);
+            $stms->bindParam("username", $data['username']);
+            $stms->bindParam("password", $data['password']);
+            $stms->bindParam("image", $data['image']);
+            $stms->bindParam("email", $data['email']);
+            $stms->bindParam("id", $data['id']);
+            
+            $stms->execute();
+            ?>
+            <script type="text/javascript">
+                window.alert("update user successed");
+                location.replace("/manageusers");
+            </script>
+            <?php
+        } catch (PDOException) {
+            ?>
+            <script type="text/javascript">
+                window.alert("change the username");
+                location.replace("/upuser/<?= $data['id'] ?>");
+            </script>
+            <?php
+        }
+        
+    }
+    public static function Insert(array $data)
+    {
+        try {
         $db = Database::getInstance()->getConnection();
 
-        $stms="UPDATE `users` SET `name`= :name ,`username`= :username ,`password`=:password ,`email`= :email  WHERE `id` = :id ;";
+        $stms="INSERT INTO `users`(`id`, `name`, `username`, `password`, `image` , `email`, `state`) VALUES (NULL, :name, :username, :password, :image, :email, :state);";
         $stms = $db->prepare($stms);
         $stms->bindParam("name", $data['name']);
         $stms->bindParam("username", $data['username']);
         $stms->bindParam("password", $data['password']);
         $stms->bindParam("email", $data['email']);
-        $stms->bindParam("id", $id);
+        $stms->bindParam("image", $data['image']);
+        $stms->bindParam("state", $data['state']);
         
-        if($stms->execute()) return "update user succesed";
-        else return "update user failed";
-    }
-    public static function Insert(array $data) : string
-    {
-        $db = Database::getInstance()->getConnection();
-
-        $stms="INSERT INTO `users`(`id`, `name`, `username`, `password`, `email`, `state`) VALUES (NULL , :name , :username , :password , :email , :state) ;";
-        $stms = $db->prepare($stms);
-        $stms->bindParam("name", $data['name']);
-        $stms->bindParam("username", $data['username']);
-        $stms->bindParam("password", $data['password']);
-        $stms->bindParam("email", $data['email']);
-        $stms->bindParam("email", $data['state']);
-        $stms->bindParam("id", $id);
-        
-        if($stms->execute()) return "insert user succesed";
-        else return "insert user failed";
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("insert user successed");
+            location.replace("/manageusers");
+        </script>
+        <?php
+        } catch (PDOException) {
+            ?>
+            <script type="text/javascript">
+                window.alert("change the username");
+                location.replace("/inuser");
+            </script>
+            <?php
+        }
     }
     public static function Count() : array
     {

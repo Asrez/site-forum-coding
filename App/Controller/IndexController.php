@@ -15,6 +15,7 @@ class IndexController
 {
     public function index()
     {
+        // $setting=;
         $admin = GetByIdU::execute(1);
 
         $countlike=CountL::execute()['count'];
