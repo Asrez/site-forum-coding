@@ -3,8 +3,6 @@
             <div class="row text-center align-items-center flex-row-reverse">
               <div class="col-lg-auto ms-lg-auto">
                 <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item"><a href="./docs/" class="link-secondary">Documentation</a></li>
-                  <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
                   <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
                   <li class="list-inline-item">
                     <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
@@ -18,13 +16,8 @@
                 <ul class="list-inline list-inline-dots mb-0">
                   <li class="list-inline-item">
                     Copyright &copy; 2024
-                    <a href="." class="link-secondary">Asrez</a>.
+                    <a href="<?= $footer['link'] ?>" class="link-secondary"><?= $footer['value_setting'] ?></a>.
                     All rights reserved.
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                      v1.0.0-beta16
-                    </a>
                   </li>
                 </ul>
               </div>

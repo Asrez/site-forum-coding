@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modals;
 
 use App\Database\Database;
@@ -20,7 +19,7 @@ class User
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT * FROM `users` WHERE `id` = :id ;";
+        $stms = "SELECT * FROM `users` WHERE `id` = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
         $stms->execute();
@@ -31,7 +30,7 @@ class User
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT * FROM `users` ;";
+        $stms = "SELECT * FROM `users` ;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -41,7 +40,7 @@ class User
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="DELETE FROM `users` WHERE `id` = :id ;";
+        $stms = "DELETE FROM `users` WHERE `id` = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
         
@@ -58,7 +57,7 @@ class User
         try {
             $db = Database::getInstance()->getConnection();
 
-            $stms="UPDATE `users` SET `name` = :name, `username`= :username, `password` = :password, `image` = :image, `email`= :email  WHERE `id` = :id ;";
+            $stms = "UPDATE `users` SET `name` = :name, `username`= :username, `password` = :password, `image` = :image, `email`= :email  WHERE `id` = :id ;";
             $stms = $db->prepare($stms);
             $stms->bindParam("name", $data['name']);
             $stms->bindParam("username", $data['username']);
@@ -89,7 +88,7 @@ class User
         try {
         $db = Database::getInstance()->getConnection();
 
-        $stms="INSERT INTO `users`(`id`, `name`, `username`, `password`, `image` , `email`, `state`) VALUES (NULL, :name, :username, :password, :image, :email, :state);";
+        $stms = "INSERT INTO `users`(`id`, `name`, `username`, `password`, `image` , `email`, `state`) VALUES (NULL, :name, :username, :password, :image, :email, :state);";
         $stms = $db->prepare($stms);
         $stms->bindParam("name", $data['name']);
         $stms->bindParam("username", $data['username']);
@@ -123,5 +122,62 @@ class User
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
+    }
+    public static function search(string $title) : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $users = "SELECT * FROM `users` WHERE `users`.`name` LIKE :title ;";
+        $title = '%'.$title.'%';
+        $users = $db->prepare($users);
+        $users->bindParam("title", $title);
+        $users->execute();
+        
+        return $users->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function Login(string $username, string $password)
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT * FROM `users` WHERE `username` = :username AND `password` = :password;";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("password", $password);
+        $stms->bindParam("username", $username);
+        $stms->execute();
+
+        if ($row = $stms->fetch(PDO::FETCH_ASSOC)) {
+            $_SESSION['admin_id'] = $row['id'];
+            ?>
+            <script type="text/javascript">
+                window.alert("welcome");
+                location.replace("/");
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script type="text/javascript">
+                window.alert("The information is incorrect");
+                location.replace("/login");
+            </script>
+            <?php
+        }
+    }
+
+    public static function Delimg(int $id)
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "UPDATE `users` SET `image` = 'default.png' WHERE `id` = :id ;";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("id", $id);
+        $stms->execute();
+
+        ?>
+            <script type="text/javascript">
+                window.alert("your image deleted");
+                location.replace("/setting/<?= $id ?>");
+            </script>
+        <?php
     }
 }

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>users</title>
-    <!-- CSS files -->
     <link href="/dist/css/tabler.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
@@ -24,7 +23,6 @@
     <?php include "includes/header.php"; ?>
 
       <div class="page-wrapper">
-        <!-- Page header -->
         <div class="page-header d-print-none">
           <div class="container-xl">
             <div class="row g-2 align-items-center">
@@ -36,7 +34,6 @@
             </div>
           </div>
         </div>
-        <!-- Page body -->
         <div class="page-body">
           <div class="container-xl">
             <div class="row justify-content-center">

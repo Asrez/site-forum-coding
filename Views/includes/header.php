@@ -1,4 +1,4 @@
-<script src="./dist/js/demo-theme.min.js?1668287865"></script>
+<script src="../dist/js/demo-theme.min.js?1668287865"></script>
     <div class="page">
       <header class="navbar navbar-expand-md navbar-light d-print-none">
         <div class="container-xl">
@@ -6,8 +6,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-              <img src="./static/<?= $setting['logo'] ?>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <a href="<?= $logo['link'] ?>">
+              <img src="../static/<?= $logo['value_setting'] ?>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -24,7 +24,7 @@
             
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                <span class="avatar avatar-sm" style="background-image: url(../static/avatars/<?= $admin['image'] ?>)"></span>
                 <div class="d-none d-xl-block ps-2">
                   <div><?= $admin['name'] ?></div>
                   <div class="mt-1 small text-muted"><?= $admin['username'] ?></div>
@@ -129,7 +129,7 @@
                     <span class="input-icon-addon">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
                     </span>
-                    <input type="search" name="searchboxall" class="form-control" placeholder="Search…" aria-label="Search in website">
+                    <input type="search" name="searchbox" class="form-control" placeholder="Search…" aria-label="Search in website">
                   </div>
                 </form>
               </div>

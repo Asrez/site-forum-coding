@@ -1,388 +1,83 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>post <?= $id ?></title>
+    <link href="../dist/css/tabler.min.css?1668287865" rel="stylesheet" />
+  <link href="../dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
+  <link href="../dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
+  <link href="../dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
+  <link href="../dist/css/demo.min.css?1668287865" rel="stylesheet" />
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+    </style>
+  </head>
+  <body >
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link href="/dist/css/tabler.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/demo.min.css?1668287865" rel="stylesheet" />
-  <title>Index</title>
-  <style>
-    @import url('https://rsms.me/inter/inter.css');
+    <?php include "includes/header.php"; ?>
 
-    :root {
-      --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    }
-  </style>
-</head>
-
-<body>
-
-  <?php include "includes/header.php"; ?>
-  
-  <div class="page-wrapper">
-    <div class="page-header d-print-none">
-      <div class="container-xl">
-        <div class="row g-2 align-items-center">
-          <div class="col">
-            <div class="page-pretitle">
-              Overview
-            </div>
-            <h2 class="page-title">
-              Dashboard
-            </h2>
-          </div>
-          <div class="col-auto ms-auto d-print-none">
-            <div class="btn-list">
-              <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                data-bs-target="#modal-report">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-                Create new post
-              </a>
-              <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                data-bs-target="#modal-report" aria-label="Create new report">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-              </a>
+      <div class="page-wrapper">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  Post <?= $id ?>
+                </h2>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="page-body">
-      <div class="container-xl">
-        <div class="row row-deck row-cards">
-          <div class="col-12">
-            <div class="row row-cards">
-              <div class="col-sm-6 col-lg-3">
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row">
+              <div class="col-sm-6">
                 <div class="card card-sm">
+                  <a href="#" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
                   <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <span
-                          class="bg-yellow text-white avatar">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
-                            <path d="M12 3v3m0 12v3" />
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          users
-                        </div>
-                        <div class="text-muted">
-                          <?= $countuser ?>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <span
-                          class="bg-pink text-white avatar">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="3" />
-                          <path d="M12 2a3 3 0 0 1 3 3c0 .562 -.259 1.442 -.776 2.64l-.724 1.36l1.76 -1.893c.499 -.6 .922 -1.002 1.27 -1.205a2.968 2.968 0 0 1 4.07 1.099a3.011 3.011 0 0 1 -1.09 4.098c-.374 .217 -.99 .396 -1.846 .535l-2.664 .366l2.4 .326c.995 .145 1.698 .337 2.11 .576a3.011 3.011 0 0 1 1.09 4.098a2.968 2.968 0 0 1 -4.07 1.098c-.348 -.202 -.771 -.604 -1.27 -1.205l-1.76 -1.893l.724 1.36c.516 1.199 .776 2.079 .776 2.64a3 3 0 0 1 -6 0c0 -.562 .259 -1.442 .776 -2.64l.724 -1.36l-1.76 1.893c-.499 .601 -.922 1.003 -1.27 1.205a2.968 2.968 0 0 1 -4.07 -1.098a3.011 3.011 0 0 1 1.09 -4.098c.374 -.218 .99 -.396 1.846 -.536l2.664 -.366l-2.4 -.325c-.995 -.145 -1.698 -.337 -2.11 -.576a3.011 3.011 0 0 1 -1.09 -4.099a2.968 2.968 0 0 1 4.07 -1.099c.348 .203 .771 .604 1.27 1.205l1.76 1.894c-1 -2.292 -1.5 -3.625 -1.5 -4a3 3 0 0 1 3 -3z" /></svg>
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="6" cy="19" r="2" />
-                            <circle cx="17" cy="19" r="2" />
-                            <path d="M17 17h-11v-14h-2" />
-                            <path d="M6 5l14 1l-1 7h-13" />
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          posts
-                        </div>
-                        <div class="text-muted">
-                          <?= $countpost ?>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <span
-                          class="bg-green text-white avatar">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          viewcounts
-                        </div>
-                        <div class="text-muted">
-                          <?= $countview ?>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <span
-                          class="bg-red text-white avatar">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path 
-                          d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          Likes
-                        </div>
-                        <div class="text-muted">
-                        <?= $countlike ?>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">Traffic summary</h3>
-                <div id="chart-mentions" class="chart-lg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">Locations</h3>
-                <div class="ratio ratio-21x9">
-                  <div>
-                    <div id="map-world" class="w-100 h-100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="row row-cards">
-              <div class="col-12">
-                <div class="card" style="height: 28rem">
-                  <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                    <div class="divide-y">
-                      <?php foreach ($users as $user){ ?>
+                    <div class="d-flex align-items-center">
                       <div>
-                        <div class="row">
-                          <div class="col-auto">
-                            <span class="avatar" style="background-image: url(./static/avatars/<?= $user['image'] ?>)"></span>
-                          </div>
-                          <div class="col">
-                            <div class="text-truncate">
-                             name : <strong><?= $user['name'] ?></strong>  , username : <strong><?= $user['username'] ?></strong>
-                            </div>
-                            <div class="text-muted"><?= $user['email'] ?></div>
-                          </div>
-                        </div>
+                        <div><?= $post['title'] ?></div>
                       </div>
-                      <?php } ?>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="card-title">Development activity</div>
-              </div>
-              <div class="position-relative">
-                <div class="position-absolute top-0 left-0 px-3 mt-1 w-75">
-                  <div class="row g-2">
-                    <div class="col-auto">
-                      <div class="chart-sparkline chart-sparkline-square" id="sparkline-activity"></div>
-                    </div>
-                    <div class="col">
-                      <div>Today's Earning: $4,262.40</div>
-                      <div class="text-muted"><!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline text-green" width="24"
-                          height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                          stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <polyline points="3 17 9 11 13 15 21 7" />
-                          <polyline points="14 7 21 7 21 14" />
-                        </svg>
-                        +5% more than yesterday
+                      <div class="ms-auto">
+                        <a href="#" class="text-muted">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
+                          <?= $post['likes'] ?>
+                        </a>
+                        <a href="#" class="ms-3 text-muted">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                          <?= $post['viewcount'] ?>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div id="chart-development-activity"></div>
-              </div>
-              <div class="card-table table-responsive">
-                <table class="table table-vcenter">
-                  <thead>
-                    <tr>
-                      <th>User</th>
-                      <th>Commit</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="w-1">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                      </td>
-                      <td class="td-truncate">
-                        <div class="text-truncate">
-                          Fix dart Sass compatibility (#29755)
-                        </div>
-                      </td>
-                      <td class="text-nowrap text-muted">28 Nov 2019</td>
-                    </tr>
-                    <tr>
-                      <td class="w-1">
-                        <span class="avatar avatar-sm">JL</span>
-                      </td>
-                      <td class="td-truncate">
-                        <div class="text-truncate">
-                          Change deprecated html tags to text decoration classes (#29604)
-                        </div>
-                      </td>
-                      <td class="text-nowrap text-muted">27 Nov 2019</td>
-                    </tr>
-                    <tr>
-                      <td class="w-1">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/002m.jpg)"></span>
-                      </td>
-                      <td class="td-truncate">
-                        <div class="text-truncate">
-                          justify-content:between ⇒ justify-content:space-between (#29734)
-                        </div>
-                      </td>
-                      <td class="text-nowrap text-muted">26 Nov 2019</td>
-                    </tr>
-                    <tr>
-                      <td class="w-1">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/003m.jpg)"></span>
-                      </td>
-                      <td class="td-truncate">
-                        <div class="text-truncate">
-                          Update change-version.js (#29736)
-                        </div>
-                      </td>
-                      <td class="text-nowrap text-muted">26 Nov 2019</td>
-                    </tr>
-                    <tr>
-                      <td class="w-1">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000f.jpg)"></span>
-                      </td>
-                      <td class="td-truncate">
-                        <div class="text-truncate">
-                          Regenerate package-lock.json (#29730)
-                        </div>
-                      </td>
-                      <td class="text-nowrap text-muted">25 Nov 2019</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="card card-md">
-              <div class="card-stamp card-stamp-lg">
-                <div class="card-stamp-icon bg-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" />
-                    <line x1="10" y1="10" x2="10.01" y2="10" />
-                    <line x1="14" y1="10" x2="14.01" y2="10" />
-                    <path d="M10 14a3.5 3.5 0 0 0 4 0" />
-                  </svg>
+                <div class="card card-sm">
+                    <h3>content :</h3>
+                    <?= $post['content'] ?>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Posts</h3>
-              </div>
-              <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap datatable">
-                  <thead>
-                    <tr>
-                      <th class="w-1">code</th>
-                      <th>title</th>
-                      <th>date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($posts as $post) { ?>
-                    <tr>
-                      <td><span class="text-muted"><?= $post['id'] ?></span></td>
-                      <td>
-                       <a href="post/<?= $post['id'] ?>"><?= $post['title'] ?></a>
-                      </td>
-                      <td>
-                      <?= $post['date'] ?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-  <?php include "includes/footer.php"; ?>
 
-  <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1668287865" defer></script>
-  <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1668287865" defer></script>
-  <script src="./dist/libs/jsvectormap/dist/maps/world.js?1668287865" defer></script>
-  <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1668287865" defer></script>
-  <script src="./dist/js/tabler.min.js?1668287865" defer></script>
-  <script src="./dist/js/demo.min.js?1668287865" defer></script>
+    <?php include "includes/footer.php"; ?>
+
+  <script src="./../dist/libs/apexcharts/dist/apexcharts.min.js?1668287865" defer></script>
+  <script src="./../dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1668287865" defer></script>
+  <script src="./../dist/libs/jsvectormap/dist/maps/world.js?1668287865" defer></script>
+  <script src="./../dist/libs/jsvectormap/dist/maps/world-merc.js?1668287865" defer></script>
+  <script src="./../dist/js/tabler.min.js?1668287865" defer></script>
+  <script src="./../dist/js/demo.min.js?1668287865" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
@@ -945,6 +640,5 @@
       })).render();
     });
   </script>
-</body>
-
+  </body>
 </html>

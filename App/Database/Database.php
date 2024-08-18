@@ -16,9 +16,9 @@ class Database
 
         try {
 
-            $db="mysql:host={$DBinfo['host']};dbname={$DBinfo['dbname']}";
+            $db = "mysql:host={$DBinfo['host']};dbname={$DBinfo['dbname']}";
 
-            $this->connect= new PDO($db,$DBinfo['username'],$DBinfo['password']);
+            $this->connect = new PDO($db,$DBinfo['username'],$DBinfo['password']);
             $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
         } 

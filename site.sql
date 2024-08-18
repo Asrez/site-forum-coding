@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2024 at 11:09 AM
+-- Generation Time: Aug 18, 2024 at 12:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,8 +56,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
-(1, 'post 1', '2024-08-29', 'content 1', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 1, 17, 68),
-(2, 'post 2', '2024-08-30', '                    content 2                  ', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 1, 44, 66),
+(1, 'post 1', '2024-08-29', 'gsdvchszafdcu\r\ndfjgdxgfvjd\r\nkdfjgvkjbfckvg\r\njcfvhjfvgjf\r\nfcjkgf\r\nggggg\r\ndfuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\r\ndddddddddddddddddddddddddddddgf\r\nddddddddddddddddddddddddddgj\r\nfffffffffffffffffffffffffffg\r\nffffffffffffffffffffffffffg', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 1, 0, 0),
+(2, 'post 2', '2024-08-30', '                    content 2                  ', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 1, 0, 0),
 (3, 'v', '2024-08-17', '\r\n                  v', '1.jpg', 1, 0, 0, 0),
 (4, 'c', '2024-08-17', '\r\n                  c', 'finances-us-dollars-and-bitcoins-currency-money-2.jpg', 1, 0, 0, 0),
 (5, 'ccc', '2024-08-17', '\r\n                  cccc', 'stylish-workplace-with-computer-at-home.jpg', 1, 1, 0, 0),
@@ -86,7 +86,8 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
-(1, 'logo', 'logo.svg', '/');
+(1, 'logo', 'logo.svg', '/'),
+(2, 'footer', 'Asrez', 'https://asrez.com');
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `image`, `email`, `state`) VALUES
-(1, 'admin 1', 'admin', '123', '000m.jpg', 'admin@gmail.com', 1),
+(1, 'admin 1', 'admin', '123', 'default.png', 'admin@gmail.com', 1),
 (2, 'user1', 'user1', '12345', '018f.jpg', 'user1@gmail.com', 0),
 (3, 'user2', 'user2', '444', '006m.jpg', 'fff@gmail.com', 0),
 (4, 'user3', 'user3', '123245', '019f.jpg', 'user2@gmail.com', 0),
@@ -190,7 +191,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `setting`
 --
 ALTER TABLE `setting`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

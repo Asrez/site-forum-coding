@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Gallery</title>
-    <!-- CSS files -->
     <link href="/dist/css/tabler.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
@@ -40,7 +39,7 @@
               <?php foreach ($posts as $post) { ?>
               <div class="col-sm-6 col-lg-4">
                 <div class="card card-sm">
-                  <a href="#" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
+                  <a href="post/<?= $post['id'] ?>" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
                   <div class="card-body">
                     <div class="d-flex align-items-center">
                       <span class="avatar me-3 rounded" style="background-image: url(/static/avatars/<?= $post['userimage'] ?>)"></span>

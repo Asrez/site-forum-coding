@@ -11,7 +11,7 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="INSERT INTO `view`(`id`, `ip`, `post_id`) VALUES (NULL , :ip , :post_id ) ;";
+        $stms = "INSERT INTO `view`(`id`, `ip`, `post_id`) VALUES (NULL , :ip , :post_id ) ;";
 
         $stms = $db->prepare($stms);
         $stms->bindParam("ip", $ip);
@@ -23,7 +23,7 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT COUNT(*) as count FROM `view`; ";
+        $stms = "SELECT COUNT(*) as count FROM `view`; ";
         $stms = $db->prepare($stms);
         $stms->execute();
 

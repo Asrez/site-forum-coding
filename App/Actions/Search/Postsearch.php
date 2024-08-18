@@ -2,11 +2,11 @@
 
 namespace App\Actions\Search;
 
-use App\Modals\Search;
-class SearchAll
+use App\Modals\Post;
+class Postsearch
 {
     public static function execute(string $title)
     {
-       return Search::search($title);
+       return Post::search($title);
     }
 }

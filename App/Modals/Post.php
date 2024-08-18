@@ -18,7 +18,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT * FROM `posts` WHERE id = :id ;";
+        $stms = "SELECT * FROM `posts` WHERE id = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
         $stms->execute();
@@ -30,7 +30,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT * FROM `posts` ;";
+        $stms = "SELECT * FROM `posts` ;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -40,14 +40,15 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT `users`.`id` ,
+        $stms = "SELECT `users`.`id` ,
          `users`.`image` as userimage ,
          `users`.`username` ,
          `posts`.`title` ,
          `posts`.`image` ,
          `posts`.`id` ,
          `posts`.`viewcount` ,
-         `posts`.`likes` 
+         `posts`.`likes` ,
+         `posts`.`content` 
         FROM `posts`
         INNER JOIN `users` ON `posts`.`admin_id` = `users`.`id` ;";
 
@@ -60,7 +61,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="DELETE FROM `posts` WHERE id = :id ;";
+        $stms = "DELETE FROM `posts` WHERE id = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
 
@@ -76,7 +77,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="UPDATE `posts` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
+        $stms = "UPDATE `posts` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
         
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
@@ -99,7 +100,7 @@ class Post
 
         $db = Database::getInstance()->getConnection();
 
-        $stms="INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0, 0);";
+        $stms = "INSERT INTO `posts`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0, 0);";
         
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
@@ -121,7 +122,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT COUNT(*) as count FROM `posts` ;";
+        $stms = "SELECT COUNT(*) as count FROM `posts` ;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -140,7 +141,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="UPDATE `posts` SET `state` = 1 WHERE `id` = :id ;";
+        $stms = "UPDATE `posts` SET `state` = 1 WHERE `id` = :id ;";
         
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
@@ -152,5 +153,17 @@ class Post
             location.replace("/manageposts");
         </script>
         <?php
+    }
+    public static function search(string $title) : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $posts = "SELECT * FROM `posts` WHERE `posts`.`title` LIKE :title ;";
+        $title = '%'.$title.'%';
+        $posts = $db->prepare($posts);
+        $posts->bindParam("title", $title);
+        $posts->execute();
+
+        return $posts->fetchAll(PDO::FETCH_ASSOC);
     }
 }

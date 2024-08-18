@@ -27,10 +27,10 @@
         <div class="card card-md">
           <div class="card-body">
             <h2 class="h2 text-center mb-4">Login to your account</h2>
-            <form action="./" method="post" >
+            <form action="/login_result" method="post">
               <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email" placeholder="youremail@email.com" autocomplete="off">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="your username" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label class="form-label">
@@ -41,13 +41,10 @@
                 </div>
               </div>
               <div class="form-footer">
-                <button type="submit" class="btn btn-primary w-100" name="btnsignin">Sign in</button>
+                <button type="submit" class="btn btn-primary w-100" name="btnlogin">Sign in</button>
               </div>
             </form>
           </div>
-        </div>
-        <div class="text-center text-muted mt-3">
-          Don't have account yet? <a href="sign-up.php" tabindex="-1">Sign up</a>
         </div>
       </div>
     </div>

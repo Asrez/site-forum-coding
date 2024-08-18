@@ -8,14 +8,25 @@ use PDO;
 
 class Search
 {
-    public static function search(string $title)
+    public static function search(string $title) : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT * FROM `users` , `posts` WHERE `users`.`name` LIKE(%".$title."%) OR `posts`.`title` LIKE(%".$title."%) ;";
-        $stms = $db->prepare($stms);
-        $stms->execute();
+        $users = "SELECT * FROM `users` WHERE `users`.`name` LIKE :title ;";
+        $posts = "SELECT * FROM `posts` WHERE `posts`.`title` LIKE :title ;";
+        $title = '%'.$title.'%';
+        $users = $db->prepare($users);
+        $posts = $db->prepare($posts);
+        $users->bindParam("title", $title);
+        $posts->bindParam("title", $title);
+        $users->execute();
+        $posts->execute();
+        $users = $users->fetchAll(PDO::FETCH_ASSOC);
+        $posts = $posts->fetchAll(PDO::FETCH_ASSOC);
+        
+        $all = ["posts" => $posts , "users" => $users];
 
-        return $stms->fetchAll(PDO::FETCH_ASSOC);
+        return $all ;
     }
+    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use flight;
 
 use App\Actions\Users\GetByIdU;
@@ -13,6 +14,9 @@ use App\Actions\Posts\UpdateP;
 use App\Actions\Posts\InsertP;
 use App\Actions\Posts\DeleteP;
 use App\Actions\Posts\Innerjoin;
+use App\Actions\Search\Postsearch;
+use App\Actions\Setting\Allsetting;
+
 
 class PostController
 {
@@ -70,33 +74,73 @@ class PostController
 
     public function GetAll()
     {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+
         $posts = GetAllP::execute();
-        $admin = GetByIdU::execute(1);
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
 
         require __DIR__."/../../views/Posts.php";
     }
 
     public function Manage()
     {
-        $admin = GetByIdU::execute(1);
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
         $posts = GetAllP::execute();
         require __DIR__."/../../Views/managepost.php";
     }
     public function Gallery()
     {
-        $admin = GetByIdU::execute(1);
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
         $posts = Innerjoin::execute();
         require __DIR__."/../../Views/gallery.php";
     }
 
     public function Upform(int $id)
     {
-        $admin = GetByIdU::execute(1);
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
         $this_post = GetByIdP::execute($id);
         require __DIR__."/../../views/updatepost.php";
     }
     public function Confirmed(int $id)
     {
         ConfirmP::execute($id);
+    }
+    public function result_search()
+    {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
+
+        if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
+
+            $title = $_POST['searchbox'];
+            $posts = Postsearch::execute($title);
+
+            require __DIR__."/../../Views/managepost.php";
+
+        }
+        else{
+
+            $posts = GetAllP::execute();
+
+            require __DIR__."/../../Views/managepost.php";
+        }
+        
+    }
+    public function GetById(int $id)
+    {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+        $admin = GetByIdU::execute($_SESSION['admin_id']);
+        $post = GetByIdP::execute($id);
+        require __DIR__."/../../Views/post.php";
     }
 }
