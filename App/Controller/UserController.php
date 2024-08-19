@@ -84,13 +84,19 @@ class UserController
 
     public function GetAll()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $users = GetAllU::execute();
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $users = GetAllU::execute();
+            
+            require __DIR__."/../../views/Users.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
         
-        require __DIR__."/../../views/Users.php";
     }
 
     public function Upform(int $id)
@@ -104,42 +110,59 @@ class UserController
     }
     public function Manage()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $users = GetAllU::execute();
-        require __DIR__."/../../Views/manageusers.php";
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $users = GetAllU::execute();
+            require __DIR__."/../../Views/manageusers.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
+        
     }
     public function Setting(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $user = GetByIdU::execute($id);
-        require __DIR__."/../../Views/settings.php";
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $user = GetByIdU::execute($id);
+            require __DIR__."/../../Views/settings.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
+        
     }
     public function result_search()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-        if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
+            if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
 
-            $title = $_POST['searchbox'];
-            $users = Usersearch::execute($title);
+                $title = $_POST['searchbox'];
+                $users = Usersearch::execute($title);
+
+                require __DIR__."/../../Views/manageusers.php";
+
+            }
+            else{
+
+            $users = GetAllU::execute();
 
             require __DIR__."/../../Views/manageusers.php";
-
+            }
         }
-        else{
-
-        $users = GetAllU::execute();
-
-        require __DIR__."/../../Views/manageusers.php";
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
         }
         
     }

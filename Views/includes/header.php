@@ -33,7 +33,7 @@
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <div class="dropdown-divider"></div>
                 <a href="/setting/<?= $admin['id'] ?>" class="dropdown-item">Settings</a>
-                <a href="/logout<?= $admin['id'] ?>" class="dropdown-item">Logout</a>
+                <a href="/logout" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>

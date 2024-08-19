@@ -11,11 +11,11 @@ class Like
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `like`(`id`, `ip`, `post_id`) VALUES (NULL , :ip , :post_id ) ;";
+        $stms = "INSERT INTO `like`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
 
         $stms = $db->prepare($stms);
         $stms->bindParam("ip", $ip);
-        $stms->bindParam("post_id", $post_id);
+        $stms->bindParam("question_id", $post_id);
 
         $stms->execute();
     }
@@ -23,11 +23,11 @@ class Like
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "DELETE  FROM `like` WHERE `ip` = :ip AND `post_id` = : post_id ;";
+        $stms = "DELETE  FROM `like` WHERE `ip` = :ip AND `question_id` = : question_id ;";
 
         $stms = $db->prepare($stms);
         $stms->bindParam("ip", $ip);
-        $stms->bindParam("post_id", $post_id);
+        $stms->bindParam("question_id", $post_id);
 
         $stms->execute();
     }

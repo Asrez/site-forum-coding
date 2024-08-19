@@ -74,32 +74,48 @@ class PostController
 
     public function GetAll()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $posts = GetAllP::execute();
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $posts = GetAllP::execute();
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-        require __DIR__."/../../views/Posts.php";
+            require __DIR__."/../../views/Posts.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
     }
 
     public function Manage()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $posts = GetAllP::execute();
-        require __DIR__."/../../Views/managepost.php";
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $posts = GetAllP::execute();
+            require __DIR__."/../../Views/managepost.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
     }
     public function Gallery()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $posts = Innerjoin::execute();
-        require __DIR__."/../../Views/gallery.php";
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $posts = Innerjoin::execute();
+            require __DIR__."/../../Views/gallery.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
+        
     }
 
     public function Upform(int $id)
@@ -114,33 +130,45 @@ class PostController
     }
     public function result_search()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-        if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
+            if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
 
-            $title = $_POST['searchbox'];
-            $posts = Postsearch::execute($title);
+                $title = $_POST['searchbox'];
+                $posts = Postsearch::execute($title);
 
-            require __DIR__."/../../Views/managepost.php";
+                require __DIR__."/../../Views/managepost.php";
 
+            }
+            else{
+
+                $posts = GetAllP::execute();
+
+                require __DIR__."/../../Views/managepost.php";
+            }
         }
-        else{
-
-            $posts = GetAllP::execute();
-
-            require __DIR__."/../../Views/managepost.php";
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
         }
-        
     }
     public function GetById(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $post = GetByIdP::execute($id);
-        require __DIR__."/../../Views/post.php";
+        if (isset($_SESSION['admin_id'])){       
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
+
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $post = GetByIdP::execute($id);
+            
+            require __DIR__."/../../Views/post.php";
+        }
+        else {
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
+        
     }
 }

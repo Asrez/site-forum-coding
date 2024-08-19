@@ -139,7 +139,7 @@ class User
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `users` WHERE `username` = :username AND `password` = :password;";
+        $stms = "SELECT * FROM `users` WHERE `username` = :username AND `password` = :password AND `state` = 1;";
         $stms = $db->prepare($stms);
         $stms->bindParam("password", $password);
         $stms->bindParam("username", $username);

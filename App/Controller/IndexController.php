@@ -16,20 +16,25 @@ class IndexController
 {
     public function index()
     {
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
+        if(isset($_SESSION['admin_id'])){
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-        $countlike=CountL::execute()['count'];
-        $countview=CountV::execute()['count'];
-        $countpost=CountP::execute()['count'];
-        $countuser=CountU::execute()['count'];
+            $countlike=CountL::execute()['count'];
+            $countview=CountV::execute()['count'];
+            $countpost=CountP::execute()['count'];
+            $countuser=CountU::execute()['count'];
 
-        $posts = GetAllP::execute();
-        $users = GetAllU::execute();
-        
-        require __DIR__ ."/../../Views/index.php";
+            $posts = GetAllP::execute();
+            $users = GetAllU::execute();
+            
+            require __DIR__ ."/../../Views/index.php";
+        }
+        else{
+            require __DIR__ ."/../../Views/sign-in.php";
+        }
     }
     public function result_search()
     {
@@ -61,5 +66,16 @@ class IndexController
             require __DIR__."/../../Views/index.php";
         }
         
+    }
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        ?>
+        <script type="text/javascript">
+            window.alert("you got out");
+            location.replace("/");
+        </script>
+        <?php
     }
 }

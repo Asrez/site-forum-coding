@@ -13,7 +13,7 @@ class Search
         $db = Database::getInstance()->getConnection();
 
         $users = "SELECT * FROM `users` WHERE `users`.`name` LIKE :title ;";
-        $posts = "SELECT * FROM `posts` WHERE `posts`.`title` LIKE :title ;";
+        $posts = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title ;";
         $title = '%'.$title.'%';
         $users = $db->prepare($users);
         $posts = $db->prepare($posts);

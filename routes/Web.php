@@ -42,6 +42,7 @@ Flight::route("POST /login_result" ,[new UserController(),"login_result"]);
 //setting accont
 Flight::route("POST /updateuser/@id" ,[new UserController(),"Upuser"]);
 Flight::route("GET /deleteimg/@id" ,[new UserController(),"Delimg"]);
+Flight::route("GET /logout" ,[new IndexController(),"logout"]);
 
 
 
