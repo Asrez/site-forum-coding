@@ -18,4 +18,14 @@ class Setting
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
+    public static function advers()
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT * FROM `setting` WHERE `state` = 'adver';";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

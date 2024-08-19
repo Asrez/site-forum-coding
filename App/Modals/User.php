@@ -150,7 +150,7 @@ class User
             ?>
             <script type="text/javascript">
                 window.alert("welcome");
-                location.replace("/");
+                location.replace("/panel");
             </script>
             <?php
         }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\CountP;
+use App\Actions\Setting\Advers;
 use App\Actions\Users\GetAllU;
 use App\Actions\Users\CountU;
 use App\Actions\Users\GetByIdU;
@@ -14,6 +15,25 @@ use App\Actions\Search\SearchAll;
 
 class IndexController
 {
+    public function Main_index()
+    {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+        
+        $advers = Advers::execute();
+        $questions = GetAllP::execute();
+        
+        require __DIR__ ."/../../Views/Main_index.php";
+    }
+    public function Main_index2()
+    {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+        $questions = GetAllP::execute();
+        $advers = Advers::execute();
+        
+        require __DIR__ ."/../../Views/Main_index2.php";
+    }
     public function index()
     {
         if(isset($_SESSION['admin_id'])){
@@ -74,8 +94,23 @@ class IndexController
         ?>
         <script type="text/javascript">
             window.alert("you got out");
-            location.replace("/");
+            location.replace("/panel");
         </script>
         <?php
+    }
+    public function search_result_main()
+    {
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+        $advers = Advers::execute();
+        if (isset($_POST['search']) && ! empty($_POST['search'])){
+
+            $title = $_POST['search'];
+
+            $all = SearchAll::execute($title);
+            $questions = $all['posts'];
+
+            require __DIR__."/../../Views/Main_index.php";
+        }
     }
 }

@@ -46,12 +46,16 @@
               </div>
             </div>
             <div class="form-footer">
-              <button type="submit" class="btn btn-primary w-100" name="btnsignup">Create new account</button>
+              <button type="submit" class="btn btn-primary w-100" name="btninuser">Create new account</button>
             </div>
           </div>
+          <select name="state" style="opacity:0">
+            <option value="0">User</option>
+            <option value="1">Admin</option>
+          </select>
         </form>
         <div class="text-center text-muted mt-3">
-          Already have account? <a href="sign-in.php" tabindex="-1">Sign in</a>
+          Already have account? <a href="/login" tabindex="-1">Sign in</a>
         </div>
       </div>
     </div>

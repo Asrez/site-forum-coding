@@ -118,6 +118,31 @@ class Post
         <?php
     
     }
+    public static function Insert2(array $data)
+    {
+
+        $date = date("Y-m-d");
+
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0, 0);";
+        
+        $stms = $db->prepare($stms);
+        $stms->bindParam("title", $data['title']);
+        $stms->bindParam("date", $date);
+        $stms->bindParam("content", $data['content']);
+        $stms->bindParam("image", $data['image']);
+        $stms->bindParam("admin_id", $data['admin_id'] );
+
+        $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("your question added .wait for confirmed by admins");
+            location.replace("/");
+        </script>
+        <?php
+    
+    }
     public static function Count() : array
     {
         $db = Database::getInstance()->getConnection();

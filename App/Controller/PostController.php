@@ -171,4 +171,36 @@ class PostController
         }
         
     }
+    public function add_question()
+    {
+        if (isset($_SESSION['admin_id'])) {
+            if(isset($_POST['btnAddQuestion'])){
+                if(isset($_POST['title']) && !empty($_POST['title'])
+                && isset($_POST['content']) && !empty($_POST['content'])
+                && isset($_POST['admin_id']) && !empty($_POST['admin_id'])){
+                    $title = $_POST['title'];
+                    $content = $_POST['content'];
+                    $image = basename($_FILES["image"]["name"]);
+                    if($image === "") $image = "1.jpg";
+                    $admin_id = $_POST['admin_id'];
+                    $data = [
+                        'title'=> $title,
+                        'content'=> $content,
+                        'image'=> $image,
+                        'admin_id'=> $admin_id
+                    ];
+
+                    InsertP::execute2($data);
+                }
+            }
+        }
+        else{
+            ?>
+            <script type="text/javascript">
+                
+            </script>
+            <?php
+
+        }
+    }
 }

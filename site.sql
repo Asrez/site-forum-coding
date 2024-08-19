@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 12:03 PM
+-- Generation Time: Aug 19, 2024 at 11:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,22 +24,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `answers`
+--
+
+CREATE TABLE `answers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `answer` mediumtext NOT NULL,
+  `question_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `state` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `like`
 --
 
 CREATE TABLE `like` (
   `id` bigint(20) NOT NULL,
   `ip` mediumtext NOT NULL,
-  `post_id` bigint(20) NOT NULL
+  `question_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Table structure for table `questions`
 --
 
-CREATE TABLE `posts` (
+CREATE TABLE `questions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(5000) NOT NULL,
   `date` date NOT NULL,
@@ -52,10 +66,10 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
--- Dumping data for table `posts`
+-- Dumping data for table `questions`
 --
 
-INSERT INTO `posts` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
+INSERT INTO `questions` (`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `likes`, `viewcount`) VALUES
 (1, 'post 1', '2024-08-29', 'gsdvchszafdcu\r\ndfjgdxgfvjd\r\nkdfjgvkjbfckvg\r\njcfvhjfvgjf\r\nfcjkgf\r\nggggg\r\ndfuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\r\ndddddddddddddddddddddddddddddgf\r\nddddddddddddddddddddddddddgj\r\nfffffffffffffffffffffffffffg\r\nffffffffffffffffffffffffffg', 'a-woman-works-at-a-desk-with-a-laptop-and-a-cup-of-coffee.jpg', 1, 1, 0, 0),
 (2, 'post 2', '2024-08-30', '                    content 2                  ', 'cup-of-coffee-on-table-in-cafe-2.jpg', 1, 1, 0, 0),
 (3, 'v', '2024-08-17', '\r\n                  v', '1.jpg', 1, 0, 0, 0),
@@ -78,16 +92,22 @@ CREATE TABLE `setting` (
   `id` bigint(20) NOT NULL,
   `key_setting` mediumtext NOT NULL,
   `value_setting` mediumtext NOT NULL,
-  `link` mediumtext NOT NULL
+  `link` mediumtext NOT NULL,
+  `title` mediumtext DEFAULT NULL,
+  `content` longtext NOT NULL,
+  `state` varchar(5000) NOT NULL DEFAULT 'setting'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`) VALUES
-(1, 'logo', 'logo.svg', '/'),
-(2, 'footer', 'Asrez', 'https://asrez.com');
+INSERT INTO `setting` (`id`, `key_setting`, `value_setting`, `link`, `title`, `content`, `state`) VALUES
+(1, 'logo', 'logo.svg', '/', '', '', 'setting'),
+(2, 'footer', 'Asrez', 'https://asrez.com', '', '', 'setting'),
+(3, 'adver1', 'sidebar-join-laracasts-robot.webp', '#', 'Level Up Your\n                        Programming with Laracasts', 'with                         a computer, some git knowledge, and an idea, any of us can contribute to the frameworks and                         packages                         that we use every day. Cool as that may be, it can initially be a daunting experience.&nbsp;So                         let\'s                         go on a journey together, as we take an idea for Laravel Prompts from musings to merging.                         Learning                         the basic processes will put you in good stead for contributing your own ideas.', 'adver'),
+(4, 'adver2', 'how-to-contribute-to-open-source.svg', '#', '', 'computer, some git knowledge, and an idea, any of us can contribute to the frameworks and                         packages                         that we use every day. Cool as that may be, it can initially be a daunting experience.&nbsp;So                         let\'s                         go on a journey together, as we take an idea for Laravel Prompts from musings to merging.                         Learning                         the basic processes will put you in good stead for contributing your own ideas.', 'adver'),
+(5, 'adver3', 'd2ce9d569f5af686a03dfbebb343f38eb801fe67.jfif', '#', 'Contribute\r\n                        to Open Source', 'computer, some git knowledge, and an idea, any of us can contribute to the frameworks and\r\n                        packages\r\n                        that we use every day. Cool as that may be, it can initially be a daunting experience.&nbsp;So\r\n                        let\'s\r\n                        go on a journey together, as we take an idea for Laravel Prompts from musings to merging.\r\n                        Learning\r\n                        the basic processes will put you in good stead for contributing your own ideas', 'adver');
 
 -- --------------------------------------------------------
 
@@ -128,12 +148,18 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `image`, `email`, `st
 CREATE TABLE `view` (
   `id` bigint(20) NOT NULL,
   `ip` mediumtext NOT NULL,
-  `post_id` bigint(20) NOT NULL
+  `question_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `like`
@@ -142,9 +168,9 @@ ALTER TABLE `like`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts`
+-- Indexes for table `questions`
 --
-ALTER TABLE `posts`
+ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_id` (`admin_id`),
   ADD KEY `admin_id_2` (`admin_id`);
@@ -176,22 +202,28 @@ ALTER TABLE `view`
 --
 
 --
+-- AUTO_INCREMENT for table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `like`
 --
 ALTER TABLE `like`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT for table `questions`
 --
-ALTER TABLE `posts`
+ALTER TABLE `questions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `setting`
 --
 ALTER TABLE `setting`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -204,16 +236,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `view`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
