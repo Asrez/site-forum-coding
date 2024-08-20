@@ -6,7 +6,8 @@ namespace App\Controller;
 use flight;
 
 use App\Actions\Users\GetByIdU;
-
+use App\Actions\Views\InsertV;
+use App\Actions\Comments\AllCommentsByQId;
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\ConfirmP;
 use App\Actions\Posts\GetByIdP;
@@ -197,10 +198,41 @@ class PostController
         else{
             ?>
             <script type="text/javascript">
-                
+                window.alert("Log in first");
+                location.replace("/");
             </script>
             <?php
 
         }
     }
+
+    public function show_post(int $id)
+    {    
+        //get ip
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+        InsertV::execute($id, $ip);
+        $logo = Allsetting::execute("logo");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+        $twitter = Allsetting::execute("twitter");
+        $github = Allsetting::execute("github");
+        $youtube = Allsetting::execute("youtube");
+        $answers = Innerjoin::execute2();
+        $post = GetByIdP::execute($id);
+        $user = GetByIdU::execute($post['admin_id']);
+        if ($post['state'] === 1){
+            require __DIR__."/../../Views/Main_conversation.php";
+        }
+        else{
+            require __DIR__."/../../public/error-404.html";
+        }
+        
+    }
+    
 }

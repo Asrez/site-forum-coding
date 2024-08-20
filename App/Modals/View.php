@@ -11,13 +11,31 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `view`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
+        $isset_sql = "SELECT * FROM `view` WHERE `ip` = :ip AND `question_id` = :id;";
+        $isset_query = $db->prepare($isset_sql);
+        $isset_query->bindParam("ip",$ip);
+        $isset_query->bindParam("id",$post_id);
+        $isset_query->execute();
+        $isset_query = $isset_query->fetch(PDO::FETCH_ASSOC);
 
-        $stms = $db->prepare($stms);
-        $stms->bindParam("ip", $ip);
-        $stms->bindParam("question_id", $post_id);
+        if($isset_query === false) {
 
-        $stms->execute();
+            $db = Database::getInstance()->getConnection();
+
+            $stms = "INSERT INTO `view`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
+
+            $stms = $db->prepare($stms);
+            $stms->bindParam("ip", $ip);
+            $stms->bindParam("question_id", $post_id);
+
+            $stms->execute();
+
+            $stms = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id;";
+            $stms = $db->prepare($stms);
+            $stms->bindparam("id" , $post_id);
+            $stms->execute();
+        }
+        
     }
     public static function Count() : array
     {

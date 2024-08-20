@@ -61,12 +61,15 @@ function setBeforeStyle()
 
 // Elements
 // Open Modal
-elm_SEARCH_BTN.addEventListener("click", () => {
+if (elm_SIGN_IN_BTN !== null) {
+
+    elm_SIGN_IN_BTN.addEventListener("click", () => {
     showOverlay()
     elm_SEARCH_MODAL.style.right = "0"
     document.querySelector(".search-modal input[autofocus]").focus()
     removeScroll()
 })
+}
 
 elm_HAMBURGER_BTN.addEventListener("click", () => {
     showOverlay()
@@ -79,6 +82,7 @@ elm_HAMBURGER_BTN.addEventListener("click", () => {
     // document.querySelector(".search-modal input[autofocus]").focus()
     removeScroll()
 })
+if (elm_SIGN_IN_BTN !== null) {
 
 elm_SIGN_IN_BTN.addEventListener("click", () => {
     showOverlay()
@@ -91,6 +95,9 @@ elm_SIGN_IN_BTN.addEventListener("click", () => {
     document.querySelector(".login-modal input[autofocus]").focus()
     removeScroll()
 })
+}
+
+if (elm_SIGN_UP_BTN !== null) {
 
 elm_SIGN_UP_BTN.addEventListener("click", () => {
     showOverlay()
@@ -103,10 +110,12 @@ elm_SIGN_UP_BTN.addEventListener("click", () => {
     document.querySelector(".register-modal input[autofocus]").focus()
     removeScroll()
 })
-
+}
 if (elm_NEW_DESCRIPTION_BTN !== null) {
     elm_NEW_DESCRIPTION_BTN.forEach((item) => {
         item.addEventListener("click", () => {
+            console.log('gfgfhfgh');
+            
             showOverlay()
             elm_NEW_DESCRIPTION_MODAL.style.opacity = "0"
             elm_NEW_DESCRIPTION_MODAL.style.display = "block"

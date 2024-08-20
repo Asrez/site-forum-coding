@@ -9,4 +9,8 @@ class GetAllP
     {
         return Post::GetAll();
     }
+    public static function execute2()
+    {
+        return Post::GetAllState();
+    }
 }

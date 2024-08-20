@@ -155,9 +155,7 @@
                       <div class="col-auto">
                         <span
                           class="bg-red text-white avatar">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path 
-                          d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 11l2 2l4 -4" /></svg>
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
                           </svg>
@@ -165,10 +163,10 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          Likes
+                          Admins
                         </div>
                         <div class="text-muted">
-                        <?= $countlike ?>
+                        <?= $countadmin ?>
                         </div>
                       </div>
                     </div>

@@ -9,4 +9,8 @@ class Innerjoin
     {
         return Post::Innerjoin();
     }
+    public static function execute2()
+    {
+        return Post::Innerjoin2();
+    }
 }

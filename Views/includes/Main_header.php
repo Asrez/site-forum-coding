@@ -4,32 +4,20 @@
     </div>
     <div class="flex-1 hidden md:flex xl:justify-center xl:ms-0 ms-10 justify-start h-full items-center">
         <a class="font-bold tracking-[0.05rem] text-[--color6] hover:text-white transition-all duration-300 relative h-full items-center flex justify-center before:w-full before:h-[4px] before:bg-[--color5] before:content-[''] before:inline-block before:absolute before:bottom-0 before:start-0 before:rounded-[5px] before:transition-all before:duration-300 before:opacity-0 hover:before:opacity-100 active"
-           href="#">FORUM</a>
+           href="<?= $title['link'] ?>"><?= $title['value_setting'] ?></a>
     </div>
     <div class="btn-wrapper flex-1 flex justify-end gap-3">
-        <button class="h-[40px] w-[40px] rounded-[14px] flex justify-center items-center bg-[--color2] text-white hover:bg-[--color3] transition-all duration-300 text-[--color4]"
-                id="search_btn">
-            <svg viewBox="0 0 15 15" width="17">
-                <g fill="none" fill-rule="evenodd">
-                    <path d="M-2-2h20v20H-2z"></path>
-                    <path class="fill-current text-[--color4]"
-                          d="M10.443 9.232h-.638l-.226-.218A5.223 5.223 0 0 0 10.846 5.6 5.247 5.247 0 1 0 5.6 10.846c1.3 0 2.494-.476 3.414-1.267l.218.226v.638l4.036 4.028 1.203-1.203-4.028-4.036zm-4.843 0A3.627 3.627 0 0 1 1.967 5.6 3.627 3.627 0 0 1 5.6 1.967 3.627 3.627 0 0 1 9.232 5.6 3.627 3.627 0 0 1 5.6 9.232z"></path>
-                </g>
-            </svg>
-        </button>
         <?php if (isset($_SESSION['admin_id'])) { ?>
-        <a href="/logout" class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]"
-                id="signIn_btn" >
+        <a href="/logout2" class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]">
             Log Out
         </a>
-        <a href="/profile" class="bg_gr h-[40px] w-[163px] rounded-[14px] hidden md:flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative"
-                id="signUp_btn">
+        <a href="/profile" class="bg_gr h-[40px] w-[163px] rounded-[14px] hidden md:flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">
             Profile
         </a>
         <?php } else { ?>
         <button class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]"
                 id="signIn_btn" >
-            Sign In
+            Log In
         </button>
         <button class="bg_gr h-[40px] w-[163px] rounded-[14px] hidden md:flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative"
                 id="signUp_btn">

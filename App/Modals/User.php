@@ -83,6 +83,37 @@ class User
         }
         
     }
+    public static function Update2(array $data)
+    {
+        try {
+            $db = Database::getInstance()->getConnection();
+
+            $stms = "UPDATE `users` SET `name` = :name, `username`= :username, `password` = :password,`image` = :image, `email`= :email  WHERE `id` = :id ;";
+            $stms = $db->prepare($stms);
+            $stms->bindParam("name", $data['name']);
+            $stms->bindParam("username", $data['username']);
+            $stms->bindParam("password", $data['password']);
+            $stms->bindParam("email", $data['email']);
+            $stms->bindParam("image", $data['image']);
+            $stms->bindParam("id", $data['id']);
+            
+            $stms->execute();
+            ?>
+            <script type="text/javascript">
+                window.alert("your accont updated");
+                location.replace("/profile");
+            </script>
+            <?php
+        } catch (PDOException) {
+            ?>
+            <script type="text/javascript">
+                window.alert("change the username");
+                location.replace("/edit");
+            </script>
+            <?php
+        }
+        
+    }
     public static function Insert(array $data)
     {
         try {
@@ -113,11 +144,57 @@ class User
             <?php
         }
     }
+    public static function Insert2(array $data)
+    {
+        try {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "INSERT INTO `users`(`id`, `name`, `username`, `password`, `image` , `email`, `state`) VALUES (NULL, :name, :username, :password, :image, :email, 0);";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("name", $data['name']);
+        $stms->bindParam("username", $data['username']);
+        $stms->bindParam("password", $data['password']);
+        $stms->bindParam("email", $data['email']);
+        $stms->bindParam("image", $data['image']);        
+        $stms->execute();
+
+        $stms2 = "SELECT * FROM `users` WHERE `username` = :username ;";
+        $stms2 = $db->prepare($stms2);
+        $stms2->bindParam("username", $data['username']);
+        $stms2->execute();
+        $row = $stms2->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['admin_id'] = $row['id'];
+
+        ?>
+        <script type="text/javascript">
+            window.alert("regestration is done");
+            location.replace("/");
+        </script>
+        <?php
+        } catch (PDOException) {
+            ?>
+            <script type="text/javascript">
+                window.alert("change the username");
+                location.replace("/");
+            </script>
+            <?php
+        }
+    }
     public static function Count() : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms="SELECT COUNT(*) as count FROM `users` ;";
+        $stms="SELECT COUNT(*) as count FROM `users` WHERE `state` = 0;";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetch(PDO::FETCH_ASSOC);
+    }
+    public static function Count2() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms="SELECT COUNT(*) as count FROM `users` WHERE `state` = 1;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -159,6 +236,35 @@ class User
             <script type="text/javascript">
                 window.alert("The information is incorrect");
                 location.replace("/login");
+            </script>
+            <?php
+        }
+        
+    }
+    public static function Login2(string $username, string $password)
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT * FROM `users` WHERE `username` = :username AND `password` = :password ;";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("password", $password);
+        $stms->bindParam("username", $username);
+        $stms->execute();
+
+        if ($row = $stms->fetch(PDO::FETCH_ASSOC)) {
+            $_SESSION['admin_id'] = $row['id'];
+            ?>
+            <script type="text/javascript">
+                window.alert("welcome");
+                location.replace("/");
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script type="text/javascript">
+                window.alert("The information is incorrect");
+                location.replace("/");
             </script>
             <?php
         }

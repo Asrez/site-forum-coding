@@ -18,7 +18,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `questions` WHERE id = :id ;";
+        $stms = "SELECT * FROM `questions` WHERE `id` = :id ;";
         $stms = $db->prepare($stms);
         $stms->bindParam("id", $id);
         $stms->execute();
@@ -26,11 +26,33 @@ class Post
         return $stms->fetch(PDO::FETCH_ASSOC);
 
     }
+    public static function GetByAdminId(int $id) : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT * FROM `questions` WHERE `admin_id` = :id ;";
+        $stms = $db->prepare($stms);
+        $stms->bindParam("id", $id);
+        $stms->execute();
+
+        return $stms->fetchAll(PDO::FETCH_ASSOC);
+
+    }
     public static function GetAll() : array
     {
         $db = Database::getInstance()->getConnection();
 
         $stms = "SELECT * FROM `questions` ;";
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function GetAllState() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT * FROM `questions` WHERE `state` = 1;";
         $stms = $db->prepare($stms);
         $stms->execute();
 
@@ -51,6 +73,25 @@ class Post
          `questions`.`content` 
         FROM `questions`
         INNER JOIN `users` ON `questions`.`admin_id` = `users`.`id` ;";
+
+        $stms = $db->prepare($stms);
+        $stms->execute();
+
+        return $stms->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function Innerjoin2() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $stms = "SELECT `users`.`id` ,
+         `users`.`image`,
+         `users`.`username` ,
+         `answers`.`answer` ,
+         `answers`.`id` ,
+         `answers`.`user_id` ,
+         `answers`.`date` 
+        FROM `answers`
+        INNER JOIN `users` ON `answers`.`user_id` = `users`.`id`;";
 
         $stms = $db->prepare($stms);
         $stms->execute();
@@ -191,4 +232,5 @@ class Post
 
         return $posts->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }

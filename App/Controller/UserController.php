@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 
-use flight;
 
+use App\Actions\Posts\GetAllP;
+use App\Actions\Comments\CountC;
+use App\Actions\Posts\GetByAdminId;
 use App\Actions\Users\GetAllU;
 use App\Actions\Users\GetByIdU;
 use App\Actions\Users\UpdateU;
@@ -77,6 +79,32 @@ class UserController
         }
     }
 
+    public function updateaccont(int $id)
+    {
+        if(isset($_POST["btnupuser"])){
+            if(isset($_POST['name']) && !empty($_POST['name'])
+            && isset($_POST['username']) && !empty($_POST['username'])
+            && isset($_POST['password']) && !empty($_POST['password'])
+            && isset($_POST['email']) && !empty($_POST['email'])){
+                $name = $_POST['name'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $email = $_POST['email'];
+                $image = basename($_FILES["image"]["name"]);
+                if($image === "") $image = GetByIdU::execute($id)['image'];
+                $data = [
+                    'name'=> $name,
+                    'username'=> $username,
+                    'password'=> $password,
+                    'email'=> $email,
+                    'image'=> $image,
+                    'id'=> $id
+                ];
+
+                UpdateU::execute2($data);    
+            }
+        }
+    }
     public function Delete(int $id)
     {
        return DeleteU::execute($id);
@@ -215,4 +243,86 @@ class UserController
     {
         return Deleteimg::execute($id);
     }
+
+    //Main
+    public function log_in_result()
+    {
+        if (!(isset($_SESSION['admin_id']))){
+            if (isset($_POST['btnlogin'])) {
+                if (isset($_POST['username']) && !empty($_POST['username'])
+                && isset($_POST['password']) && !empty($_POST['password'])) {
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    Login::execute2($username, $password);
+
+                }
+            }
+
+            require __DIR__."/../../Views/manageusers.php";
+        }
+    }
+
+    public function sign_up()
+    {
+        if(isset($_POST["btnsignup"])){
+            if(isset($_POST['name']) && !empty($_POST['name'])
+            && isset($_POST['username']) && !empty($_POST['username'])
+            && isset($_POST['password']) && !empty($_POST['password'])
+            && isset($_POST['email']) && !empty($_POST['email'])){
+                $name = $_POST['name'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $email = $_POST['email'];
+                $image = basename($_FILES["image"]["name"]);
+                if($image === "") $image = "default.png";
+                $data = [
+                    'name'=> $name,
+                    'username'=> $username,
+                    'password'=> $password,
+                    'email'=> $email,
+                    'image'=> $image
+                ];
+                
+                
+                InsertU::execute2($data);
+                
+            }
+        }
+    }
+    public function profile()
+    {
+       if (isset($_SESSION['admin_id'])) {
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
+            $twitter = Allsetting::execute("twitter");
+            $github = Allsetting::execute("github");
+            $youtube = Allsetting::execute("youtube");
+            $questions = GetByAdminId::execute($_SESSION['admin_id']);
+            $count_activity = count($questions);
+            $count_reply = CountC::execute($_SESSION['admin_id'])['count'];
+            $user = GetByIdU::execute($_SESSION['admin_id']);
+            require __DIR__."/../../Views/Main_my_profile.php";
+       }
+       else{
+            require __DIR__."/../../public/error-404.html";
+       }
+    }
+    public function edit()
+    {
+       if (isset($_SESSION['admin_id'])) {
+            $logo = Allsetting::execute("logo");
+            $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
+            $twitter = Allsetting::execute("twitter");
+            $github = Allsetting::execute("github");
+            $youtube = Allsetting::execute("youtube");
+            $user = GetByIdU::execute($_SESSION['admin_id']);
+            require __DIR__."/../../Views/Main_edit_profile_account.php";
+       }
+       else{
+            require __DIR__."/../../public/error-404.html";
+       }
+    }
+    
 }

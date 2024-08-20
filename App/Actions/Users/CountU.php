@@ -10,4 +10,8 @@ class CountU
     {
         return User::Count();
     }
+    public static function execute2()
+    {
+        return User::Count2();
+    }
 }
