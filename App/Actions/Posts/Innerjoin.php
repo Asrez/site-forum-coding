@@ -9,8 +9,8 @@ class Innerjoin
     {
         return Post::Innerjoin();
     }
-    public static function execute2()
+    public static function execute2(int $id)
     {
-        return Post::Innerjoin2();
+        return Post::Innerjoin2($id);
     }
 }

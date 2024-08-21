@@ -9,4 +9,8 @@ class Postsearch
     {
        return Post::search($title);
     }
+    public static function execute2(string $title)
+    {
+       return Post::search2($title);
+    }
 }

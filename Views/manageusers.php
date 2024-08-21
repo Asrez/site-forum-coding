@@ -74,9 +74,9 @@
                           <td><?= $user['email'] ?></td>
                           <td>
                             <span class="badge 
-                            <?php if ($user['state'] == "1") echo " bg-success "; ?>
+                            <?php if ($user['state'] === 1) echo " bg-success "; ?>
                              me-1"></span>
-                            <?php if ($user['state'] == "1") echo "admin";
+                            <?php if ($user['state'] === 1) echo "admin";
                                   else echo "user"; ?>
                           </td>
                           <td >

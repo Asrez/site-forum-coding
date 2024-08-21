@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learn Laravel | Laracasts</title>
+    <title>edit profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="./images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
     <link href="./node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
@@ -95,7 +95,7 @@
                         <label class="text-[--color6] font-bold block" for="user_email">Email</label>
                         <div class="input relative">
                             <input class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
-                                   id="user_email" name="email" placeholder="Email..." required="" type="text" value="<?= $user['email'] ?>">
+                                   id="user_email" name="email" placeholder="Email..." required="" type="email" value="<?= $user['email'] ?>">
                         </div>
                     </div>
                     <div class="input-box mt-6">

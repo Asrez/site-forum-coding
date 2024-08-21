@@ -197,51 +197,6 @@
     </form>
 </div>
 
-<div class="discussion-modal hidden sm:w-[600px] w-full transition-all duration-500 rounded-[14px] bg-[--modal2] fixed top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 z-[100] border border-[--color3] px-12">
-    <button class="group absolute top-[15px] right-[15px] flex justify-center items-center rounded-xl bg-[--color2] hover:bg-white p-3 transition-all duration-300"
-            id="close_btn3">
-        <svg class="fill-white group-hover:fill-[--color5]" viewBox="0 0 25 25" width="14">
-            <path d="M22.222 0 25 2.778l-9.723 9.721L25 22.222 22.222 25 12.5 15.277 2.778 25 0 22.222 9.722 12.5 0 2.778 2.778 0 12.5 9.722 22.222 0z"
-                  fill-rule="evenodd"></path>
-        </svg>
-    </button>
-    <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Discussion!</h2>
-    <form action="/addquestion" method="post" enctype="multipart/form-data">
-        <div class="input-box mt-4">
-            <label class="text-[--color6] font-bold block" for="title">Title</label>
-            <div class="input relative">
-                <input autofocus
-                       class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
-                       id="title"
-                       name="title"
-                       placeholder="Title..." required type="text">
-            </div>
-
-            <label class="text-[--color6] font-bold block mt-4" for="description">Question</label>
-            <div class="input relative">
-                <textarea
-                        class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center p-2 w-full placeholder-gray-500 outline-0 text-white"
-                        id="description" minlength="8"
-                        name="content"
-                        placeholder="Question..." required="required" rows="5"></textarea>
-            </div>
-            <input type="text" value="<?php if (isset($_SESSION['admin_id'])) echo $_SESSION['admin_id'] ?>" name="admin_id" style="opacity:0">
-            <label class="text-[--color6] font-bold block" for="image">Image</label>
-            <div class="input relative">
-                <input autofocus
-                       class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
-                       id="image"
-                       name="image"
-                       placeholder="Image..." type="file">
-            </div>
-            <button class="bg_gr mt-10 h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative mb-12"
-                    type="submit" name="btnAddQuestion">
-                Create Discussion
-            </button>
-        </div>
-    </form>
-</div>
-
 <div class="menu-modal h-full sm:w-[600px] w-full hidden transition-all duration-500 rounded-[14px] bg-[--modal2] fixed top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 z-[100] border border-[--color3] px-12 pb-5 flex-col justify-center items-center">
     <button class="group absolute top-[15px] right-[15px] flex justify-center items-center rounded-xl bg-[--color2] hover:bg-white p-3 transition-all duration-300"
             id="close_btn4">
@@ -260,6 +215,44 @@
         <a href="">About Us</a>
     </h2>
 </div>
+
+<?php if (isset($reply_post_id)) { ?>
+<div class="replay-modal hidden sm:w-[600px] w-full transition-all duration-500 rounded-[14px] bg-[--modal2] fixed top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 z-[100] border border-[--color3] px-12">
+    <button class="group absolute top-[15px] right-[15px] flex justify-center items-center rounded-xl bg-[--color2] hover:bg-white p-3 transition-all duration-300"
+            id="close_btn6">
+        <svg class="fill-white group-hover:fill-[--color5]" viewBox="0 0 25 25" width="14">
+            <path d="M22.222 0 25 2.778l-9.723 9.721L25 22.222 22.222 25 12.5 15.277 2.778 25 0 22.222 9.722 12.5 0 2.778 2.778 0 12.5 9.722 22.222 0z"
+                  fill-rule="evenodd"></path>
+        </svg>
+    </button>
+    <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Replay!</h2>
+    <form action="/addreply/<?= $id ?>" method="post">
+        <div class="input-box mt-4">
+            <label class="text-[--color6] font-bold block" for="title2">Title</label>
+            <div class="input relative">
+                <input autofocus
+                       class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
+                       id="title2"
+                       name="title"
+                       placeholder="Title..." required type="text">
+            </div>
+
+            <label class="text-[--color6] font-bold block mt-4" for="description2">Answer</label>
+            <div class="input relative">
+                <textarea
+                        class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center p-2 w-full placeholder-gray-500 outline-0 text-white"
+                        id="description2"
+                        name="answer"
+                        placeholder="Answer..." required="required" rows="5"></textarea>
+            </div>
+            <button class="bg_gr mt-10 h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative mb-12"
+                    type="submit" name="btnnewreply">
+                Create Replay
+            </button>
+        </div>
+    </form>
+</div>
+<?php } ?>
 
 <button class="bg-[--color5] w-[50px] h-[50px] flex justify-center items-center rounded-full fixed bottom-[20px] right-[10px] newDescription">
     <img src="images/reply-mobile-button.svg" alt="">

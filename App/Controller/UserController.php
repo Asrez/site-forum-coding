@@ -292,6 +292,7 @@ class UserController
     public function profile()
     {
        if (isset($_SESSION['admin_id'])) {
+            $logo_footer = Allsetting::execute("logo_footer");
             $logo = Allsetting::execute("logo");
             $footer = Allsetting::execute("footer");
             $title = Allsetting::execute("title");
@@ -311,6 +312,7 @@ class UserController
     public function edit()
     {
        if (isset($_SESSION['admin_id'])) {
+            $logo_footer = Allsetting::execute("logo_footer");
             $logo = Allsetting::execute("logo");
             $footer = Allsetting::execute("footer");
             $title = Allsetting::execute("title");

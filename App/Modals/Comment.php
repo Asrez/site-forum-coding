@@ -9,16 +9,24 @@ class Comment
 {
     public static function Insert(array $data)
     {
+        $date = date("Y-m-d");
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `answers`(`id`, `answer`, `question_id`, `user_id`) VALUES (NULL, :answer, :question_id, :id);";
+        $stms = "INSERT INTO `answers`(`id`, `answer`, `question_id`, `user_id`,`date`) VALUES (NULL, :answer, :question_id, :user_id, :date);";
 
         $stms = $db->prepare($stms);
         $stms->bindParam("answer", $data['answer']);
-        $stms->bindParam("id", $data['id']);
         $stms->bindParam("question_id", $data['question_id']);
+        $stms->bindParam("user_id", $data['user_id']);
+        $stms->bindParam("date", $date);
 
         $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("your reply added");
+            location.replace("/show_post/<?= $data['question_id'] ?>")
+        </script>
+        <?php
     }
     public static function Delete(int $id)
     {
@@ -30,6 +38,11 @@ class Comment
         $stms->bindParam("id", $id);
 
         $stms->execute();
+        ?>
+        <script type="text/javascript">
+            window.alert("your reply deleted");
+        </script>
+        <?php
     }
     public static function Count(int $id) : array
     {

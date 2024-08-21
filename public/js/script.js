@@ -1,6 +1,6 @@
 const elm_SEARCH_BTN = document.querySelector("#search_btn");
 const elm_NEW_DESCRIPTION_BTN = document.querySelectorAll(".newDescription");
-const elm_NEW_REPLAY_BTN = document.querySelectorAll(".newReplay");
+const elm_NEW_REPLAY_BTN = document.querySelectorAll("#newReplay");
 const elm_SIGN_IN_BTN = document.querySelector("#signIn_btn"); // login
 const elm_SIGN_UP_BTN = document.querySelector("#signUp_btn"); // register
 const elm_HAMBURGER_BTN = document.querySelector("#hamburger_btn"); // register
@@ -158,7 +158,7 @@ sortElements.forEach(function (element) {
 // Overlay And CloseBtn
 elm_OVERLAY.addEventListener("click", () => {
     hideOverlay()
-    elm_SEARCH_MODAL.style.right = "-100%"
+    // elm_SEARCH_MODAL.style.right = "-100%"
     elm_SIGN_IN_MODAL.style.opacity = "0"
     elm_SIGN_IN_MODAL.style.transform = "translate(50%, 50%)";
     elm_SIGN_UP_MODAL.style.opacity = "0"
@@ -195,11 +195,11 @@ elm_CLOSE_BTN4.addEventListener("click", () => {
     elm_HAMBURGER_MODAL.style.transform = "translate(50%, 50%)";
     addScroll()
 })
-elm_CLOSE_BTN5.addEventListener("click", () => {
-    hideOverlay()
-    elm_SEARCH_MODAL.style.right = "-100%"
-    addScroll()
-})
+// elm_CLOSE_BTN5.addEventListener("click", () => {
+//     hideOverlay()
+//     elm_SEARCH_MODAL.style.right = "-100%"
+//     addScroll()
+// })
 elm_CLOSE_BTN6.addEventListener("click", () => {
     hideOverlay()
     elm_REPLAY_MODAL.style.opacity = "0"

@@ -1,23 +1,10 @@
 <div class="container mx-auto xl:px-14 p-4">
-    <footer class="sm:px-10 px-5 py-5 rounded-[14px] bg-[--color8] w-full mt-0 sm:mt-8">
-        <h1 class="w-full text-center text-[32px] text-white font-bold mt-12">Want us to email you occasionally <br>
-            with Laracasts news?</h1>
+    <footer class="sm:px-10 px-5 py-5 rounded-[14px] bg-[--color8] w-full mt-0 sm:mt-8"> 
         <div class="w-full flex justify-center items-center">
-            <form action=""
-                  class="mt-12 w-full sm:max-w-[500px] max-w-full flex items-center justify-center bg-[--color2] pl-4 px-1.5 py-1.5 rounded-[14px]"
-                  onsubmit="ValidateEmail(event)">
-                <input class="text-white w-full email_validation h-[40px] bg-transparent outline-0 placeholder-gray-500"
-                       id="email"
-                       name="email" placeholder="Email address"
-                       type="text">
-                <button class="bg_gr h-[40px] rounded-lg flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative w-full max-w-[160px]">
-                    Subscribe
-                </button>
-            </form>
         </div>
         <div class="footer-items w-full mt-12 flex lg:gap-80 gap-4 lg:flex-nowrap flex-wrap">
             <div class="lg:basis-1/2 basis-full h-full flex-grow flex-1 flex flex-col justify-between lg:items-start items-center">
-                <img alt="" class="w-[230px]" src="../static/<?= $logo['value_setting'] ?>">
+                <img alt="" class="w-[230px]" src="../static/<?= $logo_footer['value_setting'] ?>">
                 <p class="text-[--color9] font-medium mt-4 lg:text-left text-center">
                     <?= $footer['content'] ?></p>
             </div>

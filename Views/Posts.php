@@ -40,7 +40,7 @@
               <div class="col-md-6">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title"><?= $post['title'] ?></h3>
+                    <a href="post/<?= $post['id'] ?>"><h3 class="card-title"><?= $post['title'] ?></h3></a>
                   </div>
                   <div class="card-body">
                     <div id="carousel-indicators" class="carousel slide" data-bs-ride="carousel">

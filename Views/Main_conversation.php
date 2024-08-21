@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learn Laravel | Laracasts</title>
+    <title>question <?= $id ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="../images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
     <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
@@ -56,15 +56,12 @@
     <main class="w-full flex gap-10">
         <aside class="2xl:basis-[15%] lg:basis-[18.5%] lg:block hidden relative">
             <div class="sticky top-8">
-                <button class="bg_gr h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">
+                <button id="newReplay" class="bg_gr h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">
                     Reply
                 </button>
             </div>
         </aside>
         <div class="2xl:basis-[66.5%] lg:basis-[81.5%] basis-full">
-            <button class="bg-[--color5] z-[1000] w-[50px] h-[50px] flex justify-center items-center rounded-full fixed bottom-[20px] right-[10px] newReplay">
-                <img alt="" src="images/reply-mobile-button.svg">
-            </button>
             <header class="flex">
                 <div class="w-[60px] h-[50px] relative">
                     <div class="absolute right-0 bottom-0 border-t-[3px]  border-l-[3px] border-[--color8] w-[25px] h-[30px] translate-y-[5px] opacity-50 backdrop-blur-sm mr-2"></div>
@@ -95,9 +92,7 @@
                 </div>
             </header>
             <div class="mt-4 inline-block transition-all duration-300 bg-[--color7] rounded-[14px] py-4 px-7 w-full relative">
-                <figure class="inline-flex justify-center float-start items-start w-[74px]">
-                    <img alt="" class="rounded-[14px]" loading="lazy" src="../static/photos/<?= $post['image'] ?>">
-                </figure>
+            <img alt="" class="rounded-[14px]" loading="lazy" src="../static/photos/<?= $post['image'] ?>">
                 <div class="content w-[calc(100%-102px)] float-end h-full inline-flex flex-col align-top">
                     <div class="text-white bg-[--color2] w-full px-4 self-start mt-2 rounded-[14px] h-[60px] flex justify-start items-center text-[18px] font-bold">
                     <?= $post['title'] ?>
@@ -135,6 +130,10 @@
                     </div>
                 </div>
                 <?php } ?>
+                <br>
+                <h4 class="tracking-normal text-[--color9] text-[14px] line-clamp-1 font-bold" style="margin-left: 50%;">
+                    <?php if (empty($answers)) echo "no reply"; ?>
+                </h4>
             </div>
         </div>
     </main>

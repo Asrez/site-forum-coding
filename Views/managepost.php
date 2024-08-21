@@ -74,9 +74,9 @@
                           </td>
                           <td>
                             <span class="badge 
-                            <?php if ($post['state'] == "1") echo " bg-success "; ?>
+                            <?php if ($post['state'] === 1) echo " bg-success "; ?>
                              me-1"></span>
-                            <?php if ($post['state'] == "1") echo "confirmed";
+                            <?php if ($post['state'] === 1) echo "confirmed";
                                   else echo "not confirmed"; ?>
                           </td>
                           <td >
@@ -89,7 +89,7 @@
                                   <a class="dropdown-item" href="/delpost/<?= $post['id'] ?>">
                                     delete
                                   </a> 
-                                  <?php if ($post['state'] == "0") { ?> 
+                                  <?php if ($post['state'] === 0) { ?> 
                                     <a class="dropdown-item" href="/confirmpost/<?= $post['id'] ?>">
                                     confirmed
                                   </a>

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learn Laravel | Laracasts</title>
+    <title><?= $title['value_setting'] ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="./images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
+    <link href="../static/<?= $logo['value_setting'] ?>" rel="shortcut icon" type="image/x-icon">
     <link href="./node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
     <style>
@@ -74,7 +74,7 @@
                             <svg width="15" height="15" viewBox="0 0 15 15" class="mx-2"><g class="fill-white" fill-rule="evenodd"><rect class="forum-excerpt-toggle-line" width="15" height="6" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="15" height="6" y="9" rx="2"></rect></g></svg>
                         </a>
                     </div>
-                    <form action="/search" autocomplete="off" class="search-form flex md:w-auto w-full" method="post">
+                    <form action="/search" class="search-form flex md:w-auto w-full" method="get">
                         <label class="flex h-[40px] bg-[--color8] rounded-[14px] px-4 md:w-auto w-full" for="search">
                             <svg class="text-[--color4]" viewBox="0 0 15 15" width="16">
                                 <g fill="none" fill-rule="evenodd">
@@ -85,9 +85,9 @@
                             </svg>
                             <input class="bg-transparent md:w-auto w-full outline-0 ml-3 text-[--color4] tracking-wide"
                                    id="search"
-                                   name="search"
+                                   name="q"
                                    placeholder="Search..."
-                                   required type="text">
+                                   type="search">
                         </label>
                     </form>
                 </div>
@@ -113,16 +113,6 @@
                                     </svg>
                                     <span class="text-left text-xs leading-none text-[--color9] font-bold ml-1"><?= $question['viewcount'] ?></span>
                                 </div>
-                                <div class="flex items-center justify-center">
-                                    <svg class="relative text-card-200" height="19" style="top: -2px;"
-                                         viewBox="0 0 15 10"
-                                         width="15">
-                                        <path d="M7.5 0C3.344 0 0 2.818 0 6.286c0 1.987 1.094 3.757 2.781 4.914l.117 2.35c.022.438.338.58.704.32l2.023-1.442c.594.144 1.219.18 1.875.18 4.156 0 7.5-2.817 7.5-6.285C15 2.854 11.656 0 7.5 0z"
-                                              fill="#8EA5C2"
-                                              fill-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="text-left text-xs leading-none text-[--color9] font-bold ml-1"><?= $question['likes'] ?></span>
-                                </div>
                             </div>
                         </div>
                         <p class="tracking-normal text-white pr-2.5 text-[14px] font-medium line-clamp-2 mt-4"><?= $question['content'] ?></p>
@@ -134,6 +124,10 @@
 
             </div>
             <?php } ?>
+            <br>
+                <h4 class="tracking-normal text-[--color9] text-[14px] line-clamp-1 font-bold" style="margin-left: 50%;">
+                    <?php if (empty($questions)) echo "no question"; ?>
+                </h4>
         </div>
         <?php include "includes/advertising.php"; ?>
     </main>

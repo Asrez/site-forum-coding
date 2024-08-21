@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\CountP;
+use App\Actions\Posts\Chart;
 use App\Actions\Setting\Advers;
+use App\Actions\Posts\Innerjoin;
 use App\Actions\Setting\Settings;
 use App\Actions\Setting\UpdateS;
 use App\Actions\Setting\GetByIdS;
@@ -13,6 +15,7 @@ use App\Actions\Users\CountU;
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\CountV;
 use App\Actions\Setting\Allsetting;
+use App\Actions\Search\Postsearch;
 use App\Actions\Search\SearchAll;
 
 class IndexController
@@ -21,6 +24,7 @@ class IndexController
     public function Main_index()
     {
         $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
         $twitter = Allsetting::execute("twitter");
@@ -34,6 +38,7 @@ class IndexController
     public function Main_index2()
     {
         $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
         $twitter = Allsetting::execute("twitter");
@@ -47,21 +52,19 @@ class IndexController
     public function search_result_main()
     {
         $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
         $twitter = Allsetting::execute("twitter");
         $github = Allsetting::execute("github");
         $youtube = Allsetting::execute("youtube");
         $advers = Advers::execute();
-        if (isset($_POST['search']) && ! empty($_POST['search'])){
+        $questions = GetAllP::execute2();
+        if (isset($_GET['q']) && ! empty($_GET['q'])){
 
-            $title = $_POST['search'];
-
-            $all = SearchAll::execute($title);
-            $questions = $all['posts'];
-
-            require __DIR__."/../../Views/Main_index.php";
+            $questions = Postsearch::execute2($_GET['q']);
         }
+        require __DIR__ ."/../../Views/Main_index.php";
     }
     public function logout2()
     {
@@ -85,9 +88,15 @@ class IndexController
             if($admin['state'] === 0) {
                 require __DIR__ ."/../../Views/sign-in.php";
             }
-            $countadmin=CountU::execute2()['count'];
-            $countview=CountV::execute()['count'];
-            $countpost=CountP::execute()['count'];
+            $chart = Chart::execute();
+            foreach ($chart as $ch) {
+                $chart_viewcount [] = $ch['viewcount'];
+                $chart_title [] = $ch['title'];
+            }
+
+            $countadmin = CountU::execute2()['count'];
+            $countview = CountV::execute()['count'];
+            $countpost = CountP::execute()['count'];
             $countuser=CountU::execute()['count'];
             $posts = GetAllP::execute();
             $users = GetAllU::execute();

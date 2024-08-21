@@ -9,7 +9,7 @@
   <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
   <link href="/dist/css/demo.min.css?1668287865" rel="stylesheet" />
-  <title>Index</title>
+  <title>update user <?= $title ?></title>
   <style>
     @import url('https://rsms.me/inter/inter.css');
 

@@ -79,7 +79,7 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Innerjoin2() : array
+    public static function Innerjoin2(int $id) : array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -91,9 +91,10 @@ class Post
          `answers`.`user_id` ,
          `answers`.`date` 
         FROM `answers`
-        INNER JOIN `users` ON `answers`.`user_id` = `users`.`id`;";
+        INNER JOIN `users` ON `answers`.`user_id` = `users`.`id` AND `answers`.`question_id` = :id;";
 
         $stms = $db->prepare($stms);
+        $stms->bindParam("id", $id);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
@@ -232,5 +233,26 @@ class Post
 
         return $posts->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+    public static function search2(string $title) : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $posts = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title  AND `state` = 1;";
+        $title = '%'.$title.'%';
+        $posts = $db->prepare($posts);
+        $posts->bindParam("title", $title);
+        $posts->execute();
+
+        return $posts->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function Chart() : array
+    {
+        $db = Database::getInstance()->getConnection();
+
+        $posts = "SELECT * FROM `questions` ORDER BY `viewcount` DESC LIMIT 12;";
+        $posts = $db->prepare($posts);
+        $posts->execute();
+
+        return $posts->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
