@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>edit profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="./images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
-    <link href="./node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="../static/<?= $logo['value_setting'] ?>" rel="shortcut icon" type="image/x-icon">
+    <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         .bg-custom-gradient {
             background-image: radial-gradient(circle at 0% 2%, rgb(0, 117, 255), rgb(31, 64, 106) 100%);
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="input-box mt-6">
-                        <label class="text-[--color6] font-bold block" for="image">Password</label>
+                        <label class="text-[--color6] font-bold block" for="image">Image</label>
                         <div class="input relative">
                             <input class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
                                    id="image" name="image" type="file">

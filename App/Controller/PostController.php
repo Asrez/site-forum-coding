@@ -78,12 +78,14 @@ class PostController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $posts = GetAllP::execute();
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-            require __DIR__."/../../views/Posts.php";
+            require __DIR__."/../../views/posts.php";
         }
         else {
             require __DIR__ ."/../../Views/sign-in.php";
@@ -94,7 +96,9 @@ class PostController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $posts = GetAllP::execute();
@@ -108,7 +112,9 @@ class PostController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $posts = Innerjoin::execute();
@@ -122,6 +128,10 @@ class PostController
 
     public function Upform(int $id)
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
         $admin = GetByIdU::execute($_SESSION['admin_id']);
         $this_post = GetByIdP::execute($id);
         require __DIR__."/../../views/updatepost.php";
@@ -134,7 +144,9 @@ class PostController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
@@ -161,7 +173,9 @@ class PostController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $post = GetByIdP::execute($id);
@@ -230,7 +244,7 @@ class PostController
         $user = GetByIdU::execute($post['admin_id']);
         if ($post['state'] === 1){
             $reply_post_id = $id;
-            require __DIR__."/../../Views/Main_conversation.php";
+            require __DIR__."/../../Views/main_conversation.php";
         }
         else{
             require __DIR__."/../../public/error-404.html";

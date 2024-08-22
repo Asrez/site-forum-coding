@@ -114,12 +114,14 @@ class UserController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $users = GetAllU::execute();
             
-            require __DIR__."/../../views/Users.php";
+            require __DIR__."/../../views/users.php";
         }
         else {
             require __DIR__ ."/../../Views/sign-in.php";
@@ -129,18 +131,28 @@ class UserController
 
     public function Upform(int $id)
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
         $this_user = GetByIdU::execute($id);
         require __DIR__."/../../views/updateuser.php";
     }
     public function Addform()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
         require __DIR__."/../../views/insertuser.php";
     }
     public function Manage()
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $users = GetAllU::execute();
@@ -155,7 +167,9 @@ class UserController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $user = GetByIdU::execute($id);
@@ -170,7 +184,9 @@ class UserController
     {
         if (isset($_SESSION['admin_id'])){       
             $logo = Allsetting::execute("logo");
+            $logo_footer = Allsetting::execute("logo_footer");
             $footer = Allsetting::execute("footer");
+            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
@@ -196,6 +212,10 @@ class UserController
     }
     public function login()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");;
         require __DIR__."/../../views/sign-in.php";
     }
     public function login_result()
@@ -303,7 +323,7 @@ class UserController
             $count_activity = count($questions);
             $count_reply = CountC::execute($_SESSION['admin_id'])['count'];
             $user = GetByIdU::execute($_SESSION['admin_id']);
-            require __DIR__."/../../Views/Main_my_profile.php";
+            require __DIR__."/../../Views/main_my_profile.php";
        }
        else{
             require __DIR__."/../../public/error-404.html";
@@ -320,7 +340,7 @@ class UserController
             $github = Allsetting::execute("github");
             $youtube = Allsetting::execute("youtube");
             $user = GetByIdU::execute($_SESSION['admin_id']);
-            require __DIR__."/../../Views/Main_edit_profile_account.php";
+            require __DIR__."/../../Views/main_edit_profile_account.php";
        }
        else{
             require __DIR__."/../../public/error-404.html";

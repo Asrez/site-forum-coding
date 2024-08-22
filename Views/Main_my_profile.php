@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="./images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
-    <link href="./node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="../static/<?= $logo['value_setting'] ?>" rel="shortcut icon" type="image/x-icon">
+    <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <style>
         .bg-custom-gradient {
             background-image: radial-gradient(circle at 0% 2%, rgb(0, 117, 255), rgb(31, 64, 106) 100%);
@@ -104,21 +104,27 @@
         </div>
         <div class="activity mt-16">
             <h1 class="w-[150px] text-center font-bold text-white mx-auto text-[21px] after:content-[''] relative after:absolute after:inline-block after:bottom-0 after:right-1/2 after:translate-x-1/2 after:w-full after:h-[5px] after:rounded-full after:bg-[--color5] pb-2">
-                Question</h1>
+                Question
+            </h1>
                 <?php foreach ($questions as $question) { ?>
                     <div class="w-full max-w-[800px] mx-auto flex justify-between mt-8">
                         <div class="basis-[12%] flex gap-1">
-                            <div class="month flex-1 bg-[--color8] flex justify-center items-center rounded-[14px] h-[30px] font-bold text-[12px] text-[--color4]">
+                            <div class="month flex-1 bg-[--color8] flex justify-center items-center rounded-[14px] h-[30px] font-bold text-[12px] text-[--color4]" title="view count">
                                <?= $question['viewcount'] ?>
                             </div>
                         </div>
-                        <div class="basis-[86%] flex flex-col gap-5">
-                            <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
-                                <img src="../static/photos/<?= $question['image'] ?>">
-                                <h2 class="font-bold text-white"><?= $question['title'] ?></h2>
-                                <p class="mt-4 text-white font-bold text-[14px] whitespace-pre-line"><br><?= $question['content'] ?></p>
+                        <a href="/show_post/<?= $question['id'] ?>">
+                            <div class="basis-[86%] flex flex-col gap-5">
+                                <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
+                                    <img src="../static/photos/<?= $question['image'] ?>">
+                                    <h2 class="font-bold text-white"><?= $question['title'] ?></h2>
+                                    <p class="mt-4 text-white font-bold text-[14px] whitespace-pre-line"><br><?= $question['content'] ?></p>
+                                    <h3 class="mt-4 text-[10px]" style=" color :<?php if ($question['state'] === 0) echo 'red'; else echo 'green' ?>">
+                                        <?php if ($question['state'] === 0) echo "not confirmed yet"; else echo "confirmed"; ?>
+                                    </h3>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 <?php } ?>
         </div>

@@ -20,7 +20,10 @@ use App\Actions\Search\SearchAll;
 
 class IndexController
 {
-    //Main
+    public function site_map()
+    {
+        require __DIR__ ."/../../Views/sitemap.php";
+    }
     public function Main_index()
     {
         $logo = Allsetting::execute("logo");
@@ -33,7 +36,7 @@ class IndexController
         $advers = Advers::execute();
         $questions = GetAllP::execute2();
         
-        require __DIR__ ."/../../Views/Main_index.php";
+        require __DIR__ ."/../../Views/main_index.php";
     }
     public function Main_index2()
     {
@@ -47,7 +50,7 @@ class IndexController
         $questions = GetAllP::execute2();
         $advers = Advers::execute();
         
-        require __DIR__ ."/../../Views/Main_index2.php";
+        require __DIR__ ."/../../Views/main_index2.php";
     }
     public function search_result_main()
     {
@@ -64,7 +67,7 @@ class IndexController
 
             $questions = Postsearch::execute2($_GET['q']);
         }
-        require __DIR__ ."/../../Views/Main_index.php";
+        require __DIR__ ."/../../Views/main_index.php";
     }
     public function logout2()
     {
@@ -80,10 +83,12 @@ class IndexController
 
     //Admin panel
     public function index()
-    {
+    {   $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
         if(isset($_SESSION['admin_id'])){
-            $logo = Allsetting::execute("logo");
-            $footer = Allsetting::execute("footer");
+            
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 0) {
                 require __DIR__ ."/../../Views/sign-in.php";
@@ -109,12 +114,15 @@ class IndexController
     }
     public function site_setting()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+        $advers = Advers::execute();
+        $settings = Settings::execute();
+
         if(isset($_SESSION['admin_id'])){
-            $logo = Allsetting::execute("logo");
-            $footer = Allsetting::execute("footer");
             $admin = GetByIdU::execute($_SESSION['admin_id']);
-            $advers = Advers::execute();
-            $settings = Settings::execute();
             if($admin['state'] === 0) {
                 require __DIR__ ."/../../Views/sign-in.php";
             }
@@ -125,6 +133,10 @@ class IndexController
         }
     }
     public function go_setting(int $id){
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
         $setting = GetByIdS::execute($id);
         require __DIR__."/../../Views/settingupdate.php";
     }
@@ -159,15 +171,17 @@ class IndexController
     public function result_search()
     {
         $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
 
         $admin = GetByIdU::execute($_SESSION['admin_id']);
 
         if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
 
-            $title = $_POST['searchbox'];
+            $titlee = $_POST['searchbox'];
 
-            $all = SearchAll::execute($title);
+            $all = SearchAll::execute($titlee);
             $posts = $all['posts'];
             $users = $all['users'];
 

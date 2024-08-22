@@ -141,7 +141,7 @@ class Post
 
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0);";
+        $stms = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 1, 0);";
         
         $stms = $db->prepare($stms);
         $stms->bindParam("title", $data['title']);
@@ -151,6 +151,7 @@ class Post
         $stms->bindParam("admin_id", $data['admin_id'] );
 
         $stms->execute();
+
         ?>
         <script type="text/javascript">
             window.alert("insert post success");

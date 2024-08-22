@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Sign in</title>
-    <link href="/dist/css/tabler.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
-  <link href="/dist/css/demo.min.css?1668287865" rel="stylesheet" />
+    <link href="../static/<?= $logo['value_setting'] ?>" rel="shortcut icon" type="image/x-icon">
+    <link href="../dist/css/tabler.min.css?1668287865" rel="stylesheet" />
+    <link href="../dist/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
+    <link href="../dist/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
+    <link href="../dist/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
+    <link href="../dist/css/demo.min.css?1668287865" rel="stylesheet" />
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -22,7 +23,7 @@
     <div class="page page-center">
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
-          <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36" alt=""></a>
+          <a href="/" class="navbar-brand navbar-brand-autodark"><img src="../static/<?= $logo_footer['value_setting'] ?>" height="36" alt=""></a>
         </div>
         <div class="card card-md">
           <div class="card-body">

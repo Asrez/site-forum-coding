@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>question <?= $id ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="../images/favicon-32x32.webp" rel="shortcut icon" type="image/x-icon">
+    <link href="../static/<?= $logo['value_setting'] ?>" rel="shortcut icon" type="image/x-icon">
     <link href="../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <style>

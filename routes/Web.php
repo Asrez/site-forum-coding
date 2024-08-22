@@ -16,6 +16,7 @@ Flight::route("GET /go_setting/@id" ,[new IndexController(),"go_setting"]);
 Flight::route("POST /setting_update/@id" ,[new IndexController(),"setting_update"]);
 Flight::route("POST /searchall" ,[new IndexController(),"result_search"]);
 Flight::route("GET /logout" ,[new IndexController(),"logout"]);
+Flight::route("GET /sitemap" ,[new IndexController(),"site_map"]);
 
 Flight::route("POST /log_in_main_result" ,[new UserController(),"log_in_result"]);
 Flight::route("POST /sign_up_main_result" ,[new UserController(),"sign_up"]);
@@ -49,5 +50,3 @@ Flight::route("POST /searchpost" ,[new PostController(),"result_search"]);
 Flight::route("POST /addquestion" ,[new PostController(),"add_question"]);
 Flight::route("GET /show_post/@id" ,[new PostController(),"show_post"]);
 Flight::route("POST /addreply/@id" ,[new PostController(),"add_reply"]);
-
-
