@@ -7,12 +7,13 @@ use PDO;
 
 class View
 {
-    public static function Insert(int $post_id , string $ip)
+    public static function Insert(int $post_id , string $ip) :void
     {
         $db = Database::getInstance()->getConnection();
 
-        $isset_sql = "SELECT * FROM `view` WHERE `ip` = :ip AND `question_id` = :id;";
-        $isset_query = $db->prepare($isset_sql);
+        $sql = "SELECT * FROM `view` WHERE `ip` = :ip AND `question_id` = :id;";
+        
+        $isset_query = $db->prepare($sql);
         $isset_query->bindParam("ip",$ip);
         $isset_query->bindParam("id",$post_id);
         $isset_query->execute();
@@ -22,16 +23,17 @@ class View
 
             $db = Database::getInstance()->getConnection();
 
-            $stms = "INSERT INTO `view`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
+            $sql = "INSERT INTO `view`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
 
-            $stms = $db->prepare($stms);
+            $stms = $db->prepare($sql);
             $stms->bindParam("ip", $ip);
             $stms->bindParam("question_id", $post_id);
 
             $stms->execute();
 
-            $stms = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id;";
-            $stms = $db->prepare($stms);
+            $sql2 = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id;";
+            
+            $stms = $db->prepare($sql2);
             $stms->bindparam("id" , $post_id);
             $stms->execute();
         }
@@ -41,8 +43,9 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT COUNT(*) as count FROM `view`; ";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT COUNT(*) as count FROM `view`; ";
+        
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);

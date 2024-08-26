@@ -6,32 +6,29 @@ use App\Database\Database;
 use PDO;
 class Post
 {
-    public function __construct(int $id, string $title, string $content, string $image="nullimage.php", int $admin_id = 1)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->image = $image;
-        $this->admin_id = $admin_id;
-    }
-    public static function GetById(int $id) : array
+    public static function GetById(int $id)
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `questions` WHERE `id` = :id ;";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `questions` WHERE `id` = :id ;";
+
+        $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        return $stms->fetch(PDO::FETCH_ASSOC);
+        if ($row = $stms->fetch(PDO::FETCH_ASSOC))
+            return $row;
+        else
+            Flight::render(__DIR__ ."/../../public/error-404.php");
 
     }
     public static function GetByAdminId(int $id) : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `questions` WHERE `admin_id` = :id ;";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `questions` WHERE `admin_id` = :id ;";
+
+        $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
@@ -42,8 +39,9 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `questions` ;";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `questions`;";
+
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
@@ -52,8 +50,9 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `questions` WHERE `state` = 1;";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `questions` WHERE `state` = 1;";
+
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +61,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT `users`.`id` ,
+        $sql = "SELECT `users`.`id` ,
          `users`.`image` as userimage ,
          `users`.`username` ,
          `questions`.`title` ,
@@ -73,7 +72,7 @@ class Post
         FROM `questions`
         INNER JOIN `users` ON `questions`.`admin_id` = `users`.`id` ;";
 
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
@@ -82,7 +81,7 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT `users`.`id` ,
+        $sql = "SELECT `users`.`id` ,
          `users`.`image`,
          `users`.`username` ,
          `answers`.`answer` ,
@@ -92,7 +91,7 @@ class Post
         FROM `answers`
         INNER JOIN `users` ON `answers`.`user_id` = `users`.`id` AND `answers`.`question_id` = :id;";
 
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
@@ -102,11 +101,12 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "DELETE FROM `questions` WHERE id = :id ;";
-        $stms = $db->prepare($stms);
-        $stms->bindParam("id", $id);
+        $sql = "DELETE FROM `questions` WHERE id = :id ;";
 
+        $stms = $db->prepare($sql);
+        $stms->bindParam("id", $id);
         $stms->execute();
+
         ?>
         <script type="text/javascript">
             window.alert("delete post success");
@@ -118,15 +118,15 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "UPDATE `questions` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
+        $sql = "UPDATE `questions` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
         
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
         $stms->bindParam("id", $data['id']);
-
         $stms->execute();
+
         ?>
         <script type="text/javascript">
             window.alert("update post success");
@@ -141,15 +141,14 @@ class Post
 
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 1, 0);";
+        $sql = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 1, 0);";
         
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
         $stms->bindParam("admin_id", $data['admin_id'] );
-
         $stms->execute();
 
         ?>
@@ -167,16 +166,16 @@ class Post
 
         $db = Database::getInstance()->getConnection();
 
-        $stms = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0);";
+        $sql = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0);";
         
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
         $stms->bindParam("admin_id", $data['admin_id'] );
-
         $stms->execute();
+
         ?>
         <script type="text/javascript">
             window.alert("your question added .wait for confirmed by admins");
@@ -189,8 +188,9 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT COUNT(*) as count FROM `questions` ;";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT COUNT(*) as count FROM `questions` ;";
+
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
@@ -198,8 +198,10 @@ class Post
     public static function update_viewcount(int $id)
     {
         $db = Database::getInstance()->getConnection();
-        $stms = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id ;";
-        $stms = $db->prepare($stms);
+
+        $sql = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id ;";
+
+        $stms = $db->prepare($sql);
         $stms->bindParam("id" , $id);
         $stms->execute();
     }
@@ -208,12 +210,12 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "UPDATE `questions` SET `state` = 1 WHERE `id` = :id ;";
+        $sql = "UPDATE `questions` SET `state` = 1 WHERE `id` = :id ;";
         
-        $stms = $db->prepare($stms);
+        $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
-
         $stms->execute();
+
         ?>
         <script type="text/javascript">
             window.alert("post confirmed");
@@ -225,9 +227,10 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $posts = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title ;";
+        $sql = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title ;";
+
         $title = '%'.$title.'%';
-        $posts = $db->prepare($posts);
+        $posts = $db->prepare($sql);
         $posts->bindParam("title", $title);
         $posts->execute();
 
@@ -237,9 +240,10 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $posts = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title  AND `state` = 1;";
+        $sql = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title  AND `state` = 1;";
+        
         $title = '%'.$title.'%';
-        $posts = $db->prepare($posts);
+        $posts = $db->prepare($sql);
         $posts->bindParam("title", $title);
         $posts->execute();
 
@@ -249,8 +253,9 @@ class Post
     {
         $db = Database::getInstance()->getConnection();
 
-        $posts = "SELECT * FROM `questions` ORDER BY `viewcount` DESC LIMIT 12;";
-        $posts = $db->prepare($posts);
+        $sql = "SELECT `viewcount` , `title` FROM `questions` ORDER BY `viewcount` DESC LIMIT 12;";
+       
+        $posts = $db->prepare($sql);
         $posts->execute();
 
         return $posts->fetchAll(PDO::FETCH_ASSOC);

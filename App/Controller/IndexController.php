@@ -6,7 +6,6 @@ use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\CountP;
 use App\Actions\Posts\Chart;
 use App\Actions\Setting\Advers;
-use App\Actions\Posts\Innerjoin;
 use App\Actions\Setting\Settings;
 use App\Actions\Setting\UpdateS;
 use App\Actions\Setting\GetByIdS;
@@ -18,11 +17,13 @@ use App\Actions\Setting\Allsetting;
 use App\Actions\Search\Postsearch;
 use App\Actions\Search\SearchAll;
 
+use Flight;
+
 class IndexController
 {
     public function site_map()
     {
-        require __DIR__ ."/../../Views/sitemap.php";
+        Flight::render(__DIR__ ."/../../Views/sitemap.php");
     }
     public function Main_index()
     {
@@ -36,7 +37,18 @@ class IndexController
         $advers = Advers::execute();
         $questions = GetAllP::execute2();
         
-        require __DIR__ ."/../../Views/main_index.php";
+        Flight::render(__DIR__ ."/../../Views/index.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title ,
+        'twitter'=> $twitter ,
+        'github'=> $github ,
+        'youtube'=> $youtube ,
+        'advers'=> $advers ,
+        'questions'=> $questions
+        ]);
+
     }
     public function Main_index2()
     {
@@ -50,7 +62,17 @@ class IndexController
         $questions = GetAllP::execute2();
         $advers = Advers::execute();
         
-        require __DIR__ ."/../../Views/main_index2.php";
+        Flight::render(__DIR__ ."/../../Views/index2.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title ,
+        'twitter'=> $twitter ,
+        'github'=> $github ,
+        'youtube'=> $youtube ,
+        'advers'=> $advers ,
+        'questions'=> $questions
+        ]);
     }
     public function search_result_main()
     {
@@ -63,11 +85,21 @@ class IndexController
         $youtube = Allsetting::execute("youtube");
         $advers = Advers::execute();
         $questions = GetAllP::execute2();
-        if (isset($_GET['q']) && ! empty($_GET['q'])){
+        if (isset($_GET['q']) && ! empty($_GET['q'])) {
 
             $questions = Postsearch::execute2($_GET['q']);
         }
-        require __DIR__ ."/../../Views/main_index.php";
+        Flight::render(__DIR__ ."/../../Views/index.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title ,
+        'twitter'=> $twitter ,
+        'github'=> $github ,
+        'youtube'=> $youtube ,
+        'advers'=> $advers ,
+        'questions'=> $questions
+        ]);
     }
     public function logout2()
     {
@@ -81,17 +113,17 @@ class IndexController
         <?php
     }
 
-    //Admin panel
     public function index()
     {   $logo = Allsetting::execute("logo");
         $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
-        if(isset($_SESSION['admin_id'])){
+
+        if(isset($_SESSION['admin_id'])) {
             
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 0) {
-                require __DIR__ ."/../../Views/sign-in.php";
+                require __DIR__ ."/../../Views/panel/sign-in.php";
             }
             $chart = Chart::execute();
             foreach ($chart as $ch) {
@@ -106,11 +138,29 @@ class IndexController
             $posts = GetAllP::execute();
             $users = GetAllU::execute();
             
-            require __DIR__ ."/../../Views/index.php";
+            Flight::render(__DIR__ ."/../../Views/panel/index.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'admin'=> $admin ,
+            'countadmin'=> $countadmin ,
+            'countview'=> $countview ,
+            'countpost'=> $countpost ,
+            'countuser'=> $countuser ,
+            'posts'=> $posts ,
+            'users'=> $users ,
+            'chart_viewcount'=> $chart_viewcount ,
+            'chart_title'=> $chart_title 
+            ]);
         }
-        else{
-            require __DIR__ ."/../../Views/sign-in.php";
-        }
+        else
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
     }
     public function site_setting()
     {
@@ -121,24 +171,58 @@ class IndexController
         $advers = Advers::execute();
         $settings = Settings::execute();
 
-        if(isset($_SESSION['admin_id'])){
+        if(isset($_SESSION['admin_id'])) {
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 0) {
-                require __DIR__ ."/../../Views/sign-in.php";
+                Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title 
+                ]);
             }
-            require __DIR__ ."/../../Views/managesetting.php";
+            else {
+                Flight::render(__DIR__ ."/../../Views/panel/managesetting.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'advers'=> $advers ,
+                'settings'=> $settings ,
+                'admin'=> $admin 
+                ]);
+            }
         }
-        else{
-            require __DIR__ ."/../../Views/sign-in.php";
-        }
+        else
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
     }
-    public function go_setting(int $id){
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        $setting = GetByIdS::execute($id);
-        require __DIR__."/../../Views/settingupdate.php";
+    public function go_setting(int $id) 
+    {
+        if (isset($_SESSION['admin_id']) ){
+            $admin = GetByIdU::execute($_SESSION['admin_id']);
+            if ($admin['state'] === 1){
+                $logo = Allsetting::execute("logo");
+                $logo_footer = Allsetting::execute("logo_footer");
+                $footer = Allsetting::execute("footer");
+                $title = Allsetting::execute("title");
+                $setting = GetByIdS::execute($_SESSION['admin_id']);
+
+                Flight::render(__DIR__ ."/../../Views/panel/settingupdate.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'setting'=> $setting ,
+                'admin'=> $admin ,
+                'id'=> $id 
+                ]);
+            }
+        }
     }
     public function setting_update(int $id)
     {
@@ -185,7 +269,15 @@ class IndexController
             $posts = $all['posts'];
             $users = $all['users'];
 
-            require __DIR__."/../../Views/search-results.php";
+            Flight::render(__DIR__ ."/../../Views/panel/search-results.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'users'=> $users ,
+            'posts'=> $posts ,
+            'admin'=> $admin
+            ]);
 
         }
         else{
@@ -197,7 +289,19 @@ class IndexController
             $posts = GetAllP::execute();
             $users = GetAllU::execute();
 
-            require __DIR__."/../../Views/index.php";
+            Flight::render(__DIR__ ."/../../Views/index.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'users'=> $users ,
+            'posts'=> $posts ,
+            'admin'=> $admin ,
+            'countadmin'=> $countadmin ,
+            'countview'=> $countview ,
+            'countpost'=> $countpost ,
+            'countuser'=> $countuser ,
+            ]);
         }
         
     }

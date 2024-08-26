@@ -7,54 +7,59 @@ use App\Database\Database;
 use PDO;
 class Setting
 {
-    public static function Setting(string $key)
+    public static function Setting(string $key) : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `setting` WHERE `key_setting` = :key";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `setting` WHERE `key_setting` = :key";
+        
+        $stms = $db->prepare($sql);
         $stms->bindParam("key", $key);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function GetById(int $id)
+    public static function GetById(int $id) : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `setting` WHERE `id` = :id";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `setting` WHERE `id` = :id";
+        
+        $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function advers()
+    public static function advers() : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `setting` WHERE `state` = 'adver';";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `setting` WHERE `state` = 'adver';";
+       
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function settings()
+    public static function settings() : array
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "SELECT * FROM `setting` WHERE `state` = 'setting';";
-        $stms = $db->prepare($stms);
+        $sql = "SELECT * FROM `setting` WHERE `state` = 'setting';";
+        
+        $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Update(array $data)
+    public static function Update(array $data) : void
     {
         $db = Database::getInstance()->getConnection();
 
-        $stms = "UPDATE `setting` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
-        $stms = $db->prepare($stms);
+        $sql = "UPDATE `setting` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
+        
+        $stms = $db->prepare($sql);
         $stms->bindParam("value", $data['value']);
         $stms->bindParam("link", $data['link']);
         $stms->bindParam("content", $data['content']);

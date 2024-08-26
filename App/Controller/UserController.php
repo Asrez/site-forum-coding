@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-
-
-use App\Actions\Posts\GetAllP;
 use App\Actions\Comments\CountC;
 use App\Actions\Posts\GetByAdminId;
 use App\Actions\Users\GetAllU;
@@ -14,10 +11,10 @@ use App\Actions\Users\InsertU;
 use App\Actions\Users\DeleteU;
 use App\Actions\Users\Login;
 use App\Actions\Users\Deleteimg;
-use App\Actions\Users\Updateimg;
 use App\Actions\Search\Usersearch;
 use App\Actions\Setting\Allsetting;
 
+use Flight;
 
 class UserController
 {
@@ -112,19 +109,32 @@ class UserController
 
     public function GetAll()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $users = GetAllU::execute();
             
-            require __DIR__."/../../views/users.php";
+            Flight::render(__DIR__ ."/../../views/panel/users.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'users'=> $users ,
+            'admin'=> $admin 
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
@@ -136,7 +146,14 @@ class UserController
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
         $this_user = GetByIdU::execute($id);
-        require __DIR__."/../../views/updateuser.php";
+
+        Flight::render(__DIR__ ."/../../views/panel/updateuser.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title ,
+        'this_user'=> $this_user 
+        ]);
     }
     public function Addform()
     {
@@ -144,49 +161,93 @@ class UserController
         $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
         $title = Allsetting::execute("title");
-        require __DIR__."/../../views/insertuser.php";
+
+        Flight::render(__DIR__ ."/../../views/panel/insertuser.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title 
+        ]);
     }
     public function Manage()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $users = GetAllU::execute();
-            require __DIR__."/../../Views/manageusers.php";
+
+            Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'admin'=> $admin ,
+            'users'=> $users ,
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
     public function Setting(int $id)
     {
-        if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
 
+        if (isset($_SESSION['admin_id'])){
             $admin = GetByIdU::execute($_SESSION['admin_id']);
-            $user = GetByIdU::execute($id);
-            require __DIR__."/../../Views/settings.php";
+            if($admin['state'] === 1) {
+                $logo = Allsetting::execute("logo");
+                $logo_footer = Allsetting::execute("logo_footer");
+                $footer = Allsetting::execute("footer");
+                $title = Allsetting::execute("title");
+                $user = GetByIdU::execute($id);
+                
+                Flight::render(__DIR__ ."/../../Views/panel/settings.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'admin'=> $admin ,
+                'user'=> $user ,
+                'id'=> $id 
+                ]);
+            }
+            else {
+                Flight::render(__DIR__ ."/../../public/error-404.php");
+            }
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
     public function result_search()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
@@ -195,18 +256,37 @@ class UserController
                 $title = $_POST['searchbox'];
                 $users = Usersearch::execute($title);
 
-                require __DIR__."/../../Views/manageusers.php";
+                Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'admin'=> $admin ,
+                'users'=> $users
+                ]);
 
             }
             else{
 
-            $users = GetAllU::execute();
+                $users = GetAllU::execute();
 
-            require __DIR__."/../../Views/manageusers.php";
+                Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'admin'=> $admin ,
+                'users'=> $users
+                ]);
             }
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
@@ -215,8 +295,13 @@ class UserController
         $logo = Allsetting::execute("logo");
         $logo_footer = Allsetting::execute("logo_footer");
         $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");;
-        require __DIR__."/../../views/sign-in.php";
+        $title = Allsetting::execute("title");
+        Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title 
+        ]);
     }
     public function login_result()
     {
@@ -264,7 +349,6 @@ class UserController
         return Deleteimg::execute($id);
     }
 
-    //Main
     public function log_in_result()
     {
         if (!(isset($_SESSION['admin_id']))){
@@ -277,8 +361,6 @@ class UserController
 
                 }
             }
-
-            require __DIR__."/../../Views/manageusers.php";
         }
     }
 
@@ -323,10 +405,23 @@ class UserController
             $count_activity = count($questions);
             $count_reply = CountC::execute($_SESSION['admin_id'])['count'];
             $user = GetByIdU::execute($_SESSION['admin_id']);
-            require __DIR__."/../../Views/main_my_profile.php";
+
+            Flight::render(__DIR__ ."/../../Views/my_profile.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'twitter'=> $twitter ,
+            'github'=> $github ,
+            'youtube'=> $youtube ,
+            'questions'=> $questions ,
+            'count_activity'=> $count_activity ,
+            'count_reply'=> $count_reply ,
+            'user'=> $user 
+            ]);
        }
        else{
-            require __DIR__."/../../public/error-404.html";
+            Flight::render(__DIR__ ."/../../public/error-404.php");
        }
     }
     public function edit()
@@ -340,10 +435,21 @@ class UserController
             $github = Allsetting::execute("github");
             $youtube = Allsetting::execute("youtube");
             $user = GetByIdU::execute($_SESSION['admin_id']);
-            require __DIR__."/../../Views/main_edit_profile_account.php";
+
+            Flight::render(__DIR__ ."/../../Views/edit_profile_account.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'twitter'=> $twitter ,
+            'github'=> $github ,
+            'youtube'=> $youtube ,
+            'user'=> $user 
+            ]);
+
        }
        else{
-            require __DIR__."/../../public/error-404.html";
+            Flight::render(__DIR__ ."/../../public/error-404.php");
        }
     }
     

@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-
 use flight;
 
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\InsertV;
-use App\Actions\Comments\AllCommentsByQId;
 use App\Actions\Comments\AddComment;
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\ConfirmP;
@@ -75,53 +73,95 @@ class PostController
     }
 
     public function GetAll()
-    {
+{       $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
+            
 
             $posts = GetAllP::execute();
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
-            require __DIR__."/../../views/posts.php";
+            Flight::render(__DIR__ ."/../../views/panel/posts.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'posts'=> $posts ,
+            'admin'=> $admin 
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
     }
 
     public function Manage()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
+            
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $posts = GetAllP::execute();
-            require __DIR__."/../../Views/managepost.php";
+            
+            Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'posts'=> $posts ,
+            'admin'=> $admin 
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
     }
     public function Gallery()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $posts = Innerjoin::execute();
-            require __DIR__."/../../Views/gallery.php";
+            
+            Flight::render(__DIR__ ."/../../Views/panel/gallery.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'posts'=> $posts ,
+            'admin'=> $admin 
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
@@ -134,7 +174,16 @@ class PostController
         $title = Allsetting::execute("title");
         $admin = GetByIdU::execute($_SESSION['admin_id']);
         $this_post = GetByIdP::execute($id);
-        require __DIR__."/../../views/updatepost.php";
+
+        Flight::render(__DIR__ ."/../../views/panel/updatepost.php",
+        ['logo'=> $logo , 
+        'logo_footer'=> $logo_footer,
+        'footer'=> $footer ,
+        'title'=> $title ,
+        'this_post'=> $this_post ,
+        'admin'=> $admin ,
+        'id'=> $id
+        ]);
     }
     public function Confirmed(int $id)
     {
@@ -142,48 +191,82 @@ class PostController
     }
     public function result_search()
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
             if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
 
-                $title = $_POST['searchbox'];
-                $posts = Postsearch::execute($title);
+                $titlee = $_POST['searchbox'];
+                $posts = Postsearch::execute($titlee);
 
-                require __DIR__."/../../Views/managepost.php";
+                Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'posts'=> $posts ,
+                'admin'=> $admin 
+                ]);
 
             }
             else{
 
                 $posts = GetAllP::execute();
 
-                require __DIR__."/../../Views/managepost.php";
+                Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'posts'=> $posts ,
+                'admin'=> $admin 
+                ]);
             }
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
     }
     public function GetById(int $id)
     {
+        $logo = Allsetting::execute("logo");
+        $logo_footer = Allsetting::execute("logo_footer");
+        $footer = Allsetting::execute("footer");
+        $title = Allsetting::execute("title");
+
         if (isset($_SESSION['admin_id'])){       
-            $logo = Allsetting::execute("logo");
-            $logo_footer = Allsetting::execute("logo_footer");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
 
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $post = GetByIdP::execute($id);
             
-            require __DIR__."/../../Views/post.php";
+            Flight::render(__DIR__ ."/../../Views/panel/post.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'post'=> $post ,
+            'admin'=> $admin ,
+            'id'=> $id 
+            ]);
         }
         else {
-            require __DIR__ ."/../../Views/sign-in.php";
+            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title 
+            ]);
         }
         
     }
@@ -222,8 +305,7 @@ class PostController
     }
 
     public function show_post(int $id)
-    {    
-        //get ip
+    {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -243,11 +325,26 @@ class PostController
         $post = GetByIdP::execute($id);
         $user = GetByIdU::execute($post['admin_id']);
         if ($post['state'] === 1){
+
             $reply_post_id = $id;
-            require __DIR__."/../../Views/main_conversation.php";
+
+            Flight::render(__DIR__ ."/../../Views/conversation.php",
+            ['logo'=> $logo , 
+            'logo_footer'=> $logo_footer,
+            'footer'=> $footer ,
+            'title'=> $title ,
+            'post'=> $post ,
+            'user'=> $user ,
+            'reply_post_id'=> $reply_post_id ,
+            'twitter'=> $twitter ,
+            'github'=> $github ,
+            'youtube'=> $youtube ,
+            'answers'=> $answers ,
+            'id'=> $id
+            ]);
         }
         else{
-            require __DIR__."/../../public/error-404.html";
+            Flight::render(__DIR__ ."/../../public/error-404.php");
         }
         
     }

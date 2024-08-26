@@ -24,11 +24,22 @@
                 </div>
                 <div class="flex items-center sm:w-auto w-full gap-0 sm:gap-3">
                     <div class="hidden sm:flex flex-row-reverse gap-2">
-                        <a href="/main" class="sort1 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] active">
-                            <svg width="15" height="15" viewBox="0 0 15 15" class="mx-2"><g class="fill-white" fill-rule="evenodd"><rect class="forum-excerpt-toggle-line" width="15" height="4" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="8" height="4" y="11" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="15" height="4" y="5.5" rx="2"></rect></g></svg>
+                        <a href="main" class="sort1 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2]">
+                            <svg class="mx-2" height="15" viewBox="0 0 15 15" width="15">
+                                <g class="fill-white" fill-rule="evenodd">
+                                    <rect class="forum-excerpt-toggle-line" height="4" rx="2" width="15"></rect>
+                                    <rect class="forum-excerpt-toggle-line" height="4" rx="2" width="8" y="11"></rect>
+                                    <rect class="forum-excerpt-toggle-line" height="4" rx="2" width="15" y="5.5"></rect>
+                                </g>
+                            </svg>
                         </a>
-                        <a href="/main2" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2]">
-                            <svg width="15" height="15" viewBox="0 0 15 15" class="mx-2"><g class="fill-white" fill-rule="evenodd"><rect class="forum-excerpt-toggle-line" width="15" height="6" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="15" height="6" y="9" rx="2"></rect></g></svg>
+                        <a href="main2" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] active">
+                            <svg class="mx-2" height="15" viewBox="0 0 15 15" width="15">
+                                <g class="fill-white" fill-rule="evenodd">
+                                    <rect class="forum-excerpt-toggle-line" height="6" rx="2" width="15"></rect>
+                                    <rect class="forum-excerpt-toggle-line" height="6" rx="2" width="15" y="9"></rect>
+                                </g>
+                            </svg>
                         </a>
                     </div>
                     <form action="/search" class="search-form flex md:w-auto w-full" method="get">
@@ -72,7 +83,6 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="tracking-normal text-white pr-2.5 text-[14px] font-medium line-clamp-2 mt-4"><?= $question['content'] ?></p>
                         <div class="conversation-information w-full mt-4 flex flex-col items-start gap-1 sm:flex-row-reverse font-bold text-[13px] sm:justify-between">
                             <p class="font-bold text-[--color9] text-[12px]"><?= $question['date'] ?></p>
                         </div>
@@ -81,12 +91,10 @@
 
             </div>
             <?php } ?>
-            <br>
-                <h4 class="tracking-normal text-[--color9] text-[14px] line-clamp-1 font-bold" style="margin-left: 50%;">
-                    <?php if (empty($questions)) echo "no question"; ?>
-                </h4>
         </div>
+
         <?php include "includes/advertising.php"; ?>
+        
     </main>
 </div>
 
