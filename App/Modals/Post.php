@@ -3,6 +3,7 @@
 namespace App\Modals;
 
 use App\Database\Database;
+use Flight;
 use PDO;
 class Post
 {
@@ -19,7 +20,7 @@ class Post
         if ($row = $stms->fetch(PDO::FETCH_ASSOC))
             return $row;
         else
-            Flight::render(__DIR__ ."/../../public/error-404.php");
+            return false;
 
     }
     public static function GetByAdminId(int $id) : array
@@ -107,12 +108,6 @@ class Post
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("delete post success");
-            location.replace("/manageposts");
-        </script>
-        <?php
     }
     public static function Update(array $data) 
     {
@@ -127,12 +122,6 @@ class Post
         $stms->bindParam("id", $data['id']);
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("update post success");
-            location.replace("/manageposts");
-        </script>
-        <?php
     }
     public static function Insert(array $data)
     {
@@ -151,13 +140,6 @@ class Post
         $stms->bindParam("admin_id", $data['admin_id'] );
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("insert post success");
-            location.replace("/manageposts");
-        </script>
-        <?php
-    
     }
     public static function Insert2(array $data)
     {
@@ -176,13 +158,6 @@ class Post
         $stms->bindParam("admin_id", $data['admin_id'] );
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("your question added .wait for confirmed by admins");
-            location.replace("/");
-        </script>
-        <?php
-    
     }
     public static function Count() : array
     {
@@ -216,12 +191,6 @@ class Post
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("post confirmed");
-            location.replace("/manageposts");
-        </script>
-        <?php
     }
     public static function search(string $title) : array
     {

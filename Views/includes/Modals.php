@@ -9,7 +9,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Log In</h2>
-    <form action="/log_in_main_result" method="post">
+    <form action="log_in_main_result" method="post">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold" for="login_email">Username</label>
             <div class="input relative">
@@ -60,7 +60,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Sign Up!</h2>
-    <form action="/sign_up_main_result" method="post" enctype="multipart/form-data">
+    <form action="ign_up_main_result" method="post" enctype="multipart/form-data">
         <div class="input-box mt-4">
             
             <label class="text-[--color6] font-bold block" for="register_name">Name</label>
@@ -145,7 +145,7 @@
                 Sign Up
             </button>
             <div class="flex justify-center items-center mt-6 mb-12">
-                <a class="text-[--color4] font-medium hover:underline" href="/sign_up">Already Have an Account?</a>
+                <a class="text-[--color4] font-medium hover:underline" href="/">Already Have an Account?</a>
             </div>
         </div>
     </form>
@@ -161,7 +161,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Discussion!</h2>
-    <form action="/addquestion" method="post" enctype="multipart/form-data">
+    <form action="addquestion" method="post" enctype="multipart/form-data">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold block" for="title">Title</label>
             <div class="input relative">
@@ -226,7 +226,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Replay!</h2>
-    <form action="/addreply/<?= $id ?>" method="post">
+    <form action="addreply/<?= $id ?>" method="post">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold block" for="title2">Title</label>
             <div class="input relative">

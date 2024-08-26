@@ -245,6 +245,12 @@ class IndexController
                         "id" => $id
                     ];
                     UpdateS::execute($data);
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("updated");
+                        location.replace("/site_setting");
+                    </script>
+                    <?php
 
                 }
 

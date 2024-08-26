@@ -32,7 +32,7 @@
                       <div>
                         <div class="row">
                           <div class="col-auto">
-                            <span class="avatar" style="background-image: url(./static/avatars/<?= $user['image'] ?>)" ></span>
+                            <span class="avatar" style="background-image: url(../static/avatars/<?= $user['image'] ?>)" ></span>
                           </div>
                           <div class="col">
                             <div class="text-truncate">

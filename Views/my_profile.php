@@ -23,7 +23,7 @@
                 </div>
                 <div class="social w-[108px] flex justify-center items-center pt-2">
                     <a class="h-[40px] px-4 bg-[--color2] flex justify-center items-center hover:bg-[--color3] transition-all duration-300 rounded-[14px] text-[--color4] font-bold"
-                       href="/edit">
+                       href="edit">
                         Edit
                     </a>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="xl:w-[146px] w-full group h-full bg-[--color7] rounded-[14px] p-2 py-4 flex flex-col justify-between items-center pt-6 hover:border-blue-800 border border-transparent transition-all duration-300 cursor-pointer">
                     <img alt=""
                          class="grayscale-[60%] h-[100px] object-cover overflow-hidden group-hover:grayscale-0 transition-all duration-300"
-                         src="./images/profile/xp-level.svg">
+                         src="/images/profile/xp-level.svg">
                     <h2 class="mt-3 text-white text-[25px] font-bold group-hover:text-[--color5] transition-all duration-300">
                         <?= $count_activity ?></h2>
                     <div class="font-bold text-center text-white group-hover:text-[--color5] transition-all duration-300">
@@ -49,7 +49,7 @@
                 <div class="xl:w-[146px] w-full group h-full bg-[--color7] rounded-[14px] p-2 py-4 flex flex-col justify-between items-center pt-6 hover:border-blue-800 border border-transparent transition-all duration-300 cursor-pointer">
                     <img alt=""
                          class="grayscale-[60%] overflow-hidden h-[100px] object-cover group-hover:grayscale-0 transition-all duration-300"
-                         src="./images/profile/xp-lesson.svg">
+                         src="/images/profile/xp-lesson.svg">
                     <h2 class="mt-3 text-white text-[25px] font-bold group-hover:text-[--color5] transition-all duration-300">
                         <?= $count_reply ?></h2>
                     <div class="font-bold text-center text-white group-hover:text-[--color5] transition-all duration-300">
@@ -70,12 +70,11 @@
                                <?= $question['viewcount'] ?>
                             </div>
                         </div>
-                        <a href="/show_post/<?= $question['id'] ?>">
+                        <a href="show_post/<?= $question['id'] ?>">
                             <div class="basis-[86%] flex flex-col gap-5">
                                 <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
                                     <img src="../static/photos/<?= $question['image'] ?>">
                                     <h2 class="font-bold text-white"><?= $question['title'] ?></h2>
-                                    <p class="mt-4 text-white font-bold text-[14px] whitespace-pre-line"><br><?= $question['content'] ?></p>
                                     <h3 class="mt-4 text-[10px]" style=" color :<?php if ($question['state'] === 0) echo 'red'; else echo 'green' ?>">
                                         <?php if ($question['state'] === 0) echo "not confirmed yet"; else echo "confirmed"; ?>
                                     </h3>

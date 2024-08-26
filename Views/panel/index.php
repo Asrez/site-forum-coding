@@ -233,7 +233,7 @@
                     <tr>
                       <td><span class="text-muted"><?= $post['id'] ?></span></td>
                       <td>
-                       <a href="post/<?= $post['id'] ?>"><?= $post['title'] ?></a>
+                       <a href="/posts/<?= $post['id'] ?>"><?= $post['title'] ?></a>
                       </td>
                       <td>
                       <?= $post['date'] ?>

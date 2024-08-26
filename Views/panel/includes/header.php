@@ -32,7 +32,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <div class="dropdown-divider"></div>
-                <a href="/setting/<?= $admin['id'] ?>" class="dropdown-item">Settings</a>
+                <a href="setting/<?= $admin['id'] ?>" class="dropdown-item">Settings</a>
                 <a href="/logout" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -66,10 +66,10 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="/manageposts">
+                        <a class="dropdown-item" href="/managepost">
                           manage posts
                         </a>
-                        <a class="dropdown-item" href="/manageusers">
+                        <a class="dropdown-item" href="/manageuser">
                           manage users
                         </a>
                         <a class="dropdown-item" href="/users">
@@ -153,7 +153,7 @@
       </div>
   <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="/inpost" method="post" enctype="multipart/form-data">
+      <form action="inpost" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">New Post</h5>

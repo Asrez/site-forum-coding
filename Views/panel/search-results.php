@@ -29,7 +29,7 @@
                   <?php foreach ($posts as $post) { ?>
                     <div class="col-sm-6 col-lg-4">
                       <div class="card card-sm">
-                        <a href="#" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
+                        <a href="/posts/<?= $post['id'] ?>" class="d-block"><img src="../static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
                         <div class="card-body">
                           <div class="d-flex align-items-center">
                             <div>
@@ -47,7 +47,7 @@
                   <?php foreach ($users as $user) { ?>
                     <div class="col-sm-6 col-lg-4">
                       <div class="card card-sm">
-                        <a href="#" class="d-block"><img src="/static/avatars/<?= $user['image'] ?>" class="card-img-top"></a>
+                        <a href="<?= $user['id'] ?>" class="d-block"><img src="../static/avatars/<?= $user['image'] ?>" class="card-img-top"></a>
                         <div class="card-body">
                           <div class="d-flex align-items-center">
                             <div>

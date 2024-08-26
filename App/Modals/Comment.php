@@ -21,12 +21,6 @@ class Comment
         $stms->bindParam("date", $date);
         $stms->execute();
         
-        ?>
-        <script type="text/javascript">
-            window.alert("your reply added");
-            location.replace("/show_post/<?= $data['question_id'] ?>")
-        </script>
-        <?php
     }
     public static function Delete(int $id) : void
     {
@@ -38,11 +32,6 @@ class Comment
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("your reply deleted");
-        </script>
-        <?php
     }
     public static function Count(int $id) : array
     {

@@ -34,7 +34,7 @@ class View
             $sql2 = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id;";
             
             $stms = $db->prepare($sql2);
-            $stms->bindparam("id" , $post_id);
+            $stms->bindparam("id", $post_id);
             $stms->execute();
         }
         

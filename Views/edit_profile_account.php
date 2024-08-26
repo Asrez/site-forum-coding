@@ -31,7 +31,7 @@
             </aside>
             <div class="2xl:basis-[66.5%] lg:basis-[80%] basis-full">
                 <h2 class="text-white font-bold text-[23px]">Update Your Account</h2>
-                <form action="/updateaccont/<?= $user['id'] ?>" method="Post" enctype="multipart/form-data">
+                <form action="updateaccont/<?= $user['id'] ?>" method="Post" enctype="multipart/form-data">
                     <div class="input-box mt-6">
                         <label class="text-[--color6] font-bold block" for="name">Name</label>
                         <div class="input relative">

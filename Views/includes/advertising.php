@@ -8,7 +8,7 @@
                 </h6>
                 <figure class="flex justify-center items-center">
                     <img alt="adver_img" class="h-[85px]"
-                            src="./images/sidebar/<?= $adver['value_setting'] ?>">
+                            src="../images/sidebar/<?= $adver['value_setting'] ?>">
                 </figure>
                 <p class="line-clamp-3 tracking-[0.05rem] text-center w-[210px] text-[14px] text-white">
                     <?= $adver['content'] ?>

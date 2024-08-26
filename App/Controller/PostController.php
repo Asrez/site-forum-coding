@@ -7,6 +7,7 @@ use flight;
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\InsertV;
 use App\Actions\Comments\AddComment;
+use App\Actions\Comments\DeleteC;
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\ConfirmP;
 use App\Actions\Posts\GetByIdP;
@@ -39,10 +40,14 @@ class PostController
                 ];
 
                 InsertP::execute($data);
-                
+                ?>
+                <script type="text/javascript">
+                    window.alert("insert post success");
+                    location.replace("/managepost");
+                </script>
+                <?php  
             }
-        }
-        
+        }   
     }
 
     public function Update(int $id)
@@ -62,7 +67,12 @@ class PostController
                 ];
 
                 UpdateP::execute($data);
-                
+                ?>
+                <script type="text/javascript">
+                    window.alert("update post success");
+                    location.replace("/managepost");
+                </script>
+                <?php
             }
         }
     }
@@ -70,6 +80,12 @@ class PostController
     public function Delete(int $id)
     {
         DeleteP::execute($id);
+        ?>
+        <script type="text/javascript">
+            window.alert("delete post success");
+            location.replace("/managepost");
+        </script>
+        <?php
     }
 
     public function GetAll()
@@ -188,6 +204,12 @@ class PostController
     public function Confirmed(int $id)
     {
         ConfirmP::execute($id);
+        ?>
+        <script type="text/javascript">
+            window.alert("post confirmed");
+            location.replace("/managepost");
+        </script>
+        <?php
     }
     public function result_search()
     {
@@ -250,15 +272,18 @@ class PostController
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             $post = GetByIdP::execute($id);
             
-            Flight::render(__DIR__ ."/../../Views/panel/post.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
-            'post'=> $post ,
-            'admin'=> $admin ,
-            'id'=> $id 
-            ]);
+            if ($post === false)  Flight::render(__DIR__ ."/../../public/error-404.php");
+            else {
+                Flight::render(__DIR__ ."/../../Views/panel/post.php",
+                ['logo'=> $logo , 
+                'logo_footer'=> $logo_footer,
+                'footer'=> $footer ,
+                'title'=> $title ,
+                'post'=> $post ,
+                'admin'=> $admin ,
+                'id'=> $id 
+                ]);
+            }
         }
         else {
             Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
@@ -290,6 +315,12 @@ class PostController
                     ];
 
                     InsertP::execute2($data);
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("your question added .wait for confirmed by admins");
+                        location.replace("/");
+                    </script>
+                    <?php
                 }
             }
         }
@@ -364,6 +395,12 @@ class PostController
                     ];
                     
                     AddComment::execute($data);
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("your reply added");
+                        location.replace("//show_post/<?= $data['question_id'] ?>")
+                    </script>
+                    <?php
                 }
             }
         } else{
@@ -375,6 +412,20 @@ class PostController
             <?php
 
         }
+    }
+    public function Del_reply(int $id)
+    {
+        if (isset($_SESSION['admin_id'])) {
+            if(isset($_POST['btndelreply'])){
+                DeleteC::execute($id);
+
+                ?>
+                <script type="text/javascript">
+                    window.alert("your reply deleted");
+                </script>
+                <?php
+                }
+            }
     }
     
 }

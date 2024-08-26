@@ -7,7 +7,7 @@
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="/inuser" method="post" enctype="multipart/form-data">
+      <form action="inuser" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">New User</h5>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a href="" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          <a href="/panel" class="btn btn-link link-secondary" data-bs-dismiss="modal">
             Cancel
           </a>
           <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal" name="btninuser">

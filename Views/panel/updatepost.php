@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a href="" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          <a href="/panel" class="btn btn-link link-secondary" data-bs-dismiss="modal">
             Cancel
           </a>
           <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal" name="btnupdate">

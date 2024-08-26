@@ -27,13 +27,13 @@
               <div class="col-md-6">
                 <div class="card">
                   <div class="card-header">
-                    <a href="post/<?= $post['id'] ?>"><h3 class="card-title"><?= $post['title'] ?></h3></a>
+                    <a href="/posts/<?= $post['id'] ?>"><h3 class="card-title"><?= $post['title'] ?></h3></a>
                   </div>
                   <div class="card-body">
                     <div id="carousel-indicators" class="carousel slide" data-bs-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item active">
-                          <img class="d-block w-100" alt="" src="./static/photos/<?= $post['image'] ?>">
+                          <img class="d-block w-100" alt="" src="../static/photos/<?= $post['image'] ?>">
                         </div>
                       </div>
                     </div>

@@ -44,7 +44,7 @@
                           <td><span class="text-muted"><?= $adver['id'] ?></span></td>
                           <td><?= $adver['title'] ?></a></td>
                           <td>
-                          <span class="avatar me-3 rounded" style="background-image: url(./static/setting/<?= $adver['value_setting'] ?>)"></span>
+                          <span class="avatar me-3 rounded" style="background-image: url(../static/setting/<?= $adver['value_setting'] ?>)"></span>
                           </td>
                           <td >
                             <span class="dropdown">
@@ -113,7 +113,7 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/go_setting/<?= $setting['id'] ?>" >
+                                  <a class="dropdown-item" href="go_setting/<?= $setting['id'] ?>" >
                                     edit
                                   </a>             
                               </div>

@@ -9,12 +9,12 @@
     <div class="page page-center">
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
-          <a href="/" class="navbar-brand navbar-brand-autodark"><img src="../static/<?= $logo_footer['value_setting'] ?>" height="36" alt=""></a>
+          <a href="<?= $logo_footer['link'] ?>" class="navbar-brand navbar-brand-autodark"><img src="../static/<?= $logo_footer['value_setting'] ?>" height="36" alt=""></a>
         </div>
         <div class="card card-md">
           <div class="card-body">
             <h2 class="h2 text-center mb-4">Login to your account</h2>
-            <form action="/login_result" method="post">
+            <form action="login_result" method="post">
               <div class="mb-3">
                 <label class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" placeholder="your username" autocomplete="off">
@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div class="form-footer">
-                <button type="submit" class="btn btn-primary w-100" name="btnlogin">Sign in</button>
+                <button type="submit" class="btn btn-primary w-100" name="btnlogin">Log In</button>
               </div>
             </form>
           </div>

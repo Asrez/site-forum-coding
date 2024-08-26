@@ -43,7 +43,24 @@ class UserController
                 ];
                 
                 
-                InsertU::execute($data);
+                $result = InsertU::execute($data);
+
+                if ($result === 1) {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("insert user successed");
+                        location.replace("/manageuser");
+                    </script>
+                    <?php
+                }
+                else {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("change the username");
+                        location.replace("inuser");
+                    </script>
+                    <?php
+                }
                 
             }
         }
@@ -71,7 +88,24 @@ class UserController
                     'id'=> $id
                 ];
 
-                UpdateU::execute($data);    
+                $result = UpdateU::execute($data);    
+
+                if ($result === 1) {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("update user successed");
+                        location.replace("/manageuser");
+                    </script>
+                    <?php
+                }
+                else {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("change the username");
+                        location.replace("upuser/<?= $data['id'] ?>");
+                    </script>
+                    <?php
+                }
             }
         }
     }
@@ -98,13 +132,35 @@ class UserController
                     'id'=> $id
                 ];
 
-                UpdateU::execute2($data);    
+                $result = UpdateU::execute2($data);    
+                if ($result === 1) {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("your accont updated");
+                        location.replace("profile");
+                    </script>
+                    <?php
+                }
+                else {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("change the username");
+                        location.replace("edit");
+                    </script>
+                    <?php
+                }
             }
         }
     }
     public function Delete(int $id)
     {
-       return DeleteU::execute($id);
+        DeleteU::execute($id);
+        ?>
+        <script type="text/javascript">
+            window.alert("delete user successed");
+            location.replace("manageuser");
+        </script>
+        <?php
     }
 
     public function GetAll()
@@ -152,7 +208,8 @@ class UserController
         'logo_footer'=> $logo_footer,
         'footer'=> $footer ,
         'title'=> $title ,
-        'this_user'=> $this_user 
+        'this_user'=> $this_user ,
+        'id'=> $id
         ]);
     }
     public function Addform()
@@ -310,7 +367,23 @@ class UserController
             && isset($_POST['password']) && !empty($_POST['password'])){
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                Login::execute($username, $password);
+                $result = Login::execute($username, $password);
+                if ($result === 1){
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("welcome");
+                        location.replace("/panel");
+                    </script>
+                    <?php
+                }
+                else {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("The information is incorrect");
+                        location.replace("/");
+                    </script>
+                    <?php
+                }
             }
         }
     }
@@ -340,13 +413,35 @@ class UserController
                         'id'=> $id
                     ];
     
-                    UpdateU::execute($data);
+                    $result = UpdateU::execute($data);
+                    if ($result === 1) {
+                        ?>
+                        <script type="text/javascript">
+                            window.alert("your accont updated");
+                            location.replace("profile");
+                        </script>
+                        <?php
+                    }
+                    else {
+                        ?>
+                        <script type="text/javascript">
+                            window.alert("change the username");
+                            location.replace("edit");
+                        </script>
+                        <?php
+                    }
                 }
         }
     }
     public function Delimg(int $id)
     {
-        return Deleteimg::execute($id);
+        Deleteimg::execute($id);
+        ?>
+            <script type="text/javascript">
+                window.alert("your image deleted");
+                location.replace("/usetting/<?= $id ?>");
+            </script>
+        <?php
     }
 
     public function log_in_result()
@@ -357,7 +452,24 @@ class UserController
                 && isset($_POST['password']) && !empty($_POST['password'])) {
                     $username = $_POST['username'];
                     $password = $_POST['password'];
-                    Login::execute2($username, $password);
+
+                    $result = Login::execute2($username, $password);
+                    if ($result === 1){
+                        ?>
+                        <script type="text/javascript">
+                            window.alert("welcome");
+                            location.replace("/");
+                        </script>
+                        <?php
+                    }
+                    else {
+                        ?>
+                        <script type="text/javascript">
+                            window.alert("The information is incorrect");
+                            location.replace("/");
+                        </script>
+                        <?php
+                    }
 
                 }
             }
@@ -386,7 +498,24 @@ class UserController
                 ];
                 
                 
-                InsertU::execute2($data);
+                $result = InsertU::execute2($data);
+
+                if ($result === 1) {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("regestration is done");
+                        location.replace("/");
+                    </script>
+                    <?php
+                }
+                else {
+                    ?>
+                    <script type="text/javascript">
+                        window.alert("change the username");
+                        location.replace("/");
+                    </script>
+                    <?php
+                }
                 
             }
         }

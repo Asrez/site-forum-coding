@@ -39,14 +39,9 @@ class User
         $stms->bindParam("id", $id);
         
         $stms->execute();
-        ?>
-        <script type="text/javascript">
-            window.alert("delete user successed");
-            location.replace("/manageusers");
-        </script>
-        <?php
+        
     }
-    public static function Update(array $data) : void
+    public static function Update(array $data) : int
     {
         try {
             $db = Database::getInstance()->getConnection();
@@ -62,23 +57,16 @@ class User
             $stms->bindParam("id", $data['id']);
             
             $stms->execute();
-            ?>
-            <script type="text/javascript">
-                window.alert("update user successed");
-                location.replace("/manageusers");
-            </script>
-            <?php
+            $result = 1;
+            
         } catch (PDOException) {
-            ?>
-            <script type="text/javascript">
-                window.alert("change the username");
-                location.replace("/upuser/<?= $data['id'] ?>");
-            </script>
-            <?php
+            $result = 0;
         }
+
+        return $result;
         
     }
-    public static function Update2(array $data) : void
+    public static function Update2(array $data) : int
     {
         try {
             $db = Database::getInstance()->getConnection();
@@ -94,23 +82,15 @@ class User
             $stms->bindParam("id", $data['id']);
             
             $stms->execute();
-            ?>
-            <script type="text/javascript">
-                window.alert("your accont updated");
-                location.replace("/profile");
-            </script>
-            <?php
+            $result = 1;
+            
         } catch (PDOException) {
-            ?>
-            <script type="text/javascript">
-                window.alert("change the username");
-                location.replace("/edit");
-            </script>
-            <?php
+            $result = 1;
         }
+        return $result;
         
     }
-    public static function Insert(array $data) : void
+    public static function Insert(array $data) : int
     {
         try {
         $db = Database::getInstance()->getConnection();
@@ -126,22 +106,14 @@ class User
         $stms->bindParam("state", $data['state']);
         
         $stms->execute();
-        ?>
-        <script type="text/javascript">
-            window.alert("insert user successed");
-            location.replace("/manageusers");
-        </script>
-        <?php
+        $result = 1;
+
         } catch (PDOException) {
-            ?>
-            <script type="text/javascript">
-                window.alert("change the username");
-                location.replace("/inuser");
-            </script>
-            <?php
+            $result = 2;
         }
+        return $result;
     }
-    public static function Insert2(array $data) : void
+    public static function Insert2(array $data) : int
     {
         try {
         $db = Database::getInstance()->getConnection();
@@ -164,20 +136,12 @@ class User
         $row = $stms2->fetch(PDO::FETCH_ASSOC);
         $_SESSION['admin_id'] = $row['id'];
 
-        ?>
-        <script type="text/javascript">
-            window.alert("regestration is done");
-            location.replace("/");
-        </script>
-        <?php
+        $result = 1;
+
         } catch (PDOException) {
-            ?>
-            <script type="text/javascript">
-                window.alert("change the username");
-                location.replace("/");
-            </script>
-            <?php
+            $result = 0;
         }
+        return $result;
     }
     public static function Count() : array
     {
@@ -214,7 +178,7 @@ class User
         
         return $users->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Login(string $username, string $password) : void
+    public static function Login(string $username, string $password) : int
     {
         $db = Database::getInstance()->getConnection();
 
@@ -227,24 +191,15 @@ class User
 
         if ($row = $stms->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['admin_id'] = $row['id'];
-            ?>
-            <script type="text/javascript">
-                window.alert("welcome");
-                location.replace("/panel");
-            </script>
-            <?php
+            $result = 1;
         }
         else{
-            ?>
-            <script type="text/javascript">
-                window.alert("The information is incorrect");
-                location.replace("/login");
-            </script>
-            <?php
+            $result = 0;
         }
+        return $result;
         
     }
-    public static function Login2(string $username, string $password) : void
+    public static function Login2(string $username, string $password) : int
     {
         $db = Database::getInstance()->getConnection();
 
@@ -257,21 +212,12 @@ class User
 
         if ($row = $stms->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['admin_id'] = $row['id'];
-            ?>
-            <script type="text/javascript">
-                window.alert("welcome");
-                location.replace("/");
-            </script>
-            <?php
+            $result = 1;
         }
         else{
-            ?>
-            <script type="text/javascript">
-                window.alert("The information is incorrect");
-                location.replace("/");
-            </script>
-            <?php
+            $result = 0;
         }
+        return $result;
     }
 
     public static function Delimg(int $id) : void
@@ -284,11 +230,5 @@ class User
         $stms->bindParam("id", $id);
         $stms->execute();
 
-        ?>
-            <script type="text/javascript">
-                window.alert("your image deleted");
-                location.replace("/setting/<?= $id ?>");
-            </script>
-        <?php
     }
 }

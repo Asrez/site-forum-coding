@@ -52,9 +52,9 @@
             <?php foreach ($questions as $question) { ?>
             <div class="conversation-list md:mt-8 mt-4 flex flex-col gap-3">
                 <a class="conversation inline-block hover:bg-[--color2] transition-all duration-300 bg-[--color8] rounded-[14px] py-4 px-7 w-full"
-                   href="/show_post/<?= $question['id'] ?>">
+                   href="show_post/<?= $question['id'] ?>">
                     <figure class="inline-flex justify-center float-start items-start w-[52px]">
-                        <img alt="" class="rounded-[14px]" loading="lazy" src="./static/photos/<?= $question['image'] ?>">
+                        <img alt="" class="rounded-[14px]" loading="lazy" src="../static/photos/<?= $question['image'] ?>">
                     </figure>
                     <div class="content w-[calc(100%-80px)] float-end h-full inline-flex flex-col  align-top">
                         <div class="float-start flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between sm:items-center w-full">

@@ -67,11 +67,5 @@ class Setting
         $stms->bindParam("id", $data['id']);
         $stms->execute();
 
-        ?>
-        <script type="text/javascript">
-            window.alert("updated");
-            location.replace("/site_setting");
-        </script>
-        <?php
     }
 }

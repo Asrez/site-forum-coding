@@ -19,7 +19,7 @@
               </div>
               <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex">
-                  <form action="/searchpost" method="post">
+                  <form action="posts/searchpost" method="post">
                   <input type="search" class="form-control d-inline-block w-9 me-3" placeholder="Search post…" name="searchbox"/>
                   </form>
                   <a class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
@@ -55,7 +55,7 @@
                         <tr>
                         <?php foreach ($posts as $post) { ?>
                           <td><span class="text-muted"><?= $post['id'] ?></span></td>
-                          <td><a href="post/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
+                          <td><a href="/posts/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
                           <td>
                           <?= $post['date'] ?>
                           </td>

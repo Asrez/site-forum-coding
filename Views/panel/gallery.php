@@ -26,10 +26,10 @@
               <?php foreach ($posts as $post) { ?>
               <div class="col-sm-6 col-lg-4">
                 <div class="card card-sm">
-                  <a href="post/<?= $post['id'] ?>" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
+                  <a href="/posts/<?= $post['id'] ?>" class="d-block"><img src="../static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <span class="avatar me-3 rounded" style="background-image: url(/static/avatars/<?= $post['userimage'] ?>)"></span>
+                      <span class="avatar me-3 rounded" style="background-image: url(../static/avatars/<?= $post['userimage'] ?>)"></span>
                       <div>
                         <div><?= $post['title'] ?></div>
                         <div class="text-muted"><?= $post['username'] ?></div>

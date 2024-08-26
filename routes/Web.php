@@ -29,17 +29,21 @@ Flight::route("POST /login_result" ,[new UserController(),"login_result"]);
 Flight::route("POST /updateuser/@id" ,[new UserController(),"Upuser"]);
 Flight::route("GET /deleteimg/@id" ,[new UserController(),"Delimg"]);
 Flight::route("GET /users" ,[new UserController(),"GetAll"]);
-Flight::route("GET /manageusers" ,[new UserController(),"Manage"]);
+Flight::route("GET /manageuser" ,[new UserController(),"Manage"]);
 Flight::route("GET /setting/@id" ,[new UserController(),"Setting"]);
 Flight::route("POST /inuser" ,[new UserController(),"Insert"]);
 Flight::route("GET /deluser/@id" ,[new UserController(),"Delete"]);
 Flight::route("GET /upuser/@id" ,[new UserController(),"Upform"]);
-Flight::route("POST /upuser/@id" ,[new UserController(),"Update"]);
+Flight::route("POST /upusers/@id" ,[new UserController(),"Update"]);
 Flight::route("GET /inuser" ,[new UserController(),"Addform"]);
 
-Flight::route("GET /posts" ,[new PostController(),"GetAll"]);
-Flight::route("GET /post/@id" ,[new PostController(),"GetById"]);
-Flight::route("GET /manageposts" ,[new PostController(),"Manage"]);
+flight::group('/posts',function()
+{
+    Flight::route("GET /" ,[new PostController(),"GetAll"]);
+    Flight::route("GET /@id" ,[new PostController(),"GetById"]);
+});
+
+Flight::route("GET /managepost" ,[new PostController(),"Manage"]);
 Flight::route("GET /gallery" ,[new PostController(),"Gallery"]);
 Flight::route("POST /inpost" ,[new PostController(),"Insert"]);
 Flight::route("GET /delpost/@id" ,[new PostController(),"Delete"]);
@@ -50,3 +54,7 @@ Flight::route("POST /searchpost" ,[new PostController(),"result_search"]);
 Flight::route("POST /addquestion" ,[new PostController(),"add_question"]);
 Flight::route("GET /show_post/@id" ,[new PostController(),"show_post"]);
 Flight::route("POST /addreply/@id" ,[new PostController(),"add_reply"]);
+Flight::route("GET /Del_reply/@id" ,[new PostController(),"Del_reply"]);
+
+
+

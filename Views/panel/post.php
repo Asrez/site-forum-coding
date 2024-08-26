@@ -25,7 +25,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="card card-sm">
-                  <a href="#" class="d-block"><img src="/static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
+                  <a href="#" class="d-block"><img src="../static/photos/<?= $post['image'] ?>" class="card-img-top"></a>
                   <div class="card-body">
                     <div class="d-flex align-items-center">
                       <div>
