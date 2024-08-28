@@ -12,7 +12,6 @@ use App\Actions\Users\DeleteU;
 use App\Actions\Users\Login;
 use App\Actions\Users\Deleteimg;
 use App\Actions\Search\Usersearch;
-use App\Actions\Setting\Allsetting;
 
 use Flight;
 
@@ -49,7 +48,7 @@ class UserController
                     ?>
                     <script type="text/javascript">
                         window.alert("insert user successed");
-                        location.replace("/manageuser");
+                        location.replace("/manage/user");
                     </script>
                     <?php
                 }
@@ -57,7 +56,7 @@ class UserController
                     ?>
                     <script type="text/javascript">
                         window.alert("change the username");
-                        location.replace("inuser");
+                        location.replace("/panel/inuser");
                     </script>
                     <?php
                 }
@@ -94,7 +93,7 @@ class UserController
                     ?>
                     <script type="text/javascript">
                         window.alert("update user successed");
-                        location.replace("/manageuser");
+                        location.replace("/manage/user");
                     </script>
                     <?php
                 }
@@ -137,7 +136,7 @@ class UserController
                     ?>
                     <script type="text/javascript">
                         window.alert("your accont updated");
-                        location.replace("profile");
+                        location.replace("/manage/profile");
                     </script>
                     <?php
                 }
@@ -145,7 +144,7 @@ class UserController
                     ?>
                     <script type="text/javascript">
                         window.alert("change the username");
-                        location.replace("edit");
+                        location.replace("/manage/edit");
                     </script>
                     <?php
                 }
@@ -158,17 +157,14 @@ class UserController
         ?>
         <script type="text/javascript">
             window.alert("delete user successed");
-            location.replace("manageuser");
+            location.replace("manage/user");
         </script>
         <?php
     }
 
     public function GetAll()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -176,62 +172,48 @@ class UserController
             $users = GetAllU::execute();
             
             Flight::render(__DIR__ ."/../../views/panel/users.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'users'=> $users ,
             'admin'=> $admin 
             ]);
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
 
     public function Upform(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
         $this_user = GetByIdU::execute($id);
 
         Flight::render(__DIR__ ."/../../views/panel/updateuser.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title ,
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
         'this_user'=> $this_user ,
         'id'=> $id
         ]);
     }
     public function Addform()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         Flight::render(__DIR__ ."/../../views/panel/insertuser.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title 
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
         ]);
     }
     public function Manage()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -239,45 +221,33 @@ class UserController
             $users = GetAllU::execute();
 
             Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'admin'=> $admin ,
             'users'=> $users ,
             ]);
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
     public function Setting(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 1) {
-                $logo = Allsetting::execute("logo");
-                $logo_footer = Allsetting::execute("logo_footer");
-                $footer = Allsetting::execute("footer");
-                $title = Allsetting::execute("title");
                 $user = GetByIdU::execute($id);
                 
                 Flight::render(__DIR__ ."/../../Views/panel/settings.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'admin'=> $admin ,
                 'user'=> $user ,
                 'id'=> $id 
@@ -288,21 +258,13 @@ class UserController
             }
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
     public function result_search()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -314,10 +276,10 @@ class UserController
                 $users = Usersearch::execute($title);
 
                 Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'admin'=> $admin ,
                 'users'=> $users
                 ]);
@@ -328,37 +290,24 @@ class UserController
                 $users = GetAllU::execute();
 
                 Flight::render(__DIR__ ."/../../Views/panel/manageusers.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'admin'=> $admin ,
                 'users'=> $users
                 ]);
             }
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
     public function login()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title 
-        ]);
+        $tool = tools();
+        return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
     }
     public function login_result()
     {
@@ -418,7 +367,7 @@ class UserController
                         ?>
                         <script type="text/javascript">
                             window.alert("your accont updated");
-                            location.replace("profile");
+                            location.replace("/manage/profile");
                         </script>
                         <?php
                     }
@@ -426,7 +375,7 @@ class UserController
                         ?>
                         <script type="text/javascript">
                             window.alert("change the username");
-                            location.replace("edit");
+                            location.replace("/manage/edit");
                         </script>
                         <?php
                     }
@@ -523,26 +472,20 @@ class UserController
     public function profile()
     {
        if (isset($_SESSION['admin_id'])) {
-            $logo_footer = Allsetting::execute("logo_footer");
-            $logo = Allsetting::execute("logo");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
-            $twitter = Allsetting::execute("twitter");
-            $github = Allsetting::execute("github");
-            $youtube = Allsetting::execute("youtube");
+            $tool = tools();
             $questions = GetByAdminId::execute($_SESSION['admin_id']);
             $count_activity = count($questions);
             $count_reply = CountC::execute($_SESSION['admin_id'])['count'];
             $user = GetByIdU::execute($_SESSION['admin_id']);
 
             Flight::render(__DIR__ ."/../../Views/my_profile.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
-            'twitter'=> $twitter ,
-            'github'=> $github ,
-            'youtube'=> $youtube ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
+            'twitter'=> $tool['twitter'] ,
+            'github'=> $tool['github'] ,
+            'youtube'=> $tool['youtube'] ,
             'questions'=> $questions ,
             'count_activity'=> $count_activity ,
             'count_reply'=> $count_reply ,
@@ -556,23 +499,17 @@ class UserController
     public function edit()
     {
        if (isset($_SESSION['admin_id'])) {
-            $logo_footer = Allsetting::execute("logo_footer");
-            $logo = Allsetting::execute("logo");
-            $footer = Allsetting::execute("footer");
-            $title = Allsetting::execute("title");
-            $twitter = Allsetting::execute("twitter");
-            $github = Allsetting::execute("github");
-            $youtube = Allsetting::execute("youtube");
+            $tool = tools();
             $user = GetByIdU::execute($_SESSION['admin_id']);
 
             Flight::render(__DIR__ ."/../../Views/edit_profile_account.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
-            'twitter'=> $twitter ,
-            'github'=> $github ,
-            'youtube'=> $youtube ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
+            'twitter'=> $tool['twitter'] ,
+            'github'=> $tool['github'] ,
+            'youtube'=> $tool['youtube'] ,
             'user'=> $user 
             ]);
 

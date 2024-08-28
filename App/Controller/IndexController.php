@@ -13,7 +13,6 @@ use App\Actions\Users\GetAllU;
 use App\Actions\Users\CountU;
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\CountV;
-use App\Actions\Setting\Allsetting;
 use App\Actions\Search\Postsearch;
 use App\Actions\Search\SearchAll;
 
@@ -27,24 +26,18 @@ class IndexController
     }
     public function Main_index()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        $twitter = Allsetting::execute("twitter");
-        $github = Allsetting::execute("github");
-        $youtube = Allsetting::execute("youtube");
+        $tool = tools();
         $advers = Advers::execute();
         $questions = GetAllP::execute2();
         
         Flight::render(__DIR__ ."/../../Views/index.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title ,
-        'twitter'=> $twitter ,
-        'github'=> $github ,
-        'youtube'=> $youtube ,
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
+        'twitter'=> $tool['twitter'] ,
+        'github'=> $tool['github'] ,
+        'youtube'=> $tool['youtube'] ,
         'advers'=> $advers ,
         'questions'=> $questions
         ]);
@@ -52,37 +45,25 @@ class IndexController
     }
     public function Main_index2()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        $twitter = Allsetting::execute("twitter");
-        $github = Allsetting::execute("github");
-        $youtube = Allsetting::execute("youtube");
+        $tool = tools();
         $questions = GetAllP::execute2();
         $advers = Advers::execute();
         
         Flight::render(__DIR__ ."/../../Views/index2.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title ,
-        'twitter'=> $twitter ,
-        'github'=> $github ,
-        'youtube'=> $youtube ,
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
+        'twitter'=> $tool['twitter'] ,
+        'github'=> $tool['github'] ,
+        'youtube'=> $tool['youtube'] ,
         'advers'=> $advers ,
         'questions'=> $questions
         ]);
     }
     public function search_result_main()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        $twitter = Allsetting::execute("twitter");
-        $github = Allsetting::execute("github");
-        $youtube = Allsetting::execute("youtube");
+        $tool = tools();
         $advers = Advers::execute();
         $questions = GetAllP::execute2();
         if (isset($_GET['q']) && ! empty($_GET['q'])) {
@@ -90,13 +71,13 @@ class IndexController
             $questions = Postsearch::execute2($_GET['q']);
         }
         Flight::render(__DIR__ ."/../../Views/index.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title ,
-        'twitter'=> $twitter ,
-        'github'=> $github ,
-        'youtube'=> $youtube ,
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
+        'twitter'=> $tool['twitter'] ,
+        'github'=> $tool['github'] ,
+        'youtube'=> $tool['youtube'] ,
         'advers'=> $advers ,
         'questions'=> $questions
         ]);
@@ -114,16 +95,14 @@ class IndexController
     }
 
     public function index()
-    {   $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+    {   
+        $tool = tools();
 
         if(isset($_SESSION['admin_id'])) {
             
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 0) {
-                require __DIR__ ."/../../Views/panel/sign-in.php";
+                return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
             }
             $chart = Chart::execute();
             foreach ($chart as $ch) {
@@ -139,10 +118,10 @@ class IndexController
             $users = GetAllU::execute();
             
             Flight::render(__DIR__ ."/../../Views/panel/index.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'admin'=> $admin ,
             'countadmin'=> $countadmin ,
             'countview'=> $countview ,
@@ -155,38 +134,25 @@ class IndexController
             ]);
         }
         else
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+        return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
     }
     public function site_setting()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
         $advers = Advers::execute();
         $settings = Settings::execute();
 
         if(isset($_SESSION['admin_id'])) {
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if($admin['state'] === 0) {
-                Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title 
-                ]);
+                return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
             }
             else {
                 Flight::render(__DIR__ ."/../../Views/panel/managesetting.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'advers'=> $advers ,
                 'settings'=> $settings ,
                 'admin'=> $admin 
@@ -194,29 +160,21 @@ class IndexController
             }
         }
         else
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+        return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
     }
     public function go_setting(int $id) 
     {
         if (isset($_SESSION['admin_id']) ){
             $admin = GetByIdU::execute($_SESSION['admin_id']);
             if ($admin['state'] === 1){
-                $logo = Allsetting::execute("logo");
-                $logo_footer = Allsetting::execute("logo_footer");
-                $footer = Allsetting::execute("footer");
-                $title = Allsetting::execute("title");
+                $tool = tools();
                 $setting = GetByIdS::execute($_SESSION['admin_id']);
 
                 Flight::render(__DIR__ ."/../../Views/panel/settingupdate.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'setting'=> $setting ,
                 'admin'=> $admin ,
                 'id'=> $id 
@@ -248,7 +206,7 @@ class IndexController
                     ?>
                     <script type="text/javascript">
                         window.alert("updated");
-                        location.replace("/site_setting");
+                        location.replace("/manage/site_setting");
                     </script>
                     <?php
 
@@ -260,10 +218,7 @@ class IndexController
     }
     public function result_search()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         $admin = GetByIdU::execute($_SESSION['admin_id']);
 
@@ -276,10 +231,10 @@ class IndexController
             $users = $all['users'];
 
             Flight::render(__DIR__ ."/../../Views/panel/search-results.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'users'=> $users ,
             'posts'=> $posts ,
             'admin'=> $admin
@@ -296,10 +251,10 @@ class IndexController
             $users = GetAllU::execute();
 
             Flight::render(__DIR__ ."/../../Views/index.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'users'=> $users ,
             'posts'=> $posts ,
             'admin'=> $admin ,

@@ -23,7 +23,7 @@
                 </div>
                 <div class="social w-[108px] flex justify-center items-center pt-2">
                     <a class="h-[40px] px-4 bg-[--color2] flex justify-center items-center hover:bg-[--color3] transition-all duration-300 rounded-[14px] text-[--color4] font-bold"
-                       href="edit">
+                       href="/manage/edit">
                         Edit
                     </a>
                 </div>
@@ -70,7 +70,7 @@
                                <?= $question['viewcount'] ?>
                             </div>
                         </div>
-                        <a href="show_post/<?= $question['id'] ?>">
+                        <a href="/main/show_post/<?= $question['id'] ?>">
                             <div class="basis-[86%] flex flex-col gap-5">
                                 <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
                                     <img src="../static/photos/<?= $question['image'] ?>">

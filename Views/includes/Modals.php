@@ -161,7 +161,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Discussion!</h2>
-    <form action="addquestion" method="post" enctype="multipart/form-data">
+    <form action="/main/addquestion" method="post" enctype="multipart/form-data">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold block" for="title">Title</label>
             <div class="input relative">
@@ -226,7 +226,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">New Replay!</h2>
-    <form action="addreply/<?= $id ?>" method="post">
+    <form action="/main/addreply/<?= $id ?>" method="post">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold block" for="title2">Title</label>
             <div class="input relative">

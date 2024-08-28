@@ -19,7 +19,7 @@
               </div>
               <div class="col-auto ms-auto d-print-none">
                 <div class="d-flex">
-                  <form action="posts/searchpost" method="post">
+                  <form action="/panel/searchpost" method="post">
                   <input type="search" class="form-control d-inline-block w-9 me-3" placeholder="Search post…" name="searchbox"/>
                   </form>
                   <a class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
@@ -70,14 +70,14 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/uppost/<?= $post['id'] ?>" >
+                                  <a class="dropdown-item" href="/manage/post/uppost/<?= $post['id'] ?>" >
                                     update
                                   </a>
-                                  <a class="dropdown-item" href="/delpost/<?= $post['id'] ?>">
+                                  <a class="dropdown-item" href="/manage/post/delpost/<?= $post['id'] ?>">
                                     delete
                                   </a> 
                                   <?php if ($post['state'] === 0) { ?> 
-                                    <a class="dropdown-item" href="/confirmpost/<?= $post['id'] ?>">
+                                    <a class="dropdown-item" href="/manage/post/confirmpost/<?= $post['id'] ?>">
                                     confirmed
                                   </a>
                                  <?php } ?>             

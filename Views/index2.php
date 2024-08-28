@@ -33,7 +33,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="main2" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] active">
+                        <a href="/main/main2" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] active">
                             <svg class="mx-2" height="15" viewBox="0 0 15 15" width="15">
                                 <g class="fill-white" fill-rule="evenodd">
                                     <rect class="forum-excerpt-toggle-line" height="6" rx="2" width="15"></rect>
@@ -63,7 +63,7 @@
             <?php foreach ($questions as $question) { ?>
             <div class="conversation-list md:mt-8 mt-4 flex flex-col gap-3">
                 <a class="conversation inline-block hover:bg-[--color2] transition-all duration-300 bg-[--color8] rounded-[14px] py-4 px-7 w-full"
-                   href="show_post/<?= $question['id'] ?>">
+                   href="/main/show_post/<?= $question['id'] ?>">
                     <figure class="inline-flex justify-center float-start items-start w-[52px]">
                         <img alt="" class="rounded-[14px]" loading="lazy" src="./static/photos/<?= $question['image'] ?>">
                     </figure>

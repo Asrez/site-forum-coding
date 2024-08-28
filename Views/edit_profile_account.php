@@ -21,7 +21,7 @@
                     <ul class="list-none mt-8 w-full left_side_ul">
                         <li class="w-full mt-2">
                             <a class="group w-full py-2 px-3 rounded-[14px] transition-all duration-300 flex justify-start items-center hover:bg-[--color8] text-white hover:text-[--color5] tracking-wide active"
-                               href="/edit">
+                               href="/manage/edit">
                                 <span class="group-hover:bg-[--color5] group-hover:h-[20px] inline-block w-[8px] bg-[--color3] h-[16px] rounded-[14px] me-2 transition-all duration-300"></span>
                                 Account
                             </a>
@@ -31,7 +31,7 @@
             </aside>
             <div class="2xl:basis-[66.5%] lg:basis-[80%] basis-full">
                 <h2 class="text-white font-bold text-[23px]">Update Your Account</h2>
-                <form action="updateaccont/<?= $user['id'] ?>" method="Post" enctype="multipart/form-data">
+                <form action="/main/updateaccont/<?= $user['id'] ?>" method="Post" enctype="multipart/form-data">
                     <div class="input-box mt-6">
                         <label class="text-[--color6] font-bold block" for="name">Name</label>
                         <div class="input relative">

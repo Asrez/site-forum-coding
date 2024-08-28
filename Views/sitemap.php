@@ -19,7 +19,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $stmt = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$base_url = 'localhost:8000/show_post/';
+$base_url = 'localhost:8000/main/show_post/';
 
 foreach ($stmt as $song) {
     $url = $base_url.$song["id"];

@@ -7,7 +7,7 @@
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="setting_update/<?= $id ?>" method="post" >
+      <form action="/panel/setting_update/<?= $id ?>" method="post" >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Setting / Advertising</h5>

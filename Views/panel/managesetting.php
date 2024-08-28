@@ -50,7 +50,7 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/go_setting/<?= $adver['id'] ?>" >
+                                  <a class="dropdown-item" href="/panel/go_setting/<?= $adver['id'] ?>" >
                                     edit
                                   </a>             
                               </div>
@@ -113,7 +113,7 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="go_setting/<?= $setting['id'] ?>" >
+                                  <a class="dropdown-item" href="/panel/go_setting/<?= $setting['id'] ?>" >
                                     edit
                                   </a>             
                               </div>

@@ -7,7 +7,7 @@
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="/uppost/<?= $this_post['id'] ?>" method="post" enctype="multipart/form-data">
+      <form action="/manage/post/uppost/<?= $this_post['id'] ?>" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">New Post</h5>

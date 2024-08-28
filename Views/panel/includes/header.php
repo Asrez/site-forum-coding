@@ -33,7 +33,7 @@
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <div class="dropdown-divider"></div>
                 <a href="setting/<?= $admin['id'] ?>" class="dropdown-item">Settings</a>
-                <a href="/logout" class="dropdown-item">Logout</a>
+                <a href="/panel/logout" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@
                   </a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                  <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" /><line x1="12" y1="12" x2="20" y2="7.5" /><line x1="12" y1="12" x2="12" y2="21" /><line x1="12" y1="12" x2="4" y2="7.5" /><line x1="16" y1="5.25" x2="8" y2="9.75" /></svg>
                     </span>
@@ -66,19 +66,19 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="/managepost">
+                        <a class="dropdown-item" href="/manage/post">
                           manage posts
                         </a>
-                        <a class="dropdown-item" href="/manageuser">
+                        <a class="dropdown-item" href="/manage/user">
                           manage users
                         </a>
-                        <a class="dropdown-item" href="/users">
+                        <a class="dropdown-item" href="/panel/users">
                           all users
                         </a>
-                        <a class="dropdown-item" href="/posts">
+                        <a class="dropdown-item" href="/panel/posts">
                           all posts
                         </a>
-                        <a class="dropdown-item" href="/gallery">
+                        <a class="dropdown-item" href="/panel/gallery">
                           Gallery
                           <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                         </a>
@@ -98,7 +98,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/site_setting">
+                  <a class="nav-link" href="/manage/site_setting">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 11 12 14 20 6" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
                     </span>
@@ -138,7 +138,7 @@
                 </li>
               </ul>
               <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-                <form action="/searchall" method="post" >
+                <form action="/panel/searchall" method="post" >
                   <div class="input-icon">
                     <span class="input-icon-addon">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
@@ -153,7 +153,7 @@
       </div>
   <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="inpost" method="post" enctype="multipart/form-data">
+      <form action="/manage/post/inpost" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">New Post</h5>

@@ -16,7 +16,6 @@ use App\Actions\Posts\InsertP;
 use App\Actions\Posts\DeleteP;
 use App\Actions\Posts\Innerjoin;
 use App\Actions\Search\Postsearch;
-use App\Actions\Setting\Allsetting;
 
 
 class PostController
@@ -43,7 +42,7 @@ class PostController
                 ?>
                 <script type="text/javascript">
                     window.alert("insert post success");
-                    location.replace("/managepost");
+                    location.replace("/manage/post");
                 </script>
                 <?php  
             }
@@ -70,7 +69,7 @@ class PostController
                 ?>
                 <script type="text/javascript">
                     window.alert("update post success");
-                    location.replace("/managepost");
+                    location.replace("/manage/post");
                 </script>
                 <?php
             }
@@ -83,16 +82,13 @@ class PostController
         ?>
         <script type="text/javascript">
             window.alert("delete post success");
-            location.replace("/managepost");
+            location.replace("/manage/post");
         </script>
         <?php
     }
 
     public function GetAll()
-{       $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+    {   $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
             
@@ -101,30 +97,22 @@ class PostController
             $admin = GetByIdU::execute($_SESSION['admin_id']);
 
             Flight::render(__DIR__ ."/../../views/panel/posts.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'posts'=> $posts ,
             'admin'=> $admin 
             ]);
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
     }
 
     public function Manage()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
             
@@ -133,29 +121,21 @@ class PostController
             $posts = GetAllP::execute();
             
             Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'posts'=> $posts ,
             'admin'=> $admin 
             ]);
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
     }
     public function Gallery()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -163,39 +143,31 @@ class PostController
             $posts = Innerjoin::execute();
             
             Flight::render(__DIR__ ."/../../Views/panel/gallery.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'posts'=> $posts ,
             'admin'=> $admin 
             ]);
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
 
     public function Upform(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
         $admin = GetByIdU::execute($_SESSION['admin_id']);
         $this_post = GetByIdP::execute($id);
 
         Flight::render(__DIR__ ."/../../views/panel/updatepost.php",
-        ['logo'=> $logo , 
-        'logo_footer'=> $logo_footer,
-        'footer'=> $footer ,
-        'title'=> $title ,
+        ['logo'=> $tool['logo'] , 
+        'logo_footer'=> $tool['logo_footer'] ,
+        'footer'=> $tool['footer'] ,
+        'title'=> $tool['title'] ,
         'this_post'=> $this_post ,
         'admin'=> $admin ,
         'id'=> $id
@@ -207,16 +179,13 @@ class PostController
         ?>
         <script type="text/javascript">
             window.alert("post confirmed");
-            location.replace("/managepost");
+            location.replace("/manage/post");
         </script>
         <?php
     }
     public function result_search()
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -228,10 +197,10 @@ class PostController
                 $posts = Postsearch::execute($titlee);
 
                 Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'posts'=> $posts ,
                 'admin'=> $admin 
                 ]);
@@ -242,30 +211,22 @@ class PostController
                 $posts = GetAllP::execute();
 
                 Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'posts'=> $posts ,
                 'admin'=> $admin 
                 ]);
             }
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
     }
     public function GetById(int $id)
     {
-        $logo = Allsetting::execute("logo");
-        $logo_footer = Allsetting::execute("logo_footer");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
+        $tool = tools();
 
         if (isset($_SESSION['admin_id'])){       
 
@@ -275,10 +236,10 @@ class PostController
             if ($post === false)  Flight::render(__DIR__ ."/../../public/error-404.php");
             else {
                 Flight::render(__DIR__ ."/../../Views/panel/post.php",
-                ['logo'=> $logo , 
-                'logo_footer'=> $logo_footer,
-                'footer'=> $footer ,
-                'title'=> $title ,
+                ['logo'=> $tool['logo'] , 
+                'logo_footer'=> $tool['logo_footer'] ,
+                'footer'=> $tool['footer'] ,
+                'title'=> $tool['title'] ,
                 'post'=> $post ,
                 'admin'=> $admin ,
                 'id'=> $id 
@@ -286,12 +247,7 @@ class PostController
             }
         }
         else {
-            Flight::render(__DIR__ ."/../../Views/panel/sign-in.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title 
-            ]);
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         }
         
     }
@@ -345,13 +301,8 @@ class PostController
             $ip = $_SERVER['REMOTE_ADDR'];
 
         InsertV::execute($id, $ip);
-        $logo_footer = Allsetting::execute("logo_footer");
-        $logo = Allsetting::execute("logo");
-        $footer = Allsetting::execute("footer");
-        $title = Allsetting::execute("title");
-        $twitter = Allsetting::execute("twitter");
-        $github = Allsetting::execute("github");
-        $youtube = Allsetting::execute("youtube");
+
+        $tool = tools();
         $answers = Innerjoin::execute2($id);
         $post = GetByIdP::execute($id);
         $user = GetByIdU::execute($post['admin_id']);
@@ -360,16 +311,16 @@ class PostController
             $reply_post_id = $id;
 
             Flight::render(__DIR__ ."/../../Views/conversation.php",
-            ['logo'=> $logo , 
-            'logo_footer'=> $logo_footer,
-            'footer'=> $footer ,
-            'title'=> $title ,
+            ['logo'=> $tool['logo'] , 
+            'logo_footer'=> $tool['logo_footer'] ,
+            'footer'=> $tool['footer'] ,
+            'title'=> $tool['title'] ,
             'post'=> $post ,
             'user'=> $user ,
             'reply_post_id'=> $reply_post_id ,
-            'twitter'=> $twitter ,
-            'github'=> $github ,
-            'youtube'=> $youtube ,
+            'twitter'=> $tool['twitter'] ,
+            'github'=> $tool['github'] ,
+            'youtube'=> $tool['youtube'] ,
             'answers'=> $answers ,
             'id'=> $id
             ]);
@@ -398,7 +349,7 @@ class PostController
                     ?>
                     <script type="text/javascript">
                         window.alert("your reply added");
-                        location.replace("//show_post/<?= $data['question_id'] ?>")
+                        location.replace("/main/show_post/<?= $data['question_id'] ?>")
                     </script>
                     <?php
                 }
