@@ -11,7 +11,8 @@
     "require": {
         "flightphp/core": "^3.11",
       "ext-pdo": "*",
-      "ext-json": "*"
+      "ext-json": "*",
+        "geekgroveofficial/php-smart-validator": "^1.0"
     }
     
 }

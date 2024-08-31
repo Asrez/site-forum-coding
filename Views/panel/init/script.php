@@ -78,6 +78,10 @@
             else if (value === "DeleteImg"){
                 window.alert("your image deleted");
             }
+            else if (value === "nofill"){
+                window.alert("some fields are not set")
+                location.replace("/panel");
+            }
         }
 
     })

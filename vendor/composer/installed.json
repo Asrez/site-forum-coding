@@ -76,6 +76,46 @@
                 "source": "https://github.com/flightphp/core/tree/v3.11.1"
             },
             "install-path": "../flightphp/core"
+        },
+        {
+            "name": "geekgroveofficial/php-smart-validator",
+            "version": "v1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geekGroveOfficial/php-smart-validator.git",
+                "reference": "6fe0f55b5e01bffec847856f98fbbb236ac20865"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geekGroveOfficial/php-smart-validator/zipball/6fe0f55b5e01bffec847856f98fbbb236ac20865",
+                "reference": "6fe0f55b5e01bffec847856f98fbbb236ac20865",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "time": "2024-08-28T12:06:08+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "GeekGroveOfficial\\PhpSmartValidator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A smart validation package for PHP",
+            "support": {
+                "issues": "https://github.com/geekGroveOfficial/php-smart-validator/issues",
+                "source": "https://github.com/geekGroveOfficial/php-smart-validator/tree/v1.0.0"
+            },
+            "install-path": "../geekgroveofficial/php-smart-validator"
         }
     ],
     "dev": true,

@@ -13,6 +13,10 @@ class ComposerStaticInitabb6ebe33cbb979ad3a0d50b308f9c90
     );
 
     public static $prefixLengthsPsr4 = array (
+        'G' => 
+        array (
+            'GeekGroveOfficial\\PhpSmartValidator\\' => 36,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -20,6 +24,10 @@ class ComposerStaticInitabb6ebe33cbb979ad3a0d50b308f9c90
     );
 
     public static $prefixDirsPsr4 = array (
+        'GeekGroveOfficial\\PhpSmartValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/geekgroveofficial/php-smart-validator/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',

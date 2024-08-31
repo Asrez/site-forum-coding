@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'GeekGroveOfficial\\PhpSmartValidator\\' => array($vendorDir . '/geekgroveofficial/php-smart-validator/src'),
     'App\\' => array($baseDir . '/app'),
 );

@@ -11,20 +11,25 @@ use App\Actions\Users\Login;
 use App\Actions\Users\Deleteimg;
 use App\Actions\Search\Usersearch;
 use Flight;
+use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 
 class UserController
 {
     public function Insert()
     {
-        if (isset($_POST["btninuser"])) {
-            if (
-                isset($_POST['name']) && !empty($_POST['name'])
-                && isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['password']) && !empty($_POST['password'])
-                && isset($_POST['state'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
+
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'name' => ['required', 'min:3', 'string'],
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50'],
+            'state' => ['required'],
+            'email' => ['required']
+        ]);
+
+        if ($validator->validate()) {
+
+            if (isset($_POST["btninuser"])) {
                 $name = $_POST['name'];
                 $state = $_POST['state'];
                 $username = $_POST['username'];
@@ -50,20 +55,23 @@ class UserController
                 } else {
                     Flight::redirect("/panel/inuser?status=finuser");
                 }
-
             }
+        } else {
+            Flight::redirect("/manage/user?status=nofill");
         }
     }
 
     public function Update(int $id)
     {
-        if (isset($_POST["btnupuser"])) {
-            if (
-                isset($_POST['name']) && !empty($_POST['name'])
-                && isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['password']) && !empty($_POST['password'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'name' => ['required', 'min:3', 'string'],
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50'],
+            'email' => ['required']
+        ]);
+
+        if ($validator->validate()) {
+            if (isset($_POST["btnupuser"])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
@@ -88,18 +96,23 @@ class UserController
                     Flight::redirect("/panel/user/?status=fUpdateUser");
                 }
             }
+        } else {
+            Flight::redirect("/manage/user?status=nofill");
         }
+
     }
 
     public function updateaccont(int $id)
     {
-        if (isset($_POST["btnupuser"])) {
-            if (
-                isset($_POST['name']) && !empty($_POST['name'])
-                && isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['password']) && !empty($_POST['password'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'name' => ['required', 'min:3', 'string'],
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50'],
+            'email' => ['required']
+        ]);
+
+        if ($validator->validate()) {
+            if (isset($_POST["btnupuser"])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
@@ -119,11 +132,13 @@ class UserController
                 $result = UpdateU::execute2($data);
                 if ($result === 1) {
                     Flight::redirect("/manage/profile?status=MainUpdateAccont");
-                }
-                else {
+                } else {
                     Flight::redirect("/manage/edit?status=fMainUpdateAccont");
                 }
+
             }
+        } else {
+            Flight::redirect("/manage/edit?status=nofill");
         }
     }
     public function Delete(int $id)
@@ -214,16 +229,21 @@ class UserController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else return panel_index($tool, $admin);
+        if ($admin === false)
+            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else
+            return panel_index($tool, $admin);
     }
     public function login_result()
     {
-        if (isset($_POST['btnlogin'])) {
-            if (
-                isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['password']) && !empty($_POST['password'])
-            ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50']
+        ]);
+
+        if ($validator->validate()) {
+            if (isset($_POST['btnlogin'])) {
+
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $result = Login::execute($username, $password);
@@ -232,18 +252,23 @@ class UserController
                     Flight::redirect("/panel?status=correct");
                 } else {
                     Flight::redirect("/login?status=incorrect");
+
                 }
             }
+        } else {
+            Flight::redirect("/login?status=nofill");
         }
     }
     public function Upuser(int $id)
     {
-        if (isset($_POST['btnupuser'])) {
-            if (
-                isset($_POST['name']) && !empty($_POST['name'])
-                && isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50'],
+            'email' => ['required']
+        ]);
+
+        if ($validator->validate()) {
+            if (isset($_POST['btnupuser'])) {
 
                 $name = $_POST['name'];
                 $username = $_POST['username'];
@@ -272,7 +297,10 @@ class UserController
                 } else {
                     Flight::redirect("/panel/user/?status=fUpdateAccont");
                 }
+
             }
+        } else {
+            Flight::redirect("/manage/user?status=nofill");
         }
     }
     public function Delimg(int $id)
@@ -283,12 +311,15 @@ class UserController
 
     public function log_in_result()
     {
-        if (!(isset($_SESSION['admin_id']))) {
-            if (isset($_POST['btnlogin'])) {
-                if (
-                    isset($_POST['username']) && !empty($_POST['username'])
-                    && isset($_POST['password']) && !empty($_POST['password'])
-                ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'username' => ['required', 'min:3', 'max:50'],
+            'password' => ['required', 'min:3', 'max:50']
+        ]);
+
+        if ($validator->validate()) {
+
+            if (!(isset($_SESSION['admin_id']))) {
+                if (isset($_POST['btnlogin'])) {
                     $username = $_POST['username'];
                     $password = $_POST['password'];
 
@@ -299,20 +330,25 @@ class UserController
                         Flight::redirect("/?status=incorrect");
                     }
 
+
                 }
             }
+        } else {
+            Flight::redirect("/?status=nofill");
         }
     }
 
     public function sign_up()
     {
-        if (isset($_POST["btnsignup"])) {
-            if (
-                isset($_POST['name']) && !empty($_POST['name'])
-                && isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['password']) && !empty($_POST['password'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'username' => ['required', 'min:3', 'max:50'],
+            'name' => ['required', 'min:3', 'max:50'],
+            'email' => ['required'],
+            'password' => ['required', 'min:3', 'max:50']
+        ]);
+
+        if ($validator->validate()) {
+            if (isset($_POST["btnsignup"])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
@@ -338,6 +374,8 @@ class UserController
                 }
 
             }
+        } else {
+            Flight::redirect("/?status=nofill");
         }
     }
     public function profile()

@@ -66,6 +66,10 @@
                 window.alert("change the username")
                 location.replace("/manage/edit")
             }
+            else if (value === "nofill"){
+                window.alert("some fields are not set")
+                location.replace("/")
+            }
         }
 
     })

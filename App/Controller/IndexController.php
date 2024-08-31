@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Actions\Setting\UpdateS;
 use App\Actions\Setting\GetByIdS;
 use App\Actions\Search\Postsearch;
+use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 use Flight;
 
@@ -27,8 +28,9 @@ class IndexController
     public function search_result_main()
     {
         $tool = tools();
+        $validator = new Validator(Flight::request()->data->getData(), ['q' => ['required']]);
 
-        if (isset($_GET['q']) && ! empty($_GET['q'])) {
+        if ($validator->validate()) {
 
             $tool['questions'] = Postsearch::execute2($_GET['q']);
         }
@@ -64,12 +66,17 @@ class IndexController
     }
     public function setting_update(int $id)
     {
+        $validator = new Validator(Flight::request()->data->getData(), [
+            'title' => [],
+            'link' => [],
+            'content' => [],
+            'value' => ['required'],
+        ]);
+
+        if ($validator->validate()) {
+
         if(isset($_SESSION['admin_id'])){
             if (isset($_POST['btnupdatesetting'])){
-                if (isset($_POST['title']) &&
-                isset($_POST['link']) &&
-                isset($_POST['content']) &&
-                isset($_POST['value']) ){
 
                     $title = $_POST['title'];
                     $link = $_POST['link'];
@@ -86,8 +93,11 @@ class IndexController
                     Flight::redirect("/manage/site_setting?status=SettingUpdate");
                 }
 
-            }
+            
         }
+    } else {
+        Flight::redirect("/manage/site_setting?status=nofill");
+    }
             
     }
     public function result_search()
@@ -97,7 +107,9 @@ class IndexController
         
         if ($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
+            $validator = new Validator(Flight::request()->data->getData(), ['searchbox' => ['required']]);
+    
+            if ($validator->validate()) {
 
                 $titlee = $_POST['searchbox'];
                 return panel_search_all($tool, $admin, $titlee);
