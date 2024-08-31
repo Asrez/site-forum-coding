@@ -4,7 +4,8 @@
             "App\\": "app/"
         },
         "files" : [
-            "App/providers/helper.php"
+            "App/providers/helper.php" ,
+            "Config/info.php" 
         ]
     },
     "require": {

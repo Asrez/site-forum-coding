@@ -8,7 +8,7 @@
     </div>
     <div class="btn-wrapper flex-1 flex justify-end gap-3">
         <?php if (isset($_SESSION['admin_id'])) { ?>
-        <a href="/main/logout2" class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]">
+        <a id="logout_main" class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]">
             Log Out
         </a>
         <a href="/manage/profile" class="bg_gr h-[40px] w-[163px] rounded-[14px] hidden md:flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">

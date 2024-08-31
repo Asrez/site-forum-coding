@@ -9,7 +9,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Log In</h2>
-    <form action="log_in_main_result" method="post">
+    <form action="/log_in_main_result" method="post">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold" for="login_email">Username</label>
             <div class="input relative">
@@ -60,7 +60,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Sign Up!</h2>
-    <form action="ign_up_main_result" method="post" enctype="multipart/form-data">
+    <form action="/sign_up_main_result" method="post" enctype="multipart/form-data">
         <div class="input-box mt-4">
             
             <label class="text-[--color6] font-bold block" for="register_name">Name</label>
@@ -190,7 +190,7 @@
                        placeholder="Image..." type="file">
             </div>
             <button class="bg_gr mt-10 h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative mb-12"
-                    type="submit" name="btnAddQuestion">
+                    type="submit" name="btnAddQuestion" id="btnAddQuestion">
                 Create Discussion
             </button>
         </div>
@@ -246,14 +246,15 @@
                         placeholder="Answer..." required="required" rows="5"></textarea>
             </div>
             <button class="bg_gr mt-10 h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative mb-12"
-                    type="submit" name="btnnewreply">
+                    type="submit" name="btnnewreply" id="btnnewreply">
                 Create Replay
             </button>
         </div>
     </form>
 </div>
 <?php } ?>
-
+<?php if(isset($_SESSION['admin_id'])) { ?>
 <button class="bg-[--color5] w-[50px] h-[50px] flex justify-center items-center rounded-full fixed bottom-[20px] right-[10px] newDescription">
-    <img src="images/reply-mobile-button.svg" alt="">
+    <img src="../images/reply-mobile-button.svg" alt="">
 </button>
+<?php } ?>

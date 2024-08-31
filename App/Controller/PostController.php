@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use flight;
-
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\InsertV;
 use App\Actions\Comments\AddComment;
@@ -16,6 +14,8 @@ use App\Actions\Posts\InsertP;
 use App\Actions\Posts\DeleteP;
 use App\Actions\Posts\Innerjoin;
 use App\Actions\Search\Postsearch;
+
+use Flight;
 
 
 class PostController
@@ -39,12 +39,7 @@ class PostController
                 ];
 
                 InsertP::execute($data);
-                ?>
-                <script type="text/javascript">
-                    window.alert("insert post success");
-                    location.replace("/manage/post");
-                </script>
-                <?php  
+                Flight::redirect("/manage/post?status=AddPost");
             }
         }   
     }
@@ -66,12 +61,7 @@ class PostController
                 ];
 
                 UpdateP::execute($data);
-                ?>
-                <script type="text/javascript">
-                    window.alert("update post success");
-                    location.replace("/manage/post");
-                </script>
-                <?php
+                Flight::redirect("/manage/post?status=UpdatePost");
             }
         }
     }
@@ -79,177 +69,79 @@ class PostController
     public function Delete(int $id)
     {
         DeleteP::execute($id);
-        ?>
-        <script type="text/javascript">
-            window.alert("delete post success");
-            location.replace("/manage/post");
-        </script>
-        <?php
+        Flight::redirect("/manage/post?status=DeletePost");
     }
 
     public function GetAll()
-    {   $tool = tools();
+    {
+        $tool = tools();
+        $admin = session_admin();
 
-        if (isset($_SESSION['admin_id'])){       
-            
-
-            $posts = GetAllP::execute();
-            $admin = GetByIdU::execute($_SESSION['admin_id']);
-
-            Flight::render(__DIR__ ."/../../views/panel/posts.php",
-            ['logo'=> $tool['logo'] , 
-            'logo_footer'=> $tool['logo_footer'] ,
-            'footer'=> $tool['footer'] ,
-            'title'=> $tool['title'] ,
-            'posts'=> $posts ,
-            'admin'=> $admin 
-            ]);
-        }
-        else {
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        }
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else return panel_posts($tool, $admin);
     }
 
     public function Manage()
     {
         $tool = tools();
+        $admin = session_admin();
 
-        if (isset($_SESSION['admin_id'])){       
-            
-
-            $admin = GetByIdU::execute($_SESSION['admin_id']);
-            $posts = GetAllP::execute();
-            
-            Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-            ['logo'=> $tool['logo'] , 
-            'logo_footer'=> $tool['logo_footer'] ,
-            'footer'=> $tool['footer'] ,
-            'title'=> $tool['title'] ,
-            'posts'=> $posts ,
-            'admin'=> $admin 
-            ]);
-        }
-        else {
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        }
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else return panel_manage_posts($tool, $admin);
     }
     public function Gallery()
     {
         $tool = tools();
+        $admin = session_admin();
 
-        if (isset($_SESSION['admin_id'])){       
-
-            $admin = GetByIdU::execute($_SESSION['admin_id']);
-            $posts = Innerjoin::execute();
-            
-            Flight::render(__DIR__ ."/../../Views/panel/gallery.php",
-            ['logo'=> $tool['logo'] , 
-            'logo_footer'=> $tool['logo_footer'] ,
-            'footer'=> $tool['footer'] ,
-            'title'=> $tool['title'] ,
-            'posts'=> $posts ,
-            'admin'=> $admin 
-            ]);
-        }
-        else {
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        }
-        
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else return panel_posts($tool, $admin);
     }
 
     public function Upform(int $id)
     {
         $tool = tools();
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
-        $this_post = GetByIdP::execute($id);
+        $admin = session_admin();
 
-        Flight::render(__DIR__ ."/../../views/panel/updatepost.php",
-        ['logo'=> $tool['logo'] , 
-        'logo_footer'=> $tool['logo_footer'] ,
-        'footer'=> $tool['footer'] ,
-        'title'=> $tool['title'] ,
-        'this_post'=> $this_post ,
-        'admin'=> $admin ,
-        'id'=> $id
-        ]);
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else{
+            $this_post = GetByIdP::execute($id);
+            return panel_update_page_post($tool, $admin, $this_post, $id);
+        }
     }
     public function Confirmed(int $id)
     {
         ConfirmP::execute($id);
-        ?>
-        <script type="text/javascript">
-            window.alert("post confirmed");
-            location.replace("/manage/post");
-        </script>
-        <?php
+        Flight::redirect("/manage/post?status=ConfimedPost");
     }
     public function result_search()
     {
         $tool = tools();
+        $admin = session_admin();
 
-        if (isset($_SESSION['admin_id'])){       
-
-            $admin = GetByIdU::execute($_SESSION['admin_id']);
-
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else{
             if (isset($_POST['searchbox']) && ! empty($_POST['searchbox'])){
-
                 $titlee = $_POST['searchbox'];
-                $posts = Postsearch::execute($titlee);
-
-                Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-                ['logo'=> $tool['logo'] , 
-                'logo_footer'=> $tool['logo_footer'] ,
-                'footer'=> $tool['footer'] ,
-                'title'=> $tool['title'] ,
-                'posts'=> $posts ,
-                'admin'=> $admin 
-                ]);
-
+                $tool['posts'] = Postsearch::execute($titlee);
             }
-            else{
+            else $tool['posts'] = GetAllP::execute();
 
-                $posts = GetAllP::execute();
-
-                Flight::render(__DIR__ ."/../../Views/panel/managepost.php",
-                ['logo'=> $tool['logo'] , 
-                'logo_footer'=> $tool['logo_footer'] ,
-                'footer'=> $tool['footer'] ,
-                'title'=> $tool['title'] ,
-                'posts'=> $posts ,
-                'admin'=> $admin 
-                ]);
-            }
-        }
-        else {
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+            return panel_manage_posts($tool, $admin);
         }
     }
     public function GetById(int $id)
     {
         $tool = tools();
+        $admin = session_admin();
 
-        if (isset($_SESSION['admin_id'])){       
-
-            $admin = GetByIdU::execute($_SESSION['admin_id']);
+        if($admin === false) return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        else{
             $post = GetByIdP::execute($id);
             
-            if ($post === false)  Flight::render(__DIR__ ."/../../public/error-404.php");
-            else {
-                Flight::render(__DIR__ ."/../../Views/panel/post.php",
-                ['logo'=> $tool['logo'] , 
-                'logo_footer'=> $tool['logo_footer'] ,
-                'footer'=> $tool['footer'] ,
-                'title'=> $tool['title'] ,
-                'post'=> $post ,
-                'admin'=> $admin ,
-                'id'=> $id 
-                ]);
-            }
-        }
-        else {
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        }
-        
+            if ($post === false)  return error();
+            else return panel_show_post($tool, $admin, $post, $id);
+        }        
     }
     public function add_question()
     {
@@ -271,23 +163,9 @@ class PostController
                     ];
 
                     InsertP::execute2($data);
-                    ?>
-                    <script type="text/javascript">
-                        window.alert("your question added .wait for confirmed by admins");
-                        location.replace("/");
-                    </script>
-                    <?php
+                    Flight::redirect("/?status=addquestion");
                 }
             }
-        }
-        else{
-            ?>
-            <script type="text/javascript">
-                window.alert("Log in first");
-                location.replace("/");
-            </script>
-            <?php
-
         }
     }
 
@@ -307,27 +185,11 @@ class PostController
         $post = GetByIdP::execute($id);
         $user = GetByIdU::execute($post['admin_id']);
         if ($post['state'] === 1){
-
             $reply_post_id = $id;
 
-            Flight::render(__DIR__ ."/../../Views/conversation.php",
-            ['logo'=> $tool['logo'] , 
-            'logo_footer'=> $tool['logo_footer'] ,
-            'footer'=> $tool['footer'] ,
-            'title'=> $tool['title'] ,
-            'post'=> $post ,
-            'user'=> $user ,
-            'reply_post_id'=> $reply_post_id ,
-            'twitter'=> $tool['twitter'] ,
-            'github'=> $tool['github'] ,
-            'youtube'=> $tool['youtube'] ,
-            'answers'=> $answers ,
-            'id'=> $id
-            ]);
+            return conversation($tool, $user, $post, $answers, $reply_post_id, $id);       
         }
-        else{
-            Flight::render(__DIR__ ."/../../public/error-404.php");
-        }
+        else return error();
         
     }
     public function add_reply(int $id)
@@ -346,37 +208,10 @@ class PostController
                     ];
                     
                     AddComment::execute($data);
-                    ?>
-                    <script type="text/javascript">
-                        window.alert("your reply added");
-                        location.replace("/main/show_post/<?= $data['question_id'] ?>")
-                    </script>
-                    <?php
+                    Flight::redirect("/?status=addreply");
                 }
             }
-        } else{
-            ?>
-            <script type="text/javascript">
-                window.alert("Log in first");
-                location.replace("/");
-            </script>
-            <?php
-
         }
-    }
-    public function Del_reply(int $id)
-    {
-        if (isset($_SESSION['admin_id'])) {
-            if(isset($_POST['btndelreply'])){
-                DeleteC::execute($id);
-
-                ?>
-                <script type="text/javascript">
-                    window.alert("your reply deleted");
-                </script>
-                <?php
-                }
-            }
     }
     
 }

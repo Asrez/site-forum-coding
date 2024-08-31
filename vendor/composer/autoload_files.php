@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     '4cdafd4a5191caf078235e7dd119fdaf' => $vendorDir . '/flightphp/core/flight/autoload.php',
     'b2d75321024240afbad2322190b13bf0' => $baseDir . '/App/providers/helper.php',
+    '02f275390c870ceb9f19b04aa2665b66' => $baseDir . '/Config/info.php',
 );

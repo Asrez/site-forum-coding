@@ -13,9 +13,11 @@
     <main class="w-full flex gap-10">
         <aside class="2xl:basis-[15%] lg:basis-[18.5%] lg:block hidden relative">
             <div class="sticky top-8">
+                <?php if(isset($_SESSION['admin_id'])) { ?>
                 <button id="newReplay" class="bg_gr h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">
                     Reply
                 </button>
+                <?php } ?>
             </div>
         </aside>
         <div class="2xl:basis-[66.5%] lg:basis-[81.5%] basis-full">
@@ -49,7 +51,7 @@
                 </div>
             </header>
             <div class="mt-4 inline-block transition-all duration-300 bg-[--color7] rounded-[14px] py-4 px-7 w-full relative">
-            <img alt="" class="rounded-[14px]" loading="lazy" src="../static/photos/<?= $post['image'] ?>">
+            <img alt="" class="rounded-[14px]" loading="lazy" src="/static/photos/<?= $post['image'] ?>">
                 <div class="content w-[calc(100%-102px)] float-end h-full inline-flex flex-col align-top">
                     <div class="text-white bg-[--color2] w-full px-4 self-start mt-2 rounded-[14px] h-[60px] flex justify-start items-center text-[18px] font-bold">
                     <?= $post['title'] ?>

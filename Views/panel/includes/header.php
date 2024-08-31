@@ -33,7 +33,7 @@
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <div class="dropdown-divider"></div>
                 <a href="setting/<?= $admin['id'] ?>" class="dropdown-item">Settings</a>
-                <a href="/panel/logout" class="dropdown-item">Logout</a>
+                <a id="logout_panel" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>

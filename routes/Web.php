@@ -15,6 +15,8 @@ Flight::route("GET /login" ,[new UserController(),"login"]);
 Flight::route("POST /login_result" ,[new UserController(),"login_result"]);
 Flight::route("GET /setting/@id" ,[new UserController(),"Setting"]);
 
+
+
 flight::group('/posts',function()
 {
     Flight::route("GET /" ,[new PostController(),"GetAll"]);
@@ -29,7 +31,7 @@ flight::group('/main',function()
     Flight::route("GET /show_post/@id" ,[new PostController(),"show_post"]);
     Flight::route("POST /addreply/@id" ,[new PostController(),"add_reply"]);
     Flight::route("GET /Del_reply/@id" ,[new PostController(),"Del_reply"]);
-    Flight::route("GET /logout2" ,[new IndexController(),"logout2"]);
+    Flight::route("GET /logout" ,[new IndexController(),"logout"]);
     Flight::route("POST /updateuser/@id" ,[new UserController(),"Upuser"]);
     Flight::route("POST /updateaccont/@id" ,[new UserController(),"updateaccont"]);
 
