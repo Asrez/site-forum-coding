@@ -206,6 +206,10 @@ function panel_posts(array $tool, array $admin)
     'admin'=> $admin 
     ]);
 }
+function Sitemap()
+{
+    Flight::render(__DIR__ ."/../../Views/sitemap.php");
+}
 
 function panel_manage_posts(array $tool, array $admin)
 {

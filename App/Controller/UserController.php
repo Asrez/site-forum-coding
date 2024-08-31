@@ -214,7 +214,11 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            if (isset($_POST['searchbox']) && !empty($_POST['searchbox'])) {
+            $validator = new Validator(Flight::request()->data->getData(), [
+                'searchbox' => ['required']
+            ]);
+    
+            if ($validator->validate()) {
 
                 $title = $_POST['searchbox'];
                 $tool['users'] = Usersearch::execute($title);

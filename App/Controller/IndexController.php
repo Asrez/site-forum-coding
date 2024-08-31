@@ -13,7 +13,7 @@ class IndexController
 {
     public function site_map()
     {
-        Flight::render(__DIR__ ."/../../Views/sitemap.php");
+        return Sitemap();
     }
     public function Main_index()
     {
