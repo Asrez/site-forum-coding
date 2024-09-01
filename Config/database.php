@@ -1,6 +1,6 @@
 <?php
 
-return[
+return [
     "host" => "localhost",
     "dbname" => "site",
     "username" => "root",

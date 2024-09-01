@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\Users;
 
@@ -9,6 +9,7 @@ class Login
     {
         return User::Login($username, $password);
     }
+
     public static function execute2(string $username, string $password)
     {
         return User::Login2($username, $password);

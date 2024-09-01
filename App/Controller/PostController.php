@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Actions\Users\GetByIdU;
 use App\Actions\Views\InsertV;
 use App\Actions\Comments\AddComment;
-use App\Actions\Comments\DeleteC;
 use App\Actions\Posts\GetAllP;
 use App\Actions\Posts\ConfirmP;
 use App\Actions\Posts\GetByIdP;
@@ -17,7 +16,6 @@ use App\Actions\Search\Postsearch;
 use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 use Flight;
-
 
 class PostController
 {
@@ -48,9 +46,8 @@ class PostController
                 Flight::redirect("/manage/post?status=AddPost");
 
             }
-        } else {
+        } else
             Flight::redirect("/manage/post?status=nofill");
-        }
     }
 
     public function Update(int $id)
@@ -77,9 +74,8 @@ class PostController
                 UpdateP::execute($data);
                 Flight::redirect("/manage/post?status=UpdatePost");
             }
-        } else {
+        } else
             Flight::redirect("/manage/post?status=nofill");
-        }
     }
 
     public function Delete(int $id)
@@ -109,6 +105,7 @@ class PostController
         else
             return panel_manage_posts($tool, $admin);
     }
+
     public function Gallery()
     {
         $tool = tools();
@@ -132,11 +129,13 @@ class PostController
             return panel_update_page_post($tool, $admin, $this_post, $id);
         }
     }
+
     public function Confirmed(int $id)
     {
         ConfirmP::execute($id);
         Flight::redirect("/manage/post?status=ConfimedPost");
     }
+
     public function result_search()
     {
         $tool = tools();
@@ -157,6 +156,7 @@ class PostController
             return panel_manage_posts($tool, $admin);
         }
     }
+
     public function GetById(int $id)
     {
         $tool = tools();
@@ -173,6 +173,7 @@ class PostController
                 return panel_show_post($tool, $admin, $post, $id);
         }
     }
+
     public function add_question()
     {
         $validator = new Validator(Flight::request()->data->getData(), [
@@ -202,9 +203,8 @@ class PostController
                 }
             }
 
-        } else {
+        } else
             Flight::redirect("/?status=nofill");
-        }
     }
 
     public function show_post(int $id)
@@ -230,6 +230,7 @@ class PostController
             return error();
 
     }
+
     public function add_reply(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
@@ -254,9 +255,7 @@ class PostController
                     Flight::redirect("/?status=addreply");
                 }
             }
-        } else {
+        } else
             Flight::redirect("/?status=nofill");
-        }
     }
-
 }

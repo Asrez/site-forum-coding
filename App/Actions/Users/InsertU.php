@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\Users;
 
@@ -9,6 +9,7 @@ class InsertU
     {
         return User::Insert($data);
     }
+
     public static function execute2(array $data)
     {
         return User::Insert2($data);

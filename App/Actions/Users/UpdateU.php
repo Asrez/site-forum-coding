@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\Users;
 
@@ -9,6 +9,7 @@ class UpdateU
     {
         return User::Update($data);
     }
+
     public static function execute2(array $data)
     {
         return User::Update2($data);

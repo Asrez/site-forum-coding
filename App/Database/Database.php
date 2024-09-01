@@ -12,17 +12,16 @@ class Database
     private function __construct()
     {
 
-        $DBinfo= require __DIR__."/../../config/database.php";
+        $DBinfo = require __DIR__ . "/../../config/database.php";
 
         try {
 
             $db = "mysql:host={$DBinfo['host']};dbname={$DBinfo['dbname']}";
 
-            $this->connect = new PDO($db,$DBinfo['username'],$DBinfo['password']);
+            $this->connect = new PDO($db, $DBinfo['username'], $DBinfo['password']);
             $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-        } 
-        catch (PDOException $e) {
+
+        } catch (PDOException $e) {
 
             echo $e->getMessage();
             exit();
@@ -30,11 +29,10 @@ class Database
         }
 
     }
-    
+
     public static function getInstance()
     {
-        if (!self::$instance)
-        {
+        if (!self::$instance) {
             self::$instance = new self();
         }
 
@@ -43,7 +41,7 @@ class Database
 
     public function getConnection(): PDO
     {
-       
+
         return $this->connect;
     }
 }

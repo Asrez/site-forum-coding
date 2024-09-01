@@ -7,6 +7,6 @@ class SearchAll
 {
     public static function execute(string $title)
     {
-       return Search::search($title);
+        return Search::search($title);
     }
 }

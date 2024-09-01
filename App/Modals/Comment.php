@@ -7,7 +7,7 @@ use PDO;
 
 class Comment
 {
-    public static function Insert(array $data) : void
+    public static function Insert(array $data): void
     {
         $date = date("Y-m-d");
         $db = Database::getInstance()->getConnection();
@@ -20,9 +20,10 @@ class Comment
         $stms->bindParam("user_id", $data['user_id']);
         $stms->bindParam("date", $date);
         $stms->execute();
-        
+
     }
-    public static function Delete(int $id) : void
+
+    public static function Delete(int $id): void
     {
         $db = Database::getInstance()->getConnection();
 
@@ -33,19 +34,21 @@ class Comment
         $stms->execute();
 
     }
-    public static function Count(int $id) : array
+
+    public static function Count(int $id): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT COUNT(*) as count FROM `answers` WHERE `user_id` = :id ;";
-       
+
         $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function GetAllByIdQ(int $id) :array
+
+    public static function GetAllByIdQ(int $id): array
     {
         $db = Database::getInstance()->getConnection();
 

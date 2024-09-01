@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\Users;
 
@@ -7,6 +7,6 @@ class GetByIdU
 {
     public static function execute(int $id)
     {
-       return User::GetById($id);
+        return User::GetById($id);
     }
 }

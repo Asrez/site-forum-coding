@@ -18,7 +18,6 @@ class UserController
 {
     public function Insert()
     {
-
         $validator = new Validator(Flight::request()->data->getData(), [
             'name' => ['required', 'min:3', 'string'],
             'username' => ['required', 'min:3', 'max:50'],
@@ -47,7 +46,6 @@ class UserController
                     'image' => $image
                 ];
 
-
                 $result = InsertU::execute($data);
 
                 if ($result === 1) {
@@ -56,9 +54,8 @@ class UserController
                     Flight::redirect("/panel/inuser?status=finuser");
                 }
             }
-        } else {
+        } else
             Flight::redirect("/manage/user?status=nofill");
-        }
     }
 
     public function Update(int $id)
@@ -96,10 +93,8 @@ class UserController
                     Flight::redirect("/panel/user/?status=fUpdateUser");
                 }
             }
-        } else {
+        } else
             Flight::redirect("/manage/user?status=nofill");
-        }
-
     }
 
     public function updateaccont(int $id)
@@ -137,10 +132,10 @@ class UserController
                 }
 
             }
-        } else {
+        } else
             Flight::redirect("/manage/edit?status=nofill");
-        }
     }
+
     public function Delete(int $id)
     {
         DeleteU::execute($id);
@@ -170,6 +165,7 @@ class UserController
             return panel_update_page_user($tool, $admin, $this_user, $id);
         }
     }
+
     public function Addform()
     {
         $tool = tools();
@@ -180,6 +176,7 @@ class UserController
         else
             return panel_insert_page_user($tool);
     }
+
     public function Manage()
     {
         $tool = tools();
@@ -191,6 +188,7 @@ class UserController
             return panel_manage_users($tool, $admin);
 
     }
+
     public function Setting(int $id)
     {
         $tool = tools();
@@ -206,6 +204,7 @@ class UserController
                 return error();
         }
     }
+
     public function result_search()
     {
         $tool = tools();
@@ -217,7 +216,7 @@ class UserController
             $validator = new Validator(Flight::request()->data->getData(), [
                 'searchbox' => ['required']
             ]);
-    
+
             if ($validator->validate()) {
 
                 $title = $_POST['searchbox'];
@@ -228,6 +227,7 @@ class UserController
         }
 
     }
+
     public function login()
     {
         $tool = tools();
@@ -238,6 +238,7 @@ class UserController
         else
             return panel_index($tool, $admin);
     }
+
     public function login_result()
     {
         $validator = new Validator(Flight::request()->data->getData(), [
@@ -259,10 +260,10 @@ class UserController
 
                 }
             }
-        } else {
+        } else
             Flight::redirect("/login?status=nofill");
-        }
     }
+
     public function Upuser(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
@@ -296,17 +297,16 @@ class UserController
 
                 $result = UpdateU::execute($data);
 
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/manage/user?status=UpdateAccont");
-                } else {
+                else
                     Flight::redirect("/panel/user/?status=fUpdateAccont");
-                }
 
             }
-        } else {
+        } else
             Flight::redirect("/manage/user?status=nofill");
-        }
     }
+
     public function Delimg(int $id)
     {
         Deleteimg::execute($id);
@@ -337,9 +337,8 @@ class UserController
 
                 }
             }
-        } else {
+        } else
             Flight::redirect("/?status=nofill");
-        }
     }
 
     public function sign_up()
@@ -378,10 +377,10 @@ class UserController
                 }
 
             }
-        } else {
+        } else
             Flight::redirect("/?status=nofill");
-        }
     }
+
     public function profile()
     {
         $admin = session_admin2();
@@ -391,6 +390,7 @@ class UserController
         else
             return profile();
     }
+
     public function edit()
     {
         $tool = tools();

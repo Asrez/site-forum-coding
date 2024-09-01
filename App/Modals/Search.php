@@ -8,7 +8,7 @@ use PDO;
 
 class Search
 {
-    public static function search(string $title) : array
+    public static function search(string $title): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -16,7 +16,7 @@ class Search
 
         $posts_sql = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title ;";
 
-        $title = '%'.$title.'%';
+        $title = '%' . $title . '%';
         $users = $db->prepare($users_sql);
         $posts = $db->prepare($posts_sql);
         $users->bindParam("title", $title);
@@ -25,10 +25,10 @@ class Search
         $posts->execute();
         $users = $users->fetchAll(PDO::FETCH_ASSOC);
         $posts = $posts->fetchAll(PDO::FETCH_ASSOC);
-        
-        $all = ["posts" => $posts , "users" => $users];
 
-        return $all ;
+        $all = ["posts" => $posts, "users" => $users];
+
+        return $all;
     }
-    
+
 }

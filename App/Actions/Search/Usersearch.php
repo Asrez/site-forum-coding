@@ -7,6 +7,6 @@ class Usersearch
 {
     public static function execute(string $title)
     {
-       return User::search($title);
+        return User::search($title);
     }
 }

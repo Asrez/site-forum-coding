@@ -7,58 +7,62 @@ use App\Database\Database;
 use PDO;
 class Setting
 {
-    public static function Setting(string $key) : array
+    public static function Setting(string $key): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `setting` WHERE `key_setting` = :key";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("key", $key);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function GetById(int $id) : array
+
+    public static function GetById(int $id): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `setting` WHERE `id` = :id";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function advers() : array
+
+    public static function advers(): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `setting` WHERE `state` = 'adver';";
-       
+
         $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function settings() : array
+
+    public static function settings(): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `setting` WHERE `state` = 'setting';";
-        
+
         $stms = $db->prepare($sql);
         $stms->execute();
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Update(array $data) : void
+
+    public static function Update(array $data): void
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "UPDATE `setting` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("value", $data['value']);
         $stms->bindParam("link", $data['link']);

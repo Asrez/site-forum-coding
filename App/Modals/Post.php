@@ -23,7 +23,8 @@ class Post
             return false;
 
     }
-    public static function GetByAdminId(int $id) : array
+
+    public static function GetByAdminId(int $id): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -36,7 +37,8 @@ class Post
         return $stms->fetchAll(PDO::FETCH_ASSOC);
 
     }
-    public static function GetAll() : array
+
+    public static function GetAll(): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -47,7 +49,8 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function GetAllState() : array
+
+    public static function GetAllState(): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -58,7 +61,8 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Innerjoin() : array
+
+    public static function Innerjoin(): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -78,7 +82,8 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Innerjoin2(int $id) : array
+
+    public static function Innerjoin2(int $id): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -98,7 +103,8 @@ class Post
 
         return $stms->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Delete(int $id) 
+
+    public static function Delete(int $id): void
     {
         $db = Database::getInstance()->getConnection();
 
@@ -109,12 +115,13 @@ class Post
         $stms->execute();
 
     }
-    public static function Update(array $data) 
+
+    public static function Update(array $data): void
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "UPDATE `questions` SET `title` = :title, `content` = :content, `image`= :image WHERE `id` = :id ;";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("content", $data['content']);
@@ -123,7 +130,8 @@ class Post
         $stms->execute();
 
     }
-    public static function Insert(array $data)
+
+    public static function Insert(array $data): void
     {
 
         $date = date("Y-m-d");
@@ -131,17 +139,18 @@ class Post
         $db = Database::getInstance()->getConnection();
 
         $sql = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 1, 0);";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
-        $stms->bindParam("admin_id", $data['admin_id'] );
+        $stms->bindParam("admin_id", $data['admin_id']);
         $stms->execute();
 
     }
-    public static function Insert2(array $data)
+
+    public static function Insert2(array $data): void
     {
 
         $date = date("Y-m-d");
@@ -149,17 +158,18 @@ class Post
         $db = Database::getInstance()->getConnection();
 
         $sql = "INSERT INTO `questions`(`id`, `title`, `date`, `content`, `image`, `admin_id`, `state`, `viewcount`) VALUES (NULL, :title, :date, :content, :image, :admin_id, 0, 0);";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("title", $data['title']);
         $stms->bindParam("date", $date);
         $stms->bindParam("content", $data['content']);
         $stms->bindParam("image", $data['image']);
-        $stms->bindParam("admin_id", $data['admin_id'] );
+        $stms->bindParam("admin_id", $data['admin_id']);
         $stms->execute();
 
     }
-    public static function Count() : array
+
+    public static function Count(): array
     {
         $db = Database::getInstance()->getConnection();
 
@@ -170,60 +180,64 @@ class Post
 
         return $stms->fetch(PDO::FETCH_ASSOC);
     }
-    public static function update_viewcount(int $id)
+
+    public static function update_viewcount(int $id): void
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "UPDATE `questions` SET `viewcount`=`viewcount` + 1 WHERE `id` = :id ;";
 
         $stms = $db->prepare($sql);
-        $stms->bindParam("id" , $id);
+        $stms->bindParam("id", $id);
         $stms->execute();
     }
-    
-    public static function Confirm(int $id) 
+
+    public static function Confirm(int $id): void
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "UPDATE `questions` SET `state` = 1 WHERE `id` = :id ;";
-        
+
         $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
         $stms->execute();
 
     }
-    public static function search(string $title) : array
+
+    public static function search(string $title): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title ;";
 
-        $title = '%'.$title.'%';
+        $title = '%' . $title . '%';
         $posts = $db->prepare($sql);
         $posts->bindParam("title", $title);
         $posts->execute();
 
         return $posts->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function search2(string $title) : array
+
+    public static function search2(string $title): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT * FROM `questions` WHERE `questions`.`title` LIKE :title  AND `state` = 1;";
-        
-        $title = '%'.$title.'%';
+
+        $title = '%' . $title . '%';
         $posts = $db->prepare($sql);
         $posts->bindParam("title", $title);
         $posts->execute();
 
         return $posts->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function Chart() : array
+
+    public static function Chart(): array
     {
         $db = Database::getInstance()->getConnection();
 
         $sql = "SELECT `viewcount` , `title` FROM `questions` ORDER BY `viewcount` DESC LIMIT 12;";
-       
+
         $posts = $db->prepare($sql);
         $posts->execute();
 
