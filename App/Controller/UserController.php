@@ -48,11 +48,10 @@ class UserController
 
                 $result = InsertU::execute($data);
 
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/manage/user?status=tinuser");
-                } else {
+                else
                     Flight::redirect("/panel/inuser?status=finuser");
-                }
             }
         } else
             Flight::redirect("/manage/user?status=nofill");
@@ -87,11 +86,10 @@ class UserController
 
                 $result = UpdateU::execute($data);
 
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/manage/user?status=UpdateUser");
-                } else {
+                else
                     Flight::redirect("/panel/user/?status=fUpdateUser");
-                }
             }
         } else
             Flight::redirect("/manage/user?status=nofill");
@@ -125,12 +123,10 @@ class UserController
                 ];
 
                 $result = UpdateU::execute2($data);
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/manage/profile?status=MainUpdateAccont");
-                } else {
+                else
                     Flight::redirect("/manage/edit?status=fMainUpdateAccont");
-                }
-
             }
         } else
             Flight::redirect("/manage/edit?status=nofill");
@@ -223,6 +219,7 @@ class UserController
                 $tool['users'] = Usersearch::execute($title);
             } else
                 $tool['users'] = GetAllU::execute();
+            
             return panel_manage_users($tool, $admin);
         }
 
@@ -253,12 +250,10 @@ class UserController
                 $password = $_POST['password'];
                 $result = Login::execute($username, $password);
 
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/panel?status=correct");
-                } else {
+                else
                     Flight::redirect("/login?status=incorrect");
-
-                }
             }
         } else
             Flight::redirect("/login?status=nofill");
@@ -328,11 +323,11 @@ class UserController
                     $password = $_POST['password'];
 
                     $result = Login::execute2($username, $password);
-                    if ($result === 1) {
+
+                    if ($result === 1)
                         Flight::redirect("/?status=correct");
-                    } else {
+                    else
                         Flight::redirect("/?status=incorrect");
-                    }
 
 
                 }
@@ -370,11 +365,10 @@ class UserController
 
                 $result = InsertU::execute2($data);
 
-                if ($result === 1) {
+                if ($result === 1)
                     Flight::redirect("/?status=signup");
-                } else {
+                else
                     Flight::redirect("/?status=fsignup");
-                }
 
             }
         } else

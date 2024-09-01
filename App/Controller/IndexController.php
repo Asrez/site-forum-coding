@@ -118,11 +118,10 @@ class IndexController
             $validator = new Validator(Flight::request()->data->getData(), ['searchbox' => ['required']]);
 
             if ($validator->validate()) {
-
                 $titlee = $_POST['searchbox'];
                 return panel_search_all($tool, $admin, $titlee);
-
-            } else
+            }
+            else
                 return panel_index($tool, $admin);
         }
     }
