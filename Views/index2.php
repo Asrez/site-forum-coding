@@ -13,9 +13,11 @@
     <main class="w-full flex gap-10">
         <aside class="2xl:basis-[15%] lg:basis-[18.5%] lg:block hidden relative">
             <div class="sticky top-8">
+            <?php if (isset($_SESSION['admin_id'])) { ?>
                 <button class="bg_gr h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative newDescription">
                     New Discussion
                 </button>
+                <?php } ?>
             </div>
         </aside>
         <div class="2xl:basis-[66.5%] lg:basis-[81.5%] basis-full">
