@@ -36,7 +36,7 @@
                           <a href="/panel/deleteimg/<?= $user['id'] ?>" name="btndelimg">DELETE AVATAR</a>
                       </div>
                       </div>
-                      <h3 class="card-title mt-4">username</h3>
+                      <h3 class="card-title mt-4">Username</h3>
                       <div>
                         <div class="row g-2">
                           <div class="col-auto">
@@ -44,7 +44,7 @@
                           </div>
                         </div>
                       </div>
-                      <h3 class="card-title mt-4">name</h3>
+                      <h3 class="card-title mt-4">Name</h3>
                       <div>
                         <div class="row g-2">
                           <div class="col-auto">

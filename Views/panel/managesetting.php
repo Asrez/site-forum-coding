@@ -26,15 +26,15 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">advertising</h3>
+                    <h3 class="card-title">Advertising</h3>
                   </div>
                   <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap datatable">
                       <thead>
                         <tr>
-                          <th class="w-1">code</th>
-                          <th>title</th>
-                          <th>image</th>
+                          <th class="w-1">Code</th>
+                          <th>Title</th>
+                          <th>Image</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -51,7 +51,7 @@
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
                                   <a class="dropdown-item" href="/panel/go_setting/<?= $adver['id'] ?>" >
-                                    edit
+                                    Edit
                                   </a>             
                               </div>
                             </span>
@@ -114,7 +114,7 @@
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
                                   <a class="dropdown-item" href="/panel/go_setting/<?= $setting['id'] ?>" >
-                                    edit
+                                    Edit
                                   </a>             
                               </div>
                             </span>

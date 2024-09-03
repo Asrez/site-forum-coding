@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>update user</title>
+  <title>Update User</title>
   <?php include "init/style.php"; ?>
 </head>
 <body>
@@ -11,7 +11,7 @@
       <form action="/panel/upusers/<?= $this_user['id'] ?>" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New User</h5>
+          <h5 class="modal-title">Update User</h5>
         </div>
         <div class="modal-body">
         <div class="mb-3">
@@ -37,7 +37,7 @@
             </div>
             <div class="col-lg-4">
               <div class="mb-3">
-                <label class="form-label">image</label>
+                <label class="form-label">Image</label>
                 <input name="image" type="file" class="form-control">
               </div>
             </div>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>result</title>
+    <title>Result</title>
     <?php include "init/style.php"; ?>
   </head>
   <body >
@@ -13,7 +13,7 @@
             <div class="row g-2 align-items-center">
               <div class="col">
                 <h2 class="page-title">
-                  Search results
+                  Search Results
                 </h2>
               </div>
             </div>

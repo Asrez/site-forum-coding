@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>edit profile</title>
+    <title>Edit Profile</title>
     <?php include "init/style.php"; ?>
 </head>
 <body class="bg-[--color1] pb-0 sm:pb-10">

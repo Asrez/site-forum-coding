@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>post <?= $id ?></title>
+    <title>Post <?= $id ?></title>
     <?php include "init/style.php"; ?>
   </head>
   <body >
@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <div class="card card-sm">
-                    <h3>content :</h3>
+                    <h3>Content :</h3>
                     <?= $post['content'] ?>
                   <div class="card-body">
                     <div class="d-flex align-items-center">

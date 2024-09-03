@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>update post <?= $id ?></title>
+  <title>Update post <?= $id ?></title>
   <?php include "init/style.php"; ?>
 </head>
 <body>
@@ -10,7 +10,7 @@
       <form action="/manage/post/uppost/<?= $this_post['id'] ?>" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New Post</h5>
+          <h5 class="modal-title">Update Post</h5>
         </div>
         <div class="modal-body">
           <div class="mb-3">
@@ -30,7 +30,7 @@
             </div>
             <div class="col-lg-4">
               <div class="mb-3">
-                <label class="form-label">image</label>
+                <label class="form-label">Image</label>
                 <input name="image" type="file" class="form-control">
               </div>
             </div>
@@ -38,11 +38,11 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <h3>Admin information</h3>
+            <h3>Admin Information</h3>
                 <input type="number"  name="admin_id" value="<?= $admin['id'] ?>" style="opacity : 0">
             <div class="col-lg-12">
               <div>
-                <label class="form-label">Admin username</label>
+                <label class="form-label">Admin Username</label>
                 <input class="form-control" type="text" value="<?= $admin['username'] ?>" disabled>
               </div>
             </div>

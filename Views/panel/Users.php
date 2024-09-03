@@ -2,7 +2,7 @@
 
 <html lang="en">
   <head>
-    <title>users</title>
+    <title>Users</title>
     <?php include "init/style.php"; ?>
   </head>
   <body >

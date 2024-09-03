@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-4">
               <div class="mb-3">
-                <label class="form-label">image</label>
+                <label class="form-label">Image</label>
                 <input name="image" type="file"  class="form-control">
               </div>
             </div>

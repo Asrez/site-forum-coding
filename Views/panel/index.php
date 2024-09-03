@@ -69,7 +69,7 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          users
+                          Users
                         </div>
                         <div class="text-muted">
                           <?= $countuser ?>
@@ -98,7 +98,7 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          posts
+                          Posts
                         </div>
                         <div class="text-muted">
                           <?= $countpost ?>
@@ -124,7 +124,7 @@
                       </div>
                       <div class="col">
                         <div class="font-weight-medium">
-                          viewcounts
+                          Viewcounts
                         </div>
                         <div class="text-muted">
                           <?= $countview ?>
@@ -224,7 +224,7 @@
                   <thead>
                     <tr>
                       <th class="w-1">Code</th>
-                      <th>title</th>
+                      <th>Title</th>
                       <th>Date</th>
                     </tr>
                   </thead>

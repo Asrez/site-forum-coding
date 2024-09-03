@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>setting update</title>
+  <title>Setting Update</title>
   <?php include "init/style.php"; ?>
 </head>
 <body>
