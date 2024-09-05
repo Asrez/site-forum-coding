@@ -11,8 +11,7 @@ class Database
 
     private function __construct()
     {
-
-        $DBinfo = require __DIR__ . "/../../config/database.php";
+        $DBinfo = require __DIR__ .DIRECTORY_SEPARATOR. "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."database.php";
 
         try {
 

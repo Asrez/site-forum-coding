@@ -51,7 +51,7 @@
                 </div>
             </header>
             <div class="mt-4 inline-block transition-all duration-300 bg-[--color7] rounded-[14px] py-4 px-7 w-full relative">
-            <img alt="" class="rounded-[14px]" loading="lazy" src="/static/photos/<?= $post['image'] ?>">
+            <img alt="" class="rounded-[14px]" loading="lazy" src="/static/photos/<?= $post['image'] ?>" style="height: 100%;object-fit: cover;">
                 <div class="content w-[calc(100%-102px)] float-end h-full inline-flex flex-col align-top">
                     <div class="text-white bg-[--color2] w-full px-4 self-start mt-2 rounded-[14px] h-[60px] flex justify-start items-center text-[18px] font-bold">
                     <?= $post['title'] ?>
@@ -68,7 +68,7 @@
                     <div class="replay">
                     <div class="mt-4 group has-[button[class*=replay]:hover]:border-blue-700 border border-transparent  inline-block transition-all duration-300 bg-[--color7] rounded-[14px] py-4 px-7 w-full">
                     <figure class="inline-flex justify-center float-start items-start w-[74px]">
-                        <img alt="" class="rounded-[14px]" loading="lazy" src="../static/avatars/<?= $answer['image'] ?>">
+                        <img alt="" class="rounded-[14px]" loading="lazy" src="/static/avatars/<?= $answer['image'] ?>">
                     </figure>
                     <div class="content w-[calc(100%-102px)] float-end h-full inline-flex flex-col align-top">
                         <div class="float-start flex justify-start items-center w-full gap-2">

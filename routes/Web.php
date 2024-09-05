@@ -26,11 +26,10 @@ flight::group('/main', function () {
     Flight::route("GET /main", [new IndexController(), "Main_index"]);
     Flight::route("GET /main2", [new IndexController(), "Main_index2"]);
     Flight::route("POST /addquestion", [new PostController(), "add_question"]);
-    Flight::route("GET /show_post/@id", [new PostController(), "show_post"]);
+    Flight::route("GET /show_post/@id", [new PostController(), "conversation"]);
     Flight::route("POST /addreply/@id", [new PostController(), "add_reply"]);
     Flight::route("GET /Del_reply/@id", [new PostController(), "Del_reply"]);
     Flight::route("GET /logout", [new IndexController(), "logout"]);
-    Flight::route("POST /updateuser/@id", [new UserController(), "Upuser"]);
     Flight::route("POST /updateaccont/@id", [new UserController(), "updateaccont"]);
 
 });
@@ -38,7 +37,7 @@ flight::group('/main', function () {
 
 flight::group('/manage', function () {
     flight::group('/post', function () {
-        Flight::route("GET /", [new PostController(), "Manage"]);
+        Flight::route("GET /", [new PostController(), "panel_manage_posts"]);
         Flight::route("POST /inpost", [new PostController(), "Insert"]);
         Flight::route("GET /delpost/@id", [new PostController(), "Delete"]);
         Flight::route("GET /uppost/@id", [new PostController(), "Upform"]);
@@ -46,29 +45,30 @@ flight::group('/manage', function () {
         Flight::route("GET /confirmpost/@id", [new PostController(), "Confirmed"]);
     });
 
-    Flight::route("GET /user", [new UserController(), "Manage"]);
-    Flight::route("GET /site_setting", [new IndexController(), "site_setting"]);
+    Flight::route("GET /user", [new UserController(), "Manage_user"]);
+    Flight::route("GET /site_setting", [new IndexController(), "manage_setting"]);
     Flight::route("GET /profile", [new UserController(), "profile"]);
-    Flight::route("GET /edit", [new UserController(), "edit"]);
+    Flight::route("GET /edit", [new UserController(), "edit_profile"]);
 
 });
 
 flight::group('/panel', function () {
     Flight::route("GET /", [new IndexController(), "index"]);
     Flight::route("GET /gallery", [new PostController(), "Gallery"]);
-    Flight::route("GET /users", [new UserController(), "GetAll"]);
+    Flight::route("GET /users", [new UserController(), "panel_users"]);
     Flight::route("GET /posts", [new PostController(), "GetAll"]);
     Flight::route("GET /logout", [new IndexController(), "logout"]);
     Flight::route("POST /searchall", [new IndexController(), "result_search"]);
     Flight::route("POST /searchpost", [new PostController(), "result_search"]);
     Flight::route("POST /searchuser", [new UserController(), "result_search"]);
     Flight::route("POST /inuser", [new UserController(), "Insert"]);
-    Flight::route("GET /inuser", [new UserController(), "Addform"]);
+    Flight::route("GET /inuser", [new UserController(), "Addform_users"]);
     Flight::route("GET /go_setting/@id", [new IndexController(), "go_setting"]);
     Flight::route("POST /upusers/@id", [new UserController(), "Update"]);
     Flight::route("GET /deleteimg/@id", [new UserController(), "Delimg"]);
     Flight::route("POST /setting_update/@id", [new IndexController(), "setting_update"]);
     Flight::route("GET /deluser/@id", [new UserController(), "Delete"]);
-    Flight::route("GET /upuser/@id", [new UserController(), "Upform"]);
+    Flight::route("GET /upuser/@id", [new UserController(), "Upform_users"]);
+    Flight::route("POST /updateuser/@id", [new UserController(), "Upuser"]);
 });
 

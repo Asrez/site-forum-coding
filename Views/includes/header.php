@@ -7,6 +7,16 @@
            href="<?= $title['link'] ?>"><?= $title['value_setting'] ?></a>
     </div>
     <div class="btn-wrapper flex-1 flex justify-end gap-3">
+        <button class="h-[40px] w-[40px] rounded-[14px] flex justify-center items-center bg-[--color2] text-white hover:bg-[--color3] transition-all duration-300 text-[--color4]"
+                id="search_btn">
+            <svg viewBox="0 0 15 15" width="17">
+                <g fill="none" fill-rule="evenodd">
+                    <path d="M-2-2h20v20H-2z"></path>
+                    <path class="fill-current text-[--color4]"
+                          d="M10.443 9.232h-.638l-.226-.218A5.223 5.223 0 0 0 10.846 5.6 5.247 5.247 0 1 0 5.6 10.846c1.3 0 2.494-.476 3.414-1.267l.218.226v.638l4.036 4.028 1.203-1.203-4.028-4.036zm-4.843 0A3.627 3.627 0 0 1 1.967 5.6 3.627 3.627 0 0 1 5.6 1.967 3.627 3.627 0 0 1 9.232 5.6 3.627 3.627 0 0 1 5.6 9.232z"></path>
+                </g>
+            </svg>
+        </button>
         <?php if (isset($_SESSION['admin_id'])) { ?>
         <a id="logout_main" class="h-[40px] w-[77px] rounded-[14px] hidden md:flex justify-center items-center bg-[--color2] font-bold tracking-wide hover:bg-[--color3] transition-all duration-300 text-[--color4] text-[14px]">
             Log Out

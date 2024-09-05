@@ -11,7 +11,7 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `view` WHERE `ip` = :ip AND `question_id` = :id;";
+        $sql = "SELECT * FROM `views` WHERE `ip` = :ip AND `question_id` = :id;";
 
         $isset_query = $db->prepare($sql);
         $isset_query->bindParam("ip", $ip);
@@ -23,7 +23,7 @@ class View
 
             $db = Database::getInstance()->getConnection();
 
-            $sql = "INSERT INTO `view`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
+            $sql = "INSERT INTO `views`(`id`, `ip`, `question_id`) VALUES (NULL , :ip , :question_id ) ;";
 
             $stms = $db->prepare($sql);
             $stms->bindParam("ip", $ip);
@@ -43,7 +43,7 @@ class View
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT COUNT(*) as count FROM `view`; ";
+        $sql = "SELECT COUNT(*) as count FROM `views`; ";
 
         $stms = $db->prepare($sql);
         $stms->execute();

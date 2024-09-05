@@ -59,7 +59,21 @@
                         <label class="text-[--color6] font-bold block" for="user_password">Password</label>
                         <div class="input relative">
                             <input class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
-                                   id="user_password" name="password" placeholder="Password..." required="" type="password" value="<?= $user['password'] ?>">
+                                   id="user_password" name="password" placeholder="Password..." required="" type="password" >
+                        </div>
+                    </div>
+                    <div class="input-box mt-6">
+                        <label class="text-[--color6] font-bold block" for="user_password2">New Password</label>
+                        <div class="input relative">
+                            <input class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
+                                   id="user_password2" name="new_password" placeholder="Password..." type="password" >
+                        </div>
+                    </div>
+                    <div class="input-box mt-6">
+                        <label class="text-[--color6] font-bold block" for="user_password3">Repeat New Password</label>
+                        <div class="input relative">
+                            <input class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
+                                   id="user_password3" name="repeat_new_password" placeholder="Password..." type="password" >
                         </div>
                     </div>
                     <div class="input-box mt-6">

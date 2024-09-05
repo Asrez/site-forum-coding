@@ -24,7 +24,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="password" value="<?= $this_user['password'] ?>">
+            <input type="password" class="form-control" name="password" placeholder="password" >
           </div>
           <div class="row">
           <div class="col-lg-8">

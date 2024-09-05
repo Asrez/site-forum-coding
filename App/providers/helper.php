@@ -13,15 +13,27 @@ use App\Actions\Comments\CountC;
 use App\Actions\Posts\GetByAdminId;
 use App\Actions\Setting\Settings;
 
+function directory_separator(string $file_name, string $folder = null)
+{
+    if ($folder === null) {
+        $path = __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."Views".DIRECTORY_SEPARATOR.$file_name;
+    }
+    else {
+        $path = __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."Views".DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$file_name;
+    }
+    
+    return $path;
+}
+
 function error()
 {
-    Flight::render(__DIR__ . "/../../public/error-404.php");
+    Flight::render(directory_separator("error-404.php"));
 }
 
 function sign_in(array $logo, array $logo_footer, array $footer, array $title)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/sign-in.php",
+        directory_separator("sign-in.php","panel"),
         [
             'logo' => $logo,
             'logo_footer' => $logo_footer,
@@ -106,7 +118,7 @@ function session_admin2()
 function index_main(array $tool)
 {
     Flight::render(
-        __DIR__ . "/../../Views/index.php",
+        directory_separator("index.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -126,7 +138,7 @@ function index_main2()
     $tool = tools();
 
     Flight::render(
-        __DIR__ . "/../../Views/index2.php",
+        directory_separator("index2.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -145,7 +157,7 @@ function search_result_main(array $tool)
 {
 
     Flight::render(
-        __DIR__ . "/../../Views/index.php",
+        directory_separator("index.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -160,7 +172,7 @@ function search_result_main(array $tool)
     );
 }
 
-function panel_index(array $tool, array $admin)
+function index(array $tool, array $admin)
 {
     $chart = Chart::execute();
 
@@ -170,7 +182,7 @@ function panel_index(array $tool, array $admin)
     }
 
     Flight::render(
-        __DIR__ . "/../../Views/panel/index.php",
+        directory_separator("index.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -192,7 +204,7 @@ function panel_index(array $tool, array $admin)
 function manage_setting(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/managesetting.php",
+        directory_separator("managesetting.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -209,7 +221,7 @@ function manage_setting(array $tool, array $admin)
 function setting_update(array $tool, array $admin, array $setting, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/settingupdate.php",
+        directory_separator("settingupdate.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -222,14 +234,14 @@ function setting_update(array $tool, array $admin, array $setting, int $id)
     );
 }
 
-function panel_search_all(array $tool, array $admin, string $titlee)
+function result_search(array $tool, array $admin, string $titlee)
 {
     $all = SearchAll::execute($titlee);
     $posts = $all['posts'];
     $users = $all['users'];
 
     Flight::render(
-        __DIR__ . "/../../Views/panel/search-results.php",
+        directory_separator("search-results.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -242,10 +254,10 @@ function panel_search_all(array $tool, array $admin, string $titlee)
     );
 }
 
-function panel_posts(array $tool, array $admin)
+function GetAll(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../views/panel/posts.php",
+        directory_separator("posts.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -257,15 +269,15 @@ function panel_posts(array $tool, array $admin)
     );
 }
 
-function Sitemap()
+function Site_map()
 {
-    Flight::render(__DIR__ . "/../../Views/sitemap.php");
+    Flight::render(directory_separator("sitemap.php"));
 }
 
 function panel_manage_posts(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/managepost.php",
+        directory_separator("managepost.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -277,10 +289,10 @@ function panel_manage_posts(array $tool, array $admin)
     );
 }
 
-function panel_gallery(array $tool, array $admin)
+function Gallery(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/gallery.php",
+        directory_separator("gallery.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -292,10 +304,10 @@ function panel_gallery(array $tool, array $admin)
     );
 }
 
-function panel_update_page_post(array $tool, array $admin, array $this_post, int $id)
+function Upform(array $tool, array $admin, array $this_post, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../views/panel/updatepost.php",
+        directory_separator("updatepost.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -308,10 +320,10 @@ function panel_update_page_post(array $tool, array $admin, array $this_post, int
     );
 }
 
-function panel_show_post(array $tool, array $admin, array $post, int $id)
+function post_GetById(array $tool, array $admin, array $post, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/post.php",
+        directory_separator("post.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -327,7 +339,7 @@ function panel_show_post(array $tool, array $admin, array $post, int $id)
 function conversation(array $tool, array $user, array $post, array $answers, int $reply_post_id, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../Views/conversation.php",
+        directory_separator("conversation.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -348,7 +360,7 @@ function conversation(array $tool, array $user, array $post, array $answers, int
 function panel_users(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../views/panel/users.php",
+        directory_separator("users.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -360,10 +372,10 @@ function panel_users(array $tool, array $admin)
     );
 }
 
-function panel_update_page_user(array $tool, array $admin, array $this_user, int $id)
+function Upform_users(array $tool, array $admin, array $this_user, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../views/panel/updateuser.php",
+        directory_separator("updateuser.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -375,10 +387,10 @@ function panel_update_page_user(array $tool, array $admin, array $this_user, int
     );
 }
 
-function panel_insert_page_user(array $tool)
+function Addform_users(array $tool)
 {
     Flight::render(
-        __DIR__ . "/../../views/panel/insertuser.php",
+        directory_separator("insertuser.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -388,10 +400,10 @@ function panel_insert_page_user(array $tool)
     );
 }
 
-function panel_manage_users(array $tool, array $admin)
+function Manage_user(array $tool, array $admin)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/manageusers.php",
+        directory_separator("manageusers.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -403,10 +415,10 @@ function panel_manage_users(array $tool, array $admin)
     );
 }
 
-function panel_setting(array $tool, array $admin, array $user, int $id)
+function Setting(array $tool, array $admin, array $user, int $id)
 {
     Flight::render(
-        __DIR__ . "/../../Views/panel/settings.php",
+        directory_separator("settings.php", "panel"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -428,7 +440,7 @@ function profile()
     $user = GetByIdU::execute($_SESSION['admin_id']);
 
     Flight::render(
-        __DIR__ . "/../../Views/my_profile.php",
+        directory_separator("my_profile.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -450,7 +462,7 @@ function edit_profile($tool)
     $user = GetByIdU::execute($_SESSION['admin_id']);
 
     Flight::render(
-        __DIR__ . "/../../Views/edit_profile_account.php",
+        directory_separator("edit_profile_account.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],

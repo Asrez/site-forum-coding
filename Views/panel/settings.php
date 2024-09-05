@@ -21,7 +21,7 @@
           <div class="container-xl">
             <div class="card">
               <div class="row g-0">
-              <form action="/main/updateuser/<?= $user['id'] ?>" method="post" enctype="multipart/form-data">
+              <form action="/panel/updateuser/<?= $user['id'] ?>" method="post" enctype="multipart/form-data">
                 <div class="col d-flex flex-column">
                     <di class="card-body">
                       <h2 class="mb-4">My Account</h2>

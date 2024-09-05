@@ -19,10 +19,10 @@ class UserController
     public function Insert()
     {
         $validator = new Validator(Flight::request()->data->getData(), [
-            'name' => ['required', 'min:3', 'string'],
-            'username' => ['required', 'min:3', 'max:50'],
-            'password' => ['required', 'min:3', 'max:50'],
-            'state' => ['required'],
+            'name' => ['required'],
+            'username' => ['required'],
+            'password' => ['required'],
+            'state' => [],
             'email' => ['required']
         ]);
 
@@ -32,7 +32,7 @@ class UserController
                 $name = $_POST['name'];
                 $state = $_POST['state'];
                 $username = $_POST['username'];
-                $password = $_POST['password'];
+                $password = md5($_POST['password']);
                 $email = $_POST['email'];
                 $image = basename($_FILES["image"]["name"]);
                 if ($image === "")
@@ -70,7 +70,7 @@ class UserController
             if (isset($_POST["btnupuser"])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
-                $password = $_POST['password'];
+                $password = md5($_POST['password']);
                 $email = $_POST['email'];
                 $image = basename($_FILES["image"]["name"]);
                 if ($image === "")
@@ -101,32 +101,47 @@ class UserController
             'name' => ['required', 'min:3', 'string'],
             'username' => ['required', 'min:3', 'max:50'],
             'password' => ['required', 'min:3', 'max:50'],
+            'new_password' => [],
+            'repeat_new_password' => [],
             'email' => ['required']
         ]);
 
         if ($validator->validate()) {
             if (isset($_POST["btnupuser"])) {
-                $name = $_POST['name'];
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $email = $_POST['email'];
-                $image = basename($_FILES["image"]["name"]);
-                if ($image === "")
-                    $image = GetByIdU::execute($id)['image'];
-                $data = [
-                    'name' => $name,
-                    'username' => $username,
-                    'password' => $password,
-                    'email' => $email,
-                    'image' => $image,
-                    'id' => $id
-                ];
+                $pass = GetByIdU::execute($id)['password'];
+                $password = md5($_POST['password']);
+                
+                if ($password === $pass) {
+                    $name = $_POST['name'];
+                    $username = $_POST['username'];
+                    
+                    $email = $_POST['email'];
+                    if ($_POST['new_password'] !== "" && $_POST['repeat_new_password'] !== "") {
+                        if ($_POST['new_password'] === $_POST['repeat_new_password']) {
+                            $password = md5($_POST['new_password']);
+                        } else
+                            Flight::redirect("/manage/edit?status=differentpass");
+                    }
+                    $image = basename($_FILES["image"]["name"]);
+                    if ($image === "")
+                        $image = GetByIdU::execute($id)['image'];
+                    $data = [
+                        'name' => $name,
+                        'username' => $username,
+                        'password' => $password,
+                        'email' => $email,
+                        'image' => $image,
+                        'id' => $id
+                    ];
 
-                $result = UpdateU::execute2($data);
-                if ($result === 1)
-                    Flight::redirect("/manage/profile?status=MainUpdateAccont");
+                    $result = UpdateU::execute2($data);
+                    if ($result === 1)
+                        Flight::redirect("/manage/profile?status=MainUpdateAccont");
+                    else
+                        Flight::redirect("/manage/edit?status=fMainUpdateAccont");
+                }
                 else
-                    Flight::redirect("/manage/edit?status=fMainUpdateAccont");
+                    Flight::redirect("/manage/edit?status=passerror");
             }
         } else
             Flight::redirect("/manage/edit?status=nofill");
@@ -135,10 +150,10 @@ class UserController
     public function Delete(int $id)
     {
         DeleteU::execute($id);
-        Flight::redirect("/panel/user/?status=DeleteUser");
+        Flight::redirect("/manage/user/?status=DeleteUser");
     }
 
-    public function GetAll()
+    public function panel_users()
     {
         $tool = tools();
         $admin = session_admin();
@@ -149,7 +164,7 @@ class UserController
             return panel_users($tool, $admin);
     }
 
-    public function Upform(int $id)
+    public function Upform_users(int $id)
     {
         $tool = tools();
         $admin = session_admin();
@@ -158,11 +173,11 @@ class UserController
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
             $this_user = GetByIdU::execute($id);
-            return panel_update_page_user($tool, $admin, $this_user, $id);
+            return Upform_users($tool, $admin, $this_user, $id);
         }
     }
 
-    public function Addform()
+    public function Addform_users()
     {
         $tool = tools();
         $admin = session_admin();
@@ -170,10 +185,10 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return panel_insert_page_user($tool);
+            return Addform_users($tool);
     }
 
-    public function Manage()
+    public function Manage_user()
     {
         $tool = tools();
         $admin = session_admin();
@@ -181,7 +196,7 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return panel_manage_users($tool, $admin);
+            return Manage_user($tool, $admin);
 
     }
 
@@ -195,7 +210,7 @@ class UserController
         else {
             $user = GetByIdU::execute($id);
             if ($admin['id'] === $id)
-                return panel_setting($tool, $admin, $user, $id);
+                return Setting($tool, $admin, $user, $id);
             else
                 return error();
         }
@@ -219,8 +234,8 @@ class UserController
                 $tool['users'] = Usersearch::execute($title);
             } else
                 $tool['users'] = GetAllU::execute();
-            
-            return panel_manage_users($tool, $admin);
+
+            return Manage_user($tool, $admin);
         }
 
     }
@@ -233,7 +248,7 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return panel_index($tool, $admin);
+            return index($tool, $admin);
     }
 
     public function login_result()
@@ -247,7 +262,7 @@ class UserController
             if (isset($_POST['btnlogin'])) {
 
                 $username = $_POST['username'];
-                $password = $_POST['password'];
+                $password = md5($_POST['password']);
                 $result = Login::execute($username, $password);
 
                 if ($result === 1)
@@ -320,7 +335,7 @@ class UserController
             if (!(isset($_SESSION['admin_id']))) {
                 if (isset($_POST['btnlogin'])) {
                     $username = $_POST['username'];
-                    $password = $_POST['password'];
+                    $password = md5($_POST['password']);
 
                     $result = Login::execute2($username, $password);
 
@@ -349,7 +364,7 @@ class UserController
             if (isset($_POST["btnsignup"])) {
                 $name = $_POST['name'];
                 $username = $_POST['username'];
-                $password = $_POST['password'];
+                $password = md5($_POST['password']);
                 $email = $_POST['email'];
                 $image = basename($_FILES["image"]["name"]);
                 if ($image === "")
@@ -385,7 +400,7 @@ class UserController
             return profile();
     }
 
-    public function edit()
+    public function edit_profile()
     {
         $tool = tools();
         $admin = session_admin2();

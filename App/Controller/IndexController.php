@@ -13,7 +13,7 @@ class IndexController
 {
     public function site_map()
     {
-        return Sitemap();
+        return Site_map();
     }
 
     public function Main_index()
@@ -31,13 +31,10 @@ class IndexController
     public function search_result_main()
     {
         $tool = tools();
-        $validator = new Validator(Flight::request()->data->getData(), ['q' => ['required']]);
 
-        if ($validator->validate()) {
-
+        if (isset($_GET['q']))
             $tool['questions'] = Postsearch::execute2($_GET['q']);
-        }
-
+        
         return index_main($tool);
     }
 
@@ -48,10 +45,10 @@ class IndexController
 
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        return panel_index($tool, $admin);
+        return index($tool, $admin);
     }
 
-    public function site_setting()
+    public function manage_setting()
     {
         $tool = tools();
         $admin = session_admin();
@@ -119,10 +116,10 @@ class IndexController
 
             if ($validator->validate()) {
                 $titlee = $_POST['searchbox'];
-                return panel_search_all($tool, $admin, $titlee);
+                return result_search($tool, $admin, $titlee);
             }
             else
-                return panel_index($tool, $admin);
+                return index($tool, $admin);
         }
     }
 

@@ -92,10 +92,10 @@ class PostController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return panel_posts($tool, $admin);
+            return GetAll($tool, $admin);
     }
 
-    public function Manage()
+    public function panel_manage_posts()
     {
         $tool = tools();
         $admin = session_admin();
@@ -114,7 +114,7 @@ class PostController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return panel_posts($tool, $admin);
+            return Gallery($tool, $admin);
     }
 
     public function Upform(int $id)
@@ -126,7 +126,7 @@ class PostController
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
             $this_post = GetByIdP::execute($id);
-            return panel_update_page_post($tool, $admin, $this_post, $id);
+            return Upform($tool, $admin, $this_post, $id);
         }
     }
 
@@ -148,8 +148,8 @@ class PostController
             $validator = new Validator(Flight::request()->data->getData(), ['searchbox' => ['required']]);
 
             if ($validator->validate()) {
-                $titlee = $_POST['searchbox'];
-                $tool['posts'] = Postsearch::execute($titlee);
+                $title2 = $_POST['searchbox'];
+                $tool['posts'] = Postsearch::execute($title2);
             } else
                 $tool['posts'] = GetAllP::execute();
 
@@ -170,7 +170,7 @@ class PostController
             if ($post === false)
                 return error();
             else
-                return panel_show_post($tool, $admin, $post, $id);
+                return post_GetById($tool, $admin, $post, $id);
         }
     }
 
@@ -207,7 +207,7 @@ class PostController
             Flight::redirect("/?status=nofill");
     }
 
-    public function show_post(int $id)
+    public function conversation(int $id)
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))
             $ip = $_SERVER['HTTP_CLIENT_IP'];

@@ -23,12 +23,17 @@
         $("#logout_main").click(function () {
 
             const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                window.alert("you got out");
-                location.reload();
+            result = window.confirm("do you want to log out of your account?");
+            if (result) {
+                xhttp.onload = function () {
+                    window.confirm("you got out");
+                    location.reload();
+                }
+
+                xhttp.open("GET", "/main/logout", true);
+                xhttp.send();
             }
-            xhttp.open("GET", "/main/logout", true);
-            xhttp.send();
+
         })
 
         let data = window.location.search.substring(1).trim();
@@ -67,8 +72,16 @@
                 location.replace("/manage/edit")
             }
             else if (value === "nofill") {
-                window.alert("some fields are not set")
+                window.alert("set fields correct")
                 location.replace("/")
+            }
+            else if (value === "differentpass") {
+                window.alert("new password is not the same as repeating it")
+                location.replace("/manage/edit")
+            }
+            else if (value === "passerror") {
+                window.alert("password is incorrect")
+                location.replace("/manage/edit")
             }
         }
 

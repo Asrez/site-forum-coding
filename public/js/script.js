@@ -61,6 +61,13 @@ function setBeforeStyle()
 
 // Elements
 // Open Modal
+elm_SEARCH_BTN.addEventListener("click", () => {
+    showOverlay()
+    elm_SEARCH_MODAL.style.right = "0"
+    document.querySelector(".search-modal input[autofocus]").focus()
+    removeScroll()
+})
+
 if (elm_SIGN_IN_BTN !== null) {
 
     elm_SIGN_IN_BTN.addEventListener("click", () => {
@@ -195,11 +202,11 @@ elm_CLOSE_BTN4.addEventListener("click", () => {
     elm_HAMBURGER_MODAL.style.transform = "translate(50%, 50%)";
     addScroll()
 })
-// elm_CLOSE_BTN5.addEventListener("click", () => {
-//     hideOverlay()
-//     elm_SEARCH_MODAL.style.right = "-100%"
-//     addScroll()
-// })
+elm_CLOSE_BTN5.addEventListener("click", () => {
+    hideOverlay()
+    elm_SEARCH_MODAL.style.right = "-100%"
+    addScroll()
+})
 elm_CLOSE_BTN6.addEventListener("click", () => {
     hideOverlay()
     elm_REPLAY_MODAL.style.opacity = "0"

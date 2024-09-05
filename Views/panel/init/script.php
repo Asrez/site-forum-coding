@@ -14,12 +14,16 @@
         $("#logout_panel").click(function () {
 
             const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                window.alert("you got out");
-                location.reload();
+            result = window.confirm("do you want to log out of your account?");
+            if (result) {
+                xhttp.onload = function () {
+                    window.confirm("you got out");
+                    location.reload();
+                }
+
+                xhttp.open("GET", "/main/logout", true);
+                xhttp.send();
             }
-            xhttp.open("GET", "/main/logout", true);
-            xhttp.send();
         }) 
         
         let data = window.location.search.substring(1).trim();
@@ -63,9 +67,17 @@
                 window.alert("change the username");
                 location.replace("/panel");
             }
+            else if (value === "tinuser"){
+                window.alert("user added");
+                location.replace("/manage/user");
+            }
+            else if (value === "finuser"){
+                window.alert("user not added");
+                location.replace("/manage/user");
+            }
             else if (value === "DeleteUser"){
                 window.alert("delete user successed");
-                location.replace("manage/user");
+                location.replace("/manage/user");
             }
             else if (value === "correct"){
                 window.alert("welcome");

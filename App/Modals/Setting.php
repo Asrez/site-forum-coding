@@ -11,7 +11,7 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `setting` WHERE `key_setting` = :key";
+        $sql = "SELECT * FROM `settings` WHERE `key_setting` = :key";
 
         $stms = $db->prepare($sql);
         $stms->bindParam("key", $key);
@@ -24,7 +24,7 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `setting` WHERE `id` = :id";
+        $sql = "SELECT * FROM `settings` WHERE `id` = :id";
 
         $stms = $db->prepare($sql);
         $stms->bindParam("id", $id);
@@ -37,7 +37,7 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `setting` WHERE `state` = 'adver';";
+        $sql = "SELECT * FROM `settings` WHERE `state` = 'adver';";
 
         $stms = $db->prepare($sql);
         $stms->execute();
@@ -49,7 +49,7 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `setting` WHERE `state` = 'setting';";
+        $sql = "SELECT * FROM `settings` WHERE `state` = 'setting';";
 
         $stms = $db->prepare($sql);
         $stms->execute();
@@ -61,7 +61,7 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "UPDATE `setting` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
+        $sql = "UPDATE `settings` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
 
         $stms = $db->prepare($sql);
         $stms->bindParam("value", $data['value']);
