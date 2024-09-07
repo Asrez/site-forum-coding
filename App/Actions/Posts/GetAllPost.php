@@ -3,6 +3,7 @@
 namespace App\Actions\Posts;
 
 use App\Modals\Post;
+
 class GetAllPost
 {
     public static function execute()

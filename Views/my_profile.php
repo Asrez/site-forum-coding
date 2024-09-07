@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>profile</title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
 </head>
 <body class="bg-[--color1] pb-0 sm:pb-10">
 
-<?php include "includes/header.php"; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mx-auto px-3 mt-4 sm:mt-0 sm:px-10 lg:px-56">
     <main class="w-full">
@@ -75,8 +75,16 @@
                                 <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
                                     <img src="../static/photos/<?= $question['image'] ?>">
                                     <h2 class="font-bold text-white"><?= $question['title'] ?></h2>
-                                    <h3 class="mt-4 text-[10px]" style=" color :<?php if ($question['state'] === 0) echo 'red'; else echo 'green' ?>">
-                                        <?php if ($question['state'] === 0) echo "not confirmed yet"; else echo "confirmed"; ?>
+                                    <h3 class="mt-4 text-[10px]" style=" color :<?php if ($question['state'] === 0) {
+                                        echo 'red';
+                                    } else {
+                                        echo 'green';
+                                    } ?>">
+                                        <?php if ($question['state'] === 0) {
+                                            echo 'not confirmed yet';
+                                        } else {
+                                            echo 'confirmed';
+                                        } ?>
                                     </h3>
                                 </div>
                             </div>
@@ -87,11 +95,11 @@
     </main>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include 'includes/footer.php'; ?>
 
-<?php include "includes/modals.php"; ?>
+<?php include 'includes/modals.php'; ?>
 
-<?php include "init/script.php"; ?>
+<?php include 'init/script.php'; ?>
 
 </body>
 </html>

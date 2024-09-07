@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <title>Post <?= $id ?></title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
   </head>
   <body >
 
-    <?php include "includes/header.php"; ?>
+    <?php include 'includes/header.php'; ?>
 
       <div class="page-wrapper">
         <div class="page-header d-print-none">
@@ -53,8 +53,8 @@
           </div>
         </div>
 
-    <?php include "includes/footer.php"; ?>
+    <?php include 'includes/footer.php'; ?>
 
-    <?php include "init/script.php"; ?>
+    <?php include 'init/script.php'; ?>
   </body>
 </html>

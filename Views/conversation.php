@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Question <?= $id ?></title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
 </head>
 <body class="bg-[--color1] pb-0 sm:pb-10">
 
-<?php include "includes/header.php"; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mx-auto xl:px-14 p-4">
     <main class="w-full flex gap-10">
         <aside class="2xl:basis-[15%] lg:basis-[18.5%] lg:block hidden relative">
             <div class="sticky top-8">
-                <?php if(isset($_SESSION['admin_id'])) { ?>
+                <?php if (isset($_SESSION['admin_id'])) { ?>
                 <button id="newReplay" class="bg_gr h-[40px] w-full rounded-[14px] flex justify-center items-center font-bold tracking-wide transition-all duration-300 text-white text-[14px] relative">
                     Reply
                 </button>
@@ -91,17 +91,19 @@
                 <?php } ?>
                 <br>
                 <h4 class="tracking-normal text-[--color9] text-[14px] line-clamp-1 font-bold" style="margin-left: 50%;">
-                    <?php if (empty($answers)) echo "no reply"; ?>
+                    <?php if (empty($answers)) {
+                        echo 'no reply';
+                    } ?>
                 </h4>
             </div>
         </div>
     </main>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include 'includes/footer.php'; ?>
 
-<?php include "includes/modals.php"; ?>
+<?php include 'includes/modals.php'; ?>
 
-<?php include "init/script.php"; ?>
+<?php include 'init/script.php'; ?>
 </body>
 </html>

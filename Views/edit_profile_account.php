@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Profile</title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
 </head>
 <body class="bg-[--color1] pb-0 sm:pb-10">
 
-<?php include "includes/header.php"; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mx-auto px-3 mt-4 mb-4 sm:mt-0 sm:px-10 lg:px-32">
     <main class="w-full">
@@ -92,10 +92,10 @@
     </main>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include 'includes/footer.php'; ?>
 
-<?php include "includes/modals.php"; ?>
+<?php include 'includes/modals.php'; ?>
 
-<?php include "init/script.php"; ?>
+<?php include 'init/script.php'; ?>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Settings</title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
   </head>
   <body >
       <div class="page-wrapper">
@@ -77,6 +77,6 @@
             </div>
           </div>
         </div>
-        <?php include "init/script.php"; ?>
+        <?php include 'init/script.php'; ?>
   </body>
 </html>

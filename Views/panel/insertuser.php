@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php include "init/style.php"; ?>
+  <?php include 'init/style.php'; ?>
   <title>Add User</title>
 </head>
 <body>
@@ -66,6 +66,6 @@
       </form>
     </div>
   </div>
-  <?php include "init/script.php"; ?>
+  <?php include 'init/script.php'; ?>
 </body>
 </html>

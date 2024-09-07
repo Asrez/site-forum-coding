@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\Actions\Setting\UpdateSetting;
-use App\Actions\Setting\GetByIdSetting;
 use App\Actions\Search\Postsearch;
-use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
-
+use App\Actions\Setting\GetByIdSetting;
+use App\Actions\Setting\UpdateSetting;
 use Flight;
+use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 class IndexController
 {
@@ -32,9 +31,10 @@ class IndexController
     {
         $tool = tools();
 
-        if (isset($_GET['q']))
+        if (isset($_GET['q'])) {
             $tool['questions'] = Postsearch::execute2($_GET['q']);
-        
+        }
+
         return index_main($tool);
     }
 
@@ -43,8 +43,10 @@ class IndexController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
+        }
+
         return index($tool, $admin);
     }
 
@@ -53,20 +55,22 @@ class IndexController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else
+        } else {
             return manage_setting($tool, $admin);
+        }
     }
 
     public function go_setting(int $id)
     {
         $tool = tools();
         $admin = session_admin();
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else {
+        } else {
             $setting = GetByIdSetting::execute($_SESSION['admin_id']);
+
             return setting_update($tool, $admin, $setting, $id);
         }
     }
@@ -90,18 +94,19 @@ class IndexController
                     $content = $_POST['content'];
                     $value = $_POST['value'];
                     $data = [
-                        "title" => $title,
-                        "link" => $link,
-                        "content" => $content,
-                        "value" => $value,
-                        "id" => $id
+                        'title' => $title,
+                        'link' => $link,
+                        'content' => $content,
+                        'value' => $value,
+                        'id' => $id,
                     ];
                     UpdateSetting::execute($data);
-                    Flight::redirect("/manage/site_setting?status=SettingUpdate");
+                    Flight::redirect('/manage/site_setting?status=SettingUpdate');
                 }
             }
-        } else
-            Flight::redirect("/manage/site_setting?status=nofill");
+        } else {
+            Flight::redirect('/manage/site_setting?status=nofill');
+        }
     }
 
     public function result_search()
@@ -109,17 +114,18 @@ class IndexController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else {
+        } else {
             $validator = new Validator(Flight::request()->data->getData(), ['searchbox' => ['required']]);
 
             if ($validator->validate()) {
                 $titlee = $_POST['searchbox'];
+
                 return result_search($tool, $admin, $titlee);
-            }
-            else
+            } else {
                 return index($tool, $admin);
+            }
         }
     }
 
@@ -128,5 +134,4 @@ class IndexController
         session_unset();
         session_destroy();
     }
-
 }

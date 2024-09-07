@@ -4,14 +4,16 @@ namespace App\Database;
 
 use PDO;
 use PDOException;
+
 class Database
 {
     private static $instance = null;
+
     private $connect;
 
     private function __construct()
     {
-        $DBinfo = require __DIR__ .DIRECTORY_SEPARATOR. "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."config".DIRECTORY_SEPARATOR."database.php";
+        $DBinfo = require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'database.php';
 
         try {
 
@@ -31,8 +33,8 @@ class Database
 
     public static function getInstance()
     {
-        if (!self::$instance) {
-            self::$instance = new self();
+        if (! self::$instance) {
+            self::$instance = new self;
         }
 
         return self::$instance;

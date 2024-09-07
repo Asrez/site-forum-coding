@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <title>Manage users</title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
   </head>
   <body >
 
-    <?php include "includes/header.php"; ?>
+    <?php include 'includes/header.php'; ?>
 
       <div class="page-wrapper">
         <div class="page-header d-print-none">
@@ -61,10 +61,15 @@
                           <td><?= $user['email'] ?></td>
                           <td>
                             <span class="badge 
-                            <?php if ($user['state'] === 1) echo " bg-success "; ?>
+                            <?php if ($user['state'] === 1) {
+                                echo ' bg-success ';
+                            } ?>
                              me-1"></span>
-                            <?php if ($user['state'] === 1) echo "admin";
-                                  else echo "user"; ?>
+                            <?php if ($user['state'] === 1) {
+                                echo 'admin';
+                            } else {
+                                echo 'user';
+                            } ?>
                           </td>
                           <td >
                             <span class="dropdown">
@@ -90,8 +95,8 @@
           </div>
         </div>
         
-    <?php include "includes/footer.php"; ?>
+    <?php include 'includes/footer.php'; ?>
 
-    <?php include "init/script.php"; ?>
+    <?php include 'init/script.php'; ?>
   </body>
 </html>

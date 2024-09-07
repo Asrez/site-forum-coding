@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>Setting Update</title>
-  <?php include "init/style.php"; ?>
+  <?php include 'init/style.php'; ?>
 </head>
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
@@ -58,6 +58,6 @@
       </form>
     </div>
   </div>
-  <?php include "init/script.php"; ?>
+  <?php include 'init/script.php'; ?>
 </body>
 </html>

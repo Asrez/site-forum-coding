@@ -212,7 +212,9 @@
                         name="content"
                         placeholder="Question..." required="required" rows="5"></textarea>
             </div>
-            <input type="text" value="<?php if (isset($_SESSION['admin_id'])) echo $_SESSION['admin_id'] ?>" name="admin_id" style="opacity:0">
+            <input type="text" value="<?php if (isset($_SESSION['admin_id'])) {
+                echo $_SESSION['admin_id'];
+            } ?>" name="admin_id" style="opacity:0">
             <label class="text-[--color6] font-bold block" for="image">Image</label>
             <div class="input relative">
                 <input autofocus
@@ -286,7 +288,7 @@
 </div>
 <?php } ?>
 
-<?php if(isset($_SESSION['admin_id'])) { ?>
+<?php if (isset($_SESSION['admin_id'])) { ?>
 <button class="bg-[--color5] w-[50px] h-[50px] flex justify-center items-center rounded-full fixed bottom-[20px] right-[10px] newDescription">
     <img src="../images/reply-mobile-button.svg" alt="">
 </button>

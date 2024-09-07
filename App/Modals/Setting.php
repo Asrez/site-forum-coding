@@ -3,18 +3,18 @@
 namespace App\Modals;
 
 use App\Database\Database;
-
 use PDO;
+
 class Setting
 {
     public static function Setting(string $key): array
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `settings` WHERE `key_setting` = :key";
+        $sql = 'SELECT * FROM `settings` WHERE `key_setting` = :key';
 
         $stms = $db->prepare($sql);
-        $stms->bindParam("key", $key);
+        $stms->bindParam('key', $key);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
@@ -24,10 +24,10 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM `settings` WHERE `id` = :id";
+        $sql = 'SELECT * FROM `settings` WHERE `id` = :id';
 
         $stms = $db->prepare($sql);
-        $stms->bindParam("id", $id);
+        $stms->bindParam('id', $id);
         $stms->execute();
 
         return $stms->fetch(PDO::FETCH_ASSOC);
@@ -61,14 +61,14 @@ class Setting
     {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "UPDATE `settings` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;";
+        $sql = 'UPDATE `settings` SET `value_setting`= :value,`link`= :link,`title`= :title,`content`= :content WHERE `id` = :id ;';
 
         $stms = $db->prepare($sql);
-        $stms->bindParam("value", $data['value']);
-        $stms->bindParam("link", $data['link']);
-        $stms->bindParam("content", $data['content']);
-        $stms->bindParam("title", $data['title']);
-        $stms->bindParam("id", $data['id']);
+        $stms->bindParam('value', $data['value']);
+        $stms->bindParam('link', $data['link']);
+        $stms->bindParam('content', $data['content']);
+        $stms->bindParam('title', $data['title']);
+        $stms->bindParam('id', $data['id']);
         $stms->execute();
 
     }

@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <title>Result</title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
   </head>
   <body >
-    <?php include "includes/header.php" ?>
+    <?php include 'includes/header.php' ?>
 
       <div class="page-wrapper">
         <div class="page-header d-print-none">
@@ -25,7 +25,9 @@
               <div class="col-9">
                 <div class="row row-cards">
                 <h2>Posts</h2>
-                <?php if (empty($posts)) echo "no result"; ?>
+                <?php if (empty($posts)) {
+                    echo 'no result';
+                } ?>
                   <?php foreach ($posts as $post) { ?>
                     <div class="col-sm-6 col-lg-4">
                       <div class="card card-sm">
@@ -43,7 +45,9 @@
                   <?php } ?>
                   <br>
                   <h2>Users</h2>
-                  <?php if (empty($users)) echo "no result"; ?>
+                  <?php if (empty($users)) {
+                      echo 'no result';
+                  } ?>
                   <?php foreach ($users as $user) { ?>
                     <div class="col-sm-6 col-lg-4">
                       <div class="card card-sm">
@@ -65,8 +69,8 @@
           </div>
         </div>
 
-    <?php include "includes/footer.php" ?>
+    <?php include 'includes/footer.php' ?>
     
-    <?php include "init/script.php"; ?>
+    <?php include 'init/script.php'; ?>
   </body>
 </html>

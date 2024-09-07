@@ -3,12 +3,12 @@
 
 <head>
   <title><?= $title['value_setting'] ?></title>
-  <?php include "init/style.php"; ?>
+  <?php include 'init/style.php'; ?>
 </head>
 
 <body>
 
-  <?php include "includes/header.php"; ?>
+  <?php include 'includes/header.php'; ?>
   
   <div class="page-wrapper">
     <div class="page-header d-print-none">
@@ -175,7 +175,7 @@
                 <div class="card" style="height: 28rem">
                   <div class="card-body card-body-scrollable card-body-scrollable-shadow">
                     <div class="divide-y">
-                      <?php foreach ($users as $user){ ?>
+                      <?php foreach ($users as $user) { ?>
                       <div>
                         <div class="row">
                           <div class="col-auto">
@@ -249,9 +249,9 @@
       </div>
     </div>
     
-  <?php include "includes/footer.php"; ?>
+  <?php include 'includes/footer.php'; ?>
 
-  <?php include "init/script.php"; ?>
+  <?php include 'init/script.php'; ?>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {

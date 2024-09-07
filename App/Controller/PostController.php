@@ -2,20 +2,19 @@
 
 namespace App\Controller;
 
+use App\Actions\Comments\AddComment;
+use App\Actions\Posts\ConfirmPost;
+use App\Actions\Posts\DeletePost;
+use App\Actions\Posts\GetAllPost;
+use App\Actions\Posts\GetByIdPost;
+use App\Actions\Posts\Innerjoin;
+use App\Actions\Posts\InsertPost;
+use App\Actions\Posts\UpdatePost;
+use App\Actions\Search\Postsearch;
 use App\Actions\Users\GetByIdUser;
 use App\Actions\Views\InsertView;
-use App\Actions\Comments\AddComment;
-use App\Actions\Posts\GetAllPost;
-use App\Actions\Posts\ConfirmPost;
-use App\Actions\Posts\GetByIdPost;
-use App\Actions\Posts\UpdatePost;
-use App\Actions\Posts\InsertPost;
-use App\Actions\Posts\DeletePost;
-use App\Actions\Posts\Innerjoin;
-use App\Actions\Search\Postsearch;
-use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
-
 use Flight;
+use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 class PostController
 {
@@ -24,64 +23,68 @@ class PostController
         $validator = new Validator(Flight::request()->data->getData(), [
             'title' => ['required', 'min:3', 'max:100'],
             'content' => ['required', 'min:8'],
-            'admin_id' => ['required']
+            'admin_id' => ['required'],
         ]);
 
         if ($validator->validate()) {
-            if (isset($_POST["btninpost"])) {
+            if (isset($_POST['btninpost'])) {
                 $title = $_POST['title'];
                 $content = $_POST['content'];
-                $image = basename($_FILES["image"]["name"]);
-                if ($image === "")
-                    $image = "1.jpg";
+                $image = basename($_FILES['image']['name']);
+                if ($image === '') {
+                    $image = '1.jpg';
+                }
                 $admin_id = $_POST['admin_id'];
                 $data = [
                     'title' => $title,
                     'content' => $content,
                     'image' => $image,
-                    'admin_id' => $admin_id
+                    'admin_id' => $admin_id,
                 ];
 
                 InsertPost::execute($data);
-                Flight::redirect("/manage/post?status=AddPost");
+                Flight::redirect('/manage/post?status=AddPost');
 
             }
-        } else
-            Flight::redirect("/manage/post?status=nofill");
+        } else {
+            Flight::redirect('/manage/post?status=nofill');
+        }
     }
 
     public function update(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'title' => ['required', 'min:3', 'max:100'],
-            'content' => ['required', 'min:8']
+            'content' => ['required', 'min:8'],
         ]);
 
         if ($validator->validate()) {
-            if (isset($_POST["btnupdate"])) {
+            if (isset($_POST['btnupdate'])) {
                 $title = $_POST['title'];
                 $content = $_POST['content'];
-                $image = basename($_FILES["image"]["name"]);
-                if ($image === "")
+                $image = basename($_FILES['image']['name']);
+                if ($image === '') {
                     $image = GetByIdPost::execute($id)['image'];
+                }
                 $data = [
                     'title' => $title,
                     'content' => $content,
                     'image' => $image,
-                    'id' => $id
+                    'id' => $id,
                 ];
 
                 UpdatePost::execute($data);
-                Flight::redirect("/manage/post?status=UpdatePost");
+                Flight::redirect('/manage/post?status=UpdatePost');
             }
-        } else
-            Flight::redirect("/manage/post?status=nofill");
+        } else {
+            Flight::redirect('/manage/post?status=nofill');
+        }
     }
 
     public function delete(int $id)
     {
         DeletePost::execute($id);
-        Flight::redirect("/manage/post?status=DeletePost");
+        Flight::redirect('/manage/post?status=DeletePost');
     }
 
     public function getAll()
@@ -89,10 +92,11 @@ class PostController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else
+        } else {
             return getAll($tool, $admin);
+        }
     }
 
     public function panel_manage_posts()
@@ -100,10 +104,11 @@ class PostController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else
+        } else {
             return panel_manage_posts($tool, $admin);
+        }
     }
 
     public function upform(int $id)
@@ -111,10 +116,11 @@ class PostController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else {
+        } else {
             $this_post = GetByIdPost::execute($id);
+
             return upform($tool, $admin, $this_post, $id);
         }
     }
@@ -122,7 +128,7 @@ class PostController
     public function confirmed(int $id)
     {
         ConfirmPost::execute($id);
-        Flight::redirect("/manage/post?status=ConfimedPost");
+        Flight::redirect('/manage/post?status=ConfimedPost');
     }
 
     public function result_search()
@@ -130,17 +136,18 @@ class PostController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else {
+        } else {
 
             $validator = new Validator(Flight::request()->data->getData(), ['searchbox' => ['required']]);
 
             if ($validator->validate()) {
                 $title2 = $_POST['searchbox'];
                 $tool['posts'] = Postsearch::execute($title2);
-            } else
+            } else {
                 $tool['posts'] = GetAllPost::execute();
+            }
 
             return panel_manage_posts($tool, $admin);
         }
@@ -151,15 +158,16 @@ class PostController
         $tool = tools();
         $admin = session_admin();
 
-        if ($admin === false)
+        if ($admin === false) {
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else {
+        } else {
             $post = GetByIdPost::execute($id);
 
-            if ($post === false)
+            if ($post === false) {
                 return error();
-            else
+            } else {
                 return post_GetById($tool, $admin, $post, $id);
+            }
         }
     }
 
@@ -176,34 +184,37 @@ class PostController
                 if (isset($_POST['btnAddQuestion'])) {
                     $title = $_POST['title'];
                     $content = $_POST['content'];
-                    $image = basename($_FILES["image"]["name"]);
-                    if ($image === "")
-                        $image = "1.jpg";
+                    $image = basename($_FILES['image']['name']);
+                    if ($image === '') {
+                        $image = '1.jpg';
+                    }
                     $admin_id = $_POST['admin_id'];
                     $data = [
                         'title' => $title,
                         'content' => $content,
                         'image' => $image,
-                        'admin_id' => $admin_id
+                        'admin_id' => $admin_id,
                     ];
 
                     InsertPost::execute2($data);
-                    Flight::redirect("/?status=addquestion");
+                    Flight::redirect('/?status=addquestion');
                 }
             }
 
-        } else
-            Flight::redirect("/?status=nofill");
+        } else {
+            Flight::redirect('/?status=nofill');
+        }
     }
 
     public function conversation(int $id)
     {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        if (! empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        } elseif (! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        else
+        } else {
             $ip = $_SERVER['REMOTE_ADDR'];
+        }
 
         InsertView::execute($id, $ip);
 
@@ -215,8 +226,9 @@ class PostController
             $reply_post_id = $id;
 
             return conversation($tool, $user, $post, $answers, $reply_post_id, $id);
-        } else
+        } else {
             return error();
+        }
 
     }
 
@@ -236,14 +248,15 @@ class PostController
                         'title' => $title,
                         'answer' => $answer,
                         'question_id' => $id,
-                        'user_id' => $_SESSION['admin_id']
+                        'user_id' => $_SESSION['admin_id'],
                     ];
 
                     AddComment::execute($data);
-                    Flight::redirect("/?status=addreply");
+                    Flight::redirect('/?status=addreply');
                 }
             }
-        } else
-            Flight::redirect("/?status=nofill");
+        } else {
+            Flight::redirect('/?status=nofill');
+        }
     }
 }

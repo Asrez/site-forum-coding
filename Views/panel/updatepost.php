@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>Update post <?= $id ?></title>
-  <?php include "init/style.php"; ?>
+  <?php include 'init/style.php'; ?>
 </head>
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
@@ -15,7 +15,7 @@
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" name="title" placeholder="title" value="<?=$this_post['title'] ?>">
+            <input type="text" class="form-control" name="title" placeholder="title" value="<?= $this_post['title'] ?>">
           </div>
           <div class="row">
             <div class="col-lg-8">
@@ -23,7 +23,7 @@
                 <label class="form-label">Content</label>
                 <div class="input-group input-group-flat">
                   <textarea name="content" class="form-control" rows="3">
-                    <?=$this_post['content'] ?>
+                    <?= $this_post['content'] ?>
                   </textarea>
                 </div>
               </div>
@@ -66,6 +66,6 @@
       </form>
     </div>
   </div>
-  <?php include "init/script.php"; ?>
+  <?php include 'init/script.php'; ?>
 </body>
 </html>

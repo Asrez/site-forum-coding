@@ -3,6 +3,7 @@
 namespace App\Actions\Posts;
 
 use App\Modals\Post;
+
 class InsertPost
 {
     public static function execute(array $data)

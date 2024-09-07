@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>Update User</title>
-  <?php include "init/style.php"; ?>
+  <?php include 'init/style.php'; ?>
 </head>
 <body>
 
@@ -61,6 +61,6 @@
       </form>
     </div>
   </div>
-  <?php include "init/script.php"; ?>
+  <?php include 'init/script.php'; ?>
 </body>
 </html>

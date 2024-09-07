@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title['value_setting'] ?></title>
-    <?php include "init/style.php"; ?>
+    <?php include 'init/style.php'; ?>
 </head>
 <body class="bg-[--color1] pb-0 sm:pb-10">
 
-<?php include "includes/header.php"; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mx-auto xl:px-14 p-4">
     <main class="w-full flex gap-10">
@@ -26,10 +26,14 @@
                 </div>
                 <div class="flex items-center sm:w-auto w-full gap-0 sm:gap-3">
                     <div class="hidden sm:flex flex-row-reverse gap-2">
-                        <a href="/" class="sort1 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] <?php if ($content === true) echo 'active'; ?>">
+                        <a href="/" class="sort1 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] <?php if ($content === true) {
+                            echo 'active';
+                        } ?>">
                             <svg width="15" height="15" viewBox="0 0 15 15" class="mx-2"><g class="fill-white" fill-rule="evenodd"><rect class="forum-excerpt-toggle-line" width="15" height="4" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="8" height="4" y="11" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="15" height="4" y="5.5" rx="2"></rect></g></svg>
                         </a>
-                        <a href="/main" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] <?php if ($content === false) echo 'active'; ?>">
+                        <a href="/main" class="sort2 rounded-lg w-[32px] hidden sm:flex justify-center items-center h-[32px] hover:bg-[--color3] bg-[--color2] <?php if ($content === false) {
+                            echo 'active';
+                        } ?>">
                             <svg width="15" height="15" viewBox="0 0 15 15" class="mx-2"><g class="fill-white" fill-rule="evenodd"><rect class="forum-excerpt-toggle-line" width="15" height="6" rx="2"></rect><rect class="forum-excerpt-toggle-line" width="15" height="6" y="9" rx="2"></rect></g></svg>
                         </a>
                     </div>
@@ -87,17 +91,19 @@
             <?php } ?>
             <br>
                 <h4 class="tracking-normal text-[--color9] text-[14px] line-clamp-1 font-bold" style="margin-left: 44%;">
-                    <?php if (empty($questions)) echo "no question"; ?>
+                    <?php if (empty($questions)) {
+                        echo 'no question';
+                    } ?>
                 </h4>
         </div>
-        <?php include "includes/advertising.php"; ?>
+        <?php include 'includes/advertising.php'; ?>
     </main>
 </div>
 
-<?php include "includes/footer.php"; ?>
+<?php include 'includes/footer.php'; ?>
 
-<?php include "includes/modals.php"; ?>
+<?php include 'includes/modals.php'; ?>
 
-<?php include "init/script.php"; ?>
+<?php include 'init/script.php'; ?>
 </body>
 </html>
