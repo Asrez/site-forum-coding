@@ -1,8 +1,7 @@
 <?php
-
-use App\Controller\IndexController;
-use App\Controller\PostController;
 use App\Controller\UserController;
+use App\Controller\PostController;
+use App\Controller\IndexController;
 
 Flight::route("GET /sitemap", [new IndexController(), "site_map"]);
 
@@ -35,9 +34,9 @@ Flight::group('/manage', function () {
     Flight::group('/post', function () {
         Flight::route("GET /", [new PostController(), "panel_manage_posts"]);
         Flight::route("POST /inpost", [new PostController(), "insert"]);
-        Flight::route("GET /delpost/@id", [new PostController(), "Delete"]);
-        Flight::route("GET /uppost/@id", [new PostController(), "Upform"]);
-        Flight::route("POST /uppost/@id", [new PostController(), "Update"]);
+        Flight::route("GET /delpost/@id", [new PostController(), "delete"]);
+        Flight::route("GET /uppost/@id", [new PostController(), "upform"]);
+        Flight::route("POST /uppost/@id", [new PostController(), "update"]);
         Flight::route("GET /confirmpost/@id", [new PostController(), "confirmed"]);
     });
 
