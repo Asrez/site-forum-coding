@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Actions\Setting\UpdateS;
-use App\Actions\Setting\GetByIdS;
+use App\Actions\Setting\UpdateSetting;
+use App\Actions\Setting\GetByIdSetting;
 use App\Actions\Search\Postsearch;
 use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
@@ -16,14 +16,14 @@ class IndexController
         return Site_map();
     }
 
-    public function Main_index()
+    public function main_index()
     {
         $tool = tools();
 
         return index_main($tool);
     }
 
-    public function Main_index2()
+    public function main_index2()
     {
         return index_main2();
     }
@@ -66,7 +66,7 @@ class IndexController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            $setting = GetByIdS::execute($_SESSION['admin_id']);
+            $setting = GetByIdSetting::execute($_SESSION['admin_id']);
             return setting_update($tool, $admin, $setting, $id);
         }
     }
@@ -96,7 +96,7 @@ class IndexController
                         "value" => $value,
                         "id" => $id
                     ];
-                    UpdateS::execute($data);
+                    UpdateSetting::execute($data);
                     Flight::redirect("/manage/site_setting?status=SettingUpdate");
                 }
             }

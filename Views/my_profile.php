@@ -70,7 +70,7 @@
                                <?= $question['viewcount'] ?>
                             </div>
                         </div>
-                        <a href="/main/show_post/<?= $question['id'] ?>">
+                        <a href="/question/<?= $question['id'] ?>">
                             <div class="basis-[86%] flex flex-col gap-5">
                                 <div class="w-full bg-[--color8] rounded-[14px] py-4 px-8  pb-8 relative">
                                     <img src="../static/photos/<?= $question['image'] ?>">

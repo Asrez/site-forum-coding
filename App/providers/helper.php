@@ -1,15 +1,15 @@
 <?php
 use App\Actions\Setting\Allsetting;
-use App\Actions\Posts\GetAllP;
-use App\Actions\Posts\CountP;
+use App\Actions\Posts\GetAllPost;
+use App\Actions\Posts\CountPost;
 use App\Actions\Posts\Chart;
 use App\Actions\Setting\Advers;
-use App\Actions\Users\GetAllU;
-use App\Actions\Users\CountU;
-use App\Actions\Users\GetByIdU;
-use App\Actions\Views\CountV;
+use App\Actions\Users\GetAllUser;
+use App\Actions\Users\CountUser;
+use App\Actions\Users\GetByIdUser;
+use App\Actions\Views\CountView;
 use App\Actions\Search\SearchAll;
-use App\Actions\Comments\CountC;
+use App\Actions\Comments\CountComments;
 use App\Actions\Posts\GetByAdminId;
 use App\Actions\Setting\Settings;
 
@@ -54,13 +54,13 @@ function tools()
     $github = Allsetting::execute("github");
     $youtube = Allsetting::execute("youtube");
     $advers = Advers::execute();
-    $questions = GetAllP::execute2();
-    $countadmin = CountU::execute2()['count'];
-    $countview = CountV::execute()['count'];
-    $countpost = CountP::execute()['count'];
-    $countuser = CountU::execute()['count'];
-    $posts = GetAllP::execute();
-    $users = GetAllU::execute();
+    $questions = GetAllPost::execute2();
+    $countadmin = CountUser::execute2()['count'];
+    $countview = CountView::execute()['count'];
+    $countpost = CountPost::execute()['count'];
+    $countuser = CountUser::execute()['count'];
+    $posts = GetAllPost::execute();
+    $users = GetAllUser::execute();
     $settings = Settings::execute();
     return [
         "logo" => $logo,
@@ -86,7 +86,7 @@ function session_admin()
 {
     if (isset($_SESSION['admin_id'])) {
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+        $admin = GetByIdUser::execute($_SESSION['admin_id']);
         $state = true;
 
         if ($admin['state'] === 0)
@@ -104,7 +104,7 @@ function session_admin2()
 {
     if (isset($_SESSION['admin_id'])) {
 
-        $admin = GetByIdU::execute($_SESSION['admin_id']);
+        $admin = GetByIdUser::execute($_SESSION['admin_id']);
         $state = true;
     } else
         $state = false;
@@ -128,7 +128,8 @@ function index_main(array $tool)
             'github' => $tool['github'],
             'youtube' => $tool['youtube'],
             'advers' => $tool['advers'],
-            'questions' => $tool['questions']
+            'questions' => $tool['questions'],
+            'content' => true
         ]
     );
 }
@@ -138,7 +139,7 @@ function index_main2()
     $tool = tools();
 
     Flight::render(
-        directory_separator("index2.php"),
+        directory_separator("index.php"),
         [
             'logo' => $tool['logo'],
             'logo_footer' => $tool['logo_footer'],
@@ -148,7 +149,8 @@ function index_main2()
             'github' => $tool['github'],
             'youtube' => $tool['youtube'],
             'advers' => $tool['advers'],
-            'questions' => $tool['questions']
+            'questions' => $tool['questions'],
+            'content' => false
         ]
     );
 }
@@ -254,7 +256,7 @@ function result_search(array $tool, array $admin, string $titlee)
     );
 }
 
-function GetAll(array $tool, array $admin)
+function getAll(array $tool, array $admin)
 {
     Flight::render(
         directory_separator("posts.php", "panel"),
@@ -269,9 +271,9 @@ function GetAll(array $tool, array $admin)
     );
 }
 
-function Site_map()
+function site_map()
 {
-    Flight::render(directory_separator("sitemap.php"));
+    Flight::render(directory_separator("sitemap.php", "site"));
 }
 
 function panel_manage_posts(array $tool, array $admin)
@@ -289,22 +291,7 @@ function panel_manage_posts(array $tool, array $admin)
     );
 }
 
-function Gallery(array $tool, array $admin)
-{
-    Flight::render(
-        directory_separator("gallery.php", "panel"),
-        [
-            'logo' => $tool['logo'],
-            'logo_footer' => $tool['logo_footer'],
-            'footer' => $tool['footer'],
-            'title' => $tool['title'],
-            'posts' => $tool['posts'],
-            'admin' => $admin
-        ]
-    );
-}
-
-function Upform(array $tool, array $admin, array $this_post, int $id)
+function upform(array $tool, array $admin, array $this_post, int $id)
 {
     Flight::render(
         directory_separator("updatepost.php", "panel"),
@@ -372,7 +359,7 @@ function panel_users(array $tool, array $admin)
     );
 }
 
-function Upform_users(array $tool, array $admin, array $this_user, int $id)
+function upform_users(array $tool, array $admin, array $this_user, int $id)
 {
     Flight::render(
         directory_separator("updateuser.php", "panel"),
@@ -387,7 +374,7 @@ function Upform_users(array $tool, array $admin, array $this_user, int $id)
     );
 }
 
-function Addform_users(array $tool)
+function addform_users(array $tool)
 {
     Flight::render(
         directory_separator("insertuser.php", "panel"),
@@ -400,7 +387,7 @@ function Addform_users(array $tool)
     );
 }
 
-function Manage_user(array $tool, array $admin)
+function manage_user(array $tool, array $admin)
 {
     Flight::render(
         directory_separator("manageusers.php", "panel"),
@@ -415,7 +402,7 @@ function Manage_user(array $tool, array $admin)
     );
 }
 
-function Setting(array $tool, array $admin, array $user, int $id)
+function setting(array $tool, array $admin, array $user, int $id)
 {
     Flight::render(
         directory_separator("settings.php", "panel"),
@@ -436,8 +423,8 @@ function profile()
     $tool = tools();
     $questions = GetByAdminId::execute($_SESSION['admin_id']);
     $count_activity = count($questions);
-    $count_reply = CountC::execute($_SESSION['admin_id'])['count'];
-    $user = GetByIdU::execute($_SESSION['admin_id']);
+    $count_reply = CountComments::execute($_SESSION['admin_id'])['count'];
+    $user = GetByIdUser::execute($_SESSION['admin_id']);
 
     Flight::render(
         directory_separator("my_profile.php"),
@@ -459,7 +446,7 @@ function profile()
 
 function edit_profile($tool)
 {
-    $user = GetByIdU::execute($_SESSION['admin_id']);
+    $user = GetByIdUser::execute($_SESSION['admin_id']);
 
     Flight::render(
         directory_separator("edit_profile_account.php"),

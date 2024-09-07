@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Actions\Users\GetAllU;
-use App\Actions\Users\GetByIdU;
-use App\Actions\Users\UpdateU;
-use App\Actions\Users\InsertU;
-use App\Actions\Users\DeleteU;
+use App\Actions\Users\GetAllUser;
+use App\Actions\Users\GetByIdUser;
+use App\Actions\Users\UpdateUser;
+use App\Actions\Users\InsertUser;
+use App\Actions\Users\DeleteUser;
 use App\Actions\Users\Login;
 use App\Actions\Users\Deleteimg;
 use App\Actions\Search\Usersearch;
@@ -16,7 +16,7 @@ use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
 
 class UserController
 {
-    public function Insert()
+    public function insert()
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'name' => ['required'],
@@ -46,7 +46,7 @@ class UserController
                     'image' => $image
                 ];
 
-                $result = InsertU::execute($data);
+                $result = InsertUser::execute($data);
 
                 if ($result === 1)
                     Flight::redirect("/manage/user?status=tinuser");
@@ -57,7 +57,7 @@ class UserController
             Flight::redirect("/manage/user?status=nofill");
     }
 
-    public function Update(int $id)
+    public function update(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'name' => ['required', 'min:3', 'string'],
@@ -74,7 +74,7 @@ class UserController
                 $email = $_POST['email'];
                 $image = basename($_FILES["image"]["name"]);
                 if ($image === "")
-                    $image = GetByIdU::execute($id)['image'];
+                    $image = GetByIdUser::execute($id)['image'];
                 $data = [
                     'name' => $name,
                     'username' => $username,
@@ -84,7 +84,7 @@ class UserController
                     'id' => $id
                 ];
 
-                $result = UpdateU::execute($data);
+                $result = UpdateUser::execute($data);
 
                 if ($result === 1)
                     Flight::redirect("/manage/user?status=UpdateUser");
@@ -108,7 +108,7 @@ class UserController
 
         if ($validator->validate()) {
             if (isset($_POST["btnupuser"])) {
-                $pass = GetByIdU::execute($id)['password'];
+                $pass = GetByIdUser::execute($id)['password'];
                 $password = md5($_POST['password']);
                 
                 if ($password === $pass) {
@@ -124,7 +124,7 @@ class UserController
                     }
                     $image = basename($_FILES["image"]["name"]);
                     if ($image === "")
-                        $image = GetByIdU::execute($id)['image'];
+                        $image = GetByIdUser::execute($id)['image'];
                     $data = [
                         'name' => $name,
                         'username' => $username,
@@ -134,7 +134,7 @@ class UserController
                         'id' => $id
                     ];
 
-                    $result = UpdateU::execute2($data);
+                    $result = UpdateUser::execute2($data);
                     if ($result === 1)
                         Flight::redirect("/manage/profile?status=MainUpdateAccont");
                     else
@@ -147,9 +147,9 @@ class UserController
             Flight::redirect("/manage/edit?status=nofill");
     }
 
-    public function Delete(int $id)
+    public function delete(int $id)
     {
-        DeleteU::execute($id);
+        DeleteUser::execute($id);
         Flight::redirect("/manage/user/?status=DeleteUser");
     }
 
@@ -164,7 +164,7 @@ class UserController
             return panel_users($tool, $admin);
     }
 
-    public function Upform_users(int $id)
+    public function upform_users(int $id)
     {
         $tool = tools();
         $admin = session_admin();
@@ -172,12 +172,12 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            $this_user = GetByIdU::execute($id);
-            return Upform_users($tool, $admin, $this_user, $id);
+            $this_user = GetByIdUser::execute($id);
+            return upform_users($tool, $admin, $this_user, $id);
         }
     }
 
-    public function Addform_users()
+    public function addform_users()
     {
         $tool = tools();
         $admin = session_admin();
@@ -185,10 +185,10 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return Addform_users($tool);
+            return addform_users($tool);
     }
 
-    public function Manage_user()
+    public function manage_user()
     {
         $tool = tools();
         $admin = session_admin();
@@ -196,11 +196,11 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return Manage_user($tool, $admin);
+            return manage_user($tool, $admin);
 
     }
 
-    public function Setting(int $id)
+    public function setting(int $id)
     {
         $tool = tools();
         $admin = session_admin();
@@ -208,9 +208,9 @@ class UserController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            $user = GetByIdU::execute($id);
+            $user = GetByIdUser::execute($id);
             if ($admin['id'] === $id)
-                return Setting($tool, $admin, $user, $id);
+                return setting($tool, $admin, $user, $id);
             else
                 return error();
         }
@@ -233,9 +233,9 @@ class UserController
                 $title = $_POST['searchbox'];
                 $tool['users'] = Usersearch::execute($title);
             } else
-                $tool['users'] = GetAllU::execute();
+                $tool['users'] = GetAllUser::execute();
 
-            return Manage_user($tool, $admin);
+            return manage_user($tool, $admin);
         }
 
     }
@@ -274,7 +274,7 @@ class UserController
             Flight::redirect("/login?status=nofill");
     }
 
-    public function Upuser(int $id)
+    public function upuser(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'username' => ['required', 'min:3', 'max:50'],
@@ -292,9 +292,9 @@ class UserController
                 $img = basename($_FILES["image"]["name"]);
 
                 if ($img === "")
-                    $img = GetByIdU::execute($id)['image'];
+                    $img = GetByIdUser::execute($id)['image'];
 
-                $password = GetByIdU::execute($id)['password'];
+                $password = GetByIdUser::execute($id)['password'];
 
                 $data = [
                     'name' => $name,
@@ -305,7 +305,7 @@ class UserController
                     'id' => $id
                 ];
 
-                $result = UpdateU::execute($data);
+                $result = UpdateUser::execute($data);
 
                 if ($result === 1)
                     Flight::redirect("/manage/user?status=UpdateAccont");
@@ -317,7 +317,7 @@ class UserController
             Flight::redirect("/manage/user?status=nofill");
     }
 
-    public function Delimg(int $id)
+    public function delimg(int $id)
     {
         Deleteimg::execute($id);
         Flight::redirect("/panel?status=DeleteImg");
@@ -378,7 +378,7 @@ class UserController
                 ];
 
 
-                $result = InsertU::execute2($data);
+                $result = InsertUser::execute2($data);
 
                 if ($result === 1)
                     Flight::redirect("/?status=signup");

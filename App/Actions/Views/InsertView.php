@@ -4,7 +4,7 @@ namespace App\Actions\Views;
 
 use App\Modals\View;
 
-class InsertV
+class InsertView
 {
     public static function execute(int $post_id, string $ip)
     {

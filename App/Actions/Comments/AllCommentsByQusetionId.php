@@ -3,7 +3,7 @@
 namespace App\Actions\Comments;
 
 use App\Modals\Comment;
-class AllCommentsByQId
+class AllCommentsByQusetionId
 {
     public static function execute(int $id)
     {

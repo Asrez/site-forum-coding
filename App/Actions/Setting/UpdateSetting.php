@@ -3,7 +3,7 @@
 namespace App\Actions\Setting;
 
 use App\Modals\Setting;
-class UpdateS
+class UpdateSetting
 {
     public static function execute(array $data)
     {

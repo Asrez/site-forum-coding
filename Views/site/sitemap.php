@@ -12,15 +12,14 @@ $text1 = '<?xml version="1.0" encoding="UTF-8"?>' . '<urlset xmlns="site/public/
 $text1 .= "\n";
 file_put_contents("sitemap.xml", $text1);
 
-$sql = "SELECT * FROM `questions`";
-
+$sql = "SELECT * FROM `questions` WHERE `state`=1 ;";
 
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $stmt = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $name = name();
-$base_url = $name.'/main/show_post/';
+$base_url = $name.'/question/';
 
 foreach ($stmt as $song) {
     $url = $base_url.$song["id"];
@@ -30,7 +29,5 @@ foreach ($stmt as $song) {
     $text1 .= "\n";
 }
 
-file_put_contents("sitemap.xml", $text1,FILE_APPEND);
 
-
-file_put_contents("sitemap.xml", "</urlset>", FILE_APPEND);
+file_put_contents("sitemap.xml", $text1."</urlset>", FILE_APPEND);

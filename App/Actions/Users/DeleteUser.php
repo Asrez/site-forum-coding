@@ -3,10 +3,10 @@
 namespace App\Actions\Users;
 
 use App\Modals\User;
-class GetByIdU
+class DeleteUser
 {
     public static function execute(int $id)
     {
-        return User::GetById($id);
+        return User::Delete($id);
     }
 }

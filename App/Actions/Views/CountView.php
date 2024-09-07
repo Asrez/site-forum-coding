@@ -4,7 +4,7 @@ namespace App\Actions\Views;
 
 use App\Modals\View;
 
-class CountV
+class CountView
 {
     public static function execute()
     {

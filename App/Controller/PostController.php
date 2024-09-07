@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Actions\Users\GetByIdU;
-use App\Actions\Views\InsertV;
+use App\Actions\Users\GetByIdUser;
+use App\Actions\Views\InsertView;
 use App\Actions\Comments\AddComment;
-use App\Actions\Posts\GetAllP;
-use App\Actions\Posts\ConfirmP;
-use App\Actions\Posts\GetByIdP;
-use App\Actions\Posts\UpdateP;
-use App\Actions\Posts\InsertP;
+use App\Actions\Posts\GetAllPost;
+use App\Actions\Posts\ConfirmPost;
+use App\Actions\Posts\GetByIdPost;
+use App\Actions\Posts\UpdatePost;
+use App\Actions\Posts\InsertPost;
 use App\Actions\Posts\DeleteP;
 use App\Actions\Posts\Innerjoin;
 use App\Actions\Search\Postsearch;
@@ -19,7 +19,7 @@ use Flight;
 
 class PostController
 {
-    public function Insert()
+    public function insert()
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'title' => ['required', 'min:3', 'max:100'],
@@ -42,7 +42,7 @@ class PostController
                     'admin_id' => $admin_id
                 ];
 
-                InsertP::execute($data);
+                InsertPost::execute($data);
                 Flight::redirect("/manage/post?status=AddPost");
 
             }
@@ -50,7 +50,7 @@ class PostController
             Flight::redirect("/manage/post?status=nofill");
     }
 
-    public function Update(int $id)
+    public function update(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
             'title' => ['required', 'min:3', 'max:100'],
@@ -63,7 +63,7 @@ class PostController
                 $content = $_POST['content'];
                 $image = basename($_FILES["image"]["name"]);
                 if ($image === "")
-                    $image = GetByIdP::execute($id)['image'];
+                    $image = GetByIdPost::execute($id)['image'];
                 $data = [
                     'title' => $title,
                     'content' => $content,
@@ -71,20 +71,20 @@ class PostController
                     'id' => $id
                 ];
 
-                UpdateP::execute($data);
+                UpdatePost::execute($data);
                 Flight::redirect("/manage/post?status=UpdatePost");
             }
         } else
             Flight::redirect("/manage/post?status=nofill");
     }
 
-    public function Delete(int $id)
+    public function delete(int $id)
     {
         DeleteP::execute($id);
         Flight::redirect("/manage/post?status=DeletePost");
     }
 
-    public function GetAll()
+    public function getAll()
     {
         $tool = tools();
         $admin = session_admin();
@@ -92,7 +92,7 @@ class PostController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else
-            return GetAll($tool, $admin);
+            return getAll($tool, $admin);
     }
 
     public function panel_manage_posts()
@@ -106,18 +106,7 @@ class PostController
             return panel_manage_posts($tool, $admin);
     }
 
-    public function Gallery()
-    {
-        $tool = tools();
-        $admin = session_admin();
-
-        if ($admin === false)
-            return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
-        else
-            return Gallery($tool, $admin);
-    }
-
-    public function Upform(int $id)
+    public function upform(int $id)
     {
         $tool = tools();
         $admin = session_admin();
@@ -125,14 +114,14 @@ class PostController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            $this_post = GetByIdP::execute($id);
-            return Upform($tool, $admin, $this_post, $id);
+            $this_post = GetByIdPost::execute($id);
+            return upform($tool, $admin, $this_post, $id);
         }
     }
 
-    public function Confirmed(int $id)
+    public function confirmed(int $id)
     {
-        ConfirmP::execute($id);
+        ConfirmPost::execute($id);
         Flight::redirect("/manage/post?status=ConfimedPost");
     }
 
@@ -151,13 +140,13 @@ class PostController
                 $title2 = $_POST['searchbox'];
                 $tool['posts'] = Postsearch::execute($title2);
             } else
-                $tool['posts'] = GetAllP::execute();
+                $tool['posts'] = GetAllPost::execute();
 
             return panel_manage_posts($tool, $admin);
         }
     }
 
-    public function GetById(int $id)
+    public function getById(int $id)
     {
         $tool = tools();
         $admin = session_admin();
@@ -165,7 +154,7 @@ class PostController
         if ($admin === false)
             return sign_in($tool['logo'], $tool['logo_footer'], $tool['footer'], $tool['title']);
         else {
-            $post = GetByIdP::execute($id);
+            $post = GetByIdPost::execute($id);
 
             if ($post === false)
                 return error();
@@ -198,7 +187,7 @@ class PostController
                         'admin_id' => $admin_id
                     ];
 
-                    InsertP::execute2($data);
+                    InsertPost::execute2($data);
                     Flight::redirect("/?status=addquestion");
                 }
             }
@@ -216,12 +205,12 @@ class PostController
         else
             $ip = $_SERVER['REMOTE_ADDR'];
 
-        InsertV::execute($id, $ip);
+        InsertView::execute($id, $ip);
 
         $tool = tools();
         $answers = Innerjoin::execute2($id);
-        $post = GetByIdP::execute($id);
-        $user = GetByIdU::execute($post['admin_id']);
+        $post = GetByIdPost::execute($id);
+        $user = GetByIdUser::execute($post['admin_id']);
         if ($post['state'] === 1) {
             $reply_post_id = $id;
 
@@ -234,9 +223,8 @@ class PostController
     public function add_reply(int $id)
     {
         $validator = new Validator(Flight::request()->data->getData(), [
-            'title' => ['required', 'min:3', 'max:100'],
+            'title' => [],
             'answer' => ['required', 'min:8'],
-            'admin_id' => ['required'],
         ]);
 
         if ($validator->validate()) {

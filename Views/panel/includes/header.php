@@ -22,6 +22,7 @@
               </a>
             </div>
             
+            
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <span class="avatar avatar-sm" style="background-image: url(../static/avatars/<?= $admin['image'] ?>)"></span>
@@ -77,10 +78,6 @@
                         </a>
                         <a class="dropdown-item" href="/panel/posts">
                           all posts
-                        </a>
-                        <a class="dropdown-item" href="/panel/gallery">
-                          Gallery
-                          <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
                         </a>
                       </div>
                     </div>

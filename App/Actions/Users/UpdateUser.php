@@ -3,7 +3,7 @@
 namespace App\Actions\Users;
 
 use App\Modals\User;
-class UpdateU
+class UpdateUser
 {
     public static function execute(array $data)
     {

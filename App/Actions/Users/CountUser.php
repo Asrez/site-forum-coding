@@ -4,7 +4,7 @@ namespace App\Actions\Users;
 
 use App\Modals\User;
 
-class CountU
+class CountUser
 {
     public static function execute()
     {

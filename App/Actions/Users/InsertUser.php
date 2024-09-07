@@ -3,7 +3,7 @@
 namespace App\Actions\Users;
 
 use App\Modals\User;
-class InsertU
+class InsertUser
 {
     public static function execute(array $data)
     {

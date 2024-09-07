@@ -266,7 +266,7 @@
                        class="peer mt-1 rounded-lg px-3 bg-[--color8] flex items-center h-[42px] w-full placeholder-gray-500 outline-0 text-white"
                        id="title2"
                        name="title"
-                       placeholder="Title..." required type="text">
+                       placeholder="Title..." type="text">
             </div>
 
             <label class="text-[--color6] font-bold block mt-4" for="description2">Answer</label>

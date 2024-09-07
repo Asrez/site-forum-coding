@@ -3,7 +3,7 @@
 namespace App\Actions\Posts;
 
 use App\Modals\Post;
-class ConfirmP
+class ConfirmPost
 {
     public static function execute($id)
     {

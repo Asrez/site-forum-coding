@@ -3,7 +3,7 @@ session_start();
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-Flight::set('flight.log_errors', true);
+Flight::set('Flight.log_errors', true);
 
 require_once __DIR__ . "/../routes/Api.php";
 
