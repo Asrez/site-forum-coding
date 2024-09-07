@@ -8,7 +8,7 @@
 
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="/panel/upusers/<?= $this_user['id'] ?>" method="post" enctype="multipart/form-data">
+      <form action="/panel/update2/<?= $this_user['id'] ?>" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Update User</h5>

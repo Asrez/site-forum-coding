@@ -10,7 +10,7 @@ use App\Actions\Posts\ConfirmPost;
 use App\Actions\Posts\GetByIdPost;
 use App\Actions\Posts\UpdatePost;
 use App\Actions\Posts\InsertPost;
-use App\Actions\Posts\DeleteP;
+use App\Actions\Posts\DeletePost;
 use App\Actions\Posts\Innerjoin;
 use App\Actions\Search\Postsearch;
 use GeekGroveOfficial\PhpSmartValidator\Validator\Validator;
@@ -80,7 +80,7 @@ class PostController
 
     public function delete(int $id)
     {
-        DeleteP::execute($id);
+        DeletePost::execute($id);
         Flight::redirect("/manage/post?status=DeletePost");
     }
 

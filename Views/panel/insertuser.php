@@ -7,7 +7,7 @@
 <body>
 <div class="modal-blur"  tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <form action="/panel/inuser" method="post" enctype="multipart/form-data">
+      <form action="/panel/users/creat" method="post" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">New User</h5>

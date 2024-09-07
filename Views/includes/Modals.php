@@ -9,7 +9,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Log In</h2>
-    <form action="/log_in_main_result" method="post">
+    <form action="/main/login_main" method="post">
         <div class="input-box mt-4">
             <label class="text-[--color6] font-bold" for="login_email">Username</label>
             <div class="input relative">
@@ -60,7 +60,7 @@
         </svg>
     </button>
     <h2 class="mt-10 font-bold text-center text-[32px] text-white">Sign Up!</h2>
-    <form action="/sign_up_main_result" method="post" enctype="multipart/form-data">
+    <form action="/main/signup_main" method="post" enctype="multipart/form-data">
         <div class="input-box mt-4">
             
             <label class="text-[--color6] font-bold block" for="register_name">Name</label>

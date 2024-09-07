@@ -70,14 +70,14 @@
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                               <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/manage/post/uppost/<?= $post['id'] ?>" >
+                                  <a class="dropdown-item" href="/manage/post/update/<?= $post['id'] ?>" >
                                     Update
                                   </a>
-                                  <a class="dropdown-item" href="/manage/post/delpost/<?= $post['id'] ?>">
+                                  <a class="dropdown-item" href="/manage/post/delete/<?= $post['id'] ?>">
                                     Delete
                                   </a> 
                                   <?php if ($post['state'] === 0) { ?> 
-                                    <a class="dropdown-item" href="/manage/post/confirmpost/<?= $post['id'] ?>">
+                                    <a class="dropdown-item" href="/manage/post/confirm/<?= $post['id'] ?>">
                                     Confirmed
                                   </a>
                                  <?php } ?>             

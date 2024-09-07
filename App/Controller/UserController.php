@@ -49,9 +49,9 @@ class UserController
                 $result = InsertUser::execute($data);
 
                 if ($result === 1)
-                    Flight::redirect("/manage/user?status=tinuser");
+                    Flight::redirect("/manage/user?status=tusers/creat");
                 else
-                    Flight::redirect("/panel/inuser?status=finuser");
+                    Flight::redirect("/panel/users/creat?status=fusers/creat");
             }
         } else
             Flight::redirect("/manage/user?status=nofill");
