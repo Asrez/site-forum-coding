@@ -12,7 +12,8 @@
         "flightphp/core": "^3.11",
       "ext-pdo": "*",
       "ext-json": "*",
-        "geekgroveofficial/php-smart-validator": "^1.0"
+        "geekgroveofficial/php-smart-validator": "^1.0",
+        "laravel/pint": "^1.17"
     }
     
 }

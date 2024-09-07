@@ -77,7 +77,6 @@ elm_HAMBURGER_BTN.addEventListener("click", () => {
         elm_HAMBURGER_MODAL.style.opacity = "1"
         elm_HAMBURGER_MODAL.style.transform = "translate(50%, -50%)";
     }, 0)
-    // document.querySelector(".search-modal input[autofocus]").focus()
     removeScroll()
 })
 if (elm_SIGN_IN_BTN !== null) {
@@ -152,8 +151,7 @@ sortElements.forEach(function (element) {
     });
 });
 
-// Events
-// Overlay And CloseBtn
+
 elm_OVERLAY.addEventListener("click", () => {
     hideOverlay()
     elm_SEARCH_MODAL.style.right = "-100%"
