@@ -68,15 +68,6 @@ elm_SEARCH_BTN.addEventListener("click", () => {
     removeScroll()
 })
 
-if (elm_SIGN_IN_BTN !== null) {
-
-    elm_SIGN_IN_BTN.addEventListener("click", () => {
-    showOverlay()
-    elm_SEARCH_MODAL.style.right = "0"
-    document.querySelector(".search-modal input[autofocus]").focus()
-    removeScroll()
-})
-}
 
 elm_HAMBURGER_BTN.addEventListener("click", () => {
     showOverlay()
@@ -165,7 +156,7 @@ sortElements.forEach(function (element) {
 // Overlay And CloseBtn
 elm_OVERLAY.addEventListener("click", () => {
     hideOverlay()
-    // elm_SEARCH_MODAL.style.right = "-100%"
+    elm_SEARCH_MODAL.style.right = "-100%"
     elm_SIGN_IN_MODAL.style.opacity = "0"
     elm_SIGN_IN_MODAL.style.transform = "translate(50%, 50%)";
     elm_SIGN_UP_MODAL.style.opacity = "0"
